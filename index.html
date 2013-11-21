@@ -7,110 +7,138 @@
 	<title>Expenses Tracker</title>
 </head>
 <body>
+
 <script type="text/x-handlebars">
 	<div class="container content-wrapper">
 		<div class="row">
-			<div class="col-md-12 headline">
+			<div class="col-md-12">
 				<h2>Expense Tracker</h2>
 			</div>
-			<div class="col-md-4 master">
-				<div class="links">
-					<ul>
-						<li>{{#link-to 'people'}}People{{/link-to}}</li>
-						<li>{{#link-to 'expenses'}}Expenses{{/link-to}}</li>
-						<li>{{#link-to 'summary'}}Summary{{/link-to}}</li>
-					</ul>
-				</div>
+			<hr>
+			<div class="nav well col-md-4 master">
+				<ul>
+					<li>{{#linkTo 'friends'}}Friends{{/linkTo}}</li>
+					<li>{{#linkTo 'expenses'}}Expenses{{/linkTo}}</li>
+					<li>{{#linkTo 'summary'}}Summary{{/linkTo}}</li>
+				</ul>
 			</div>
-
-			<div class="col-md-8 detail">
-				{{outlet}}
+			<div class="well col-md-8 detail">
+				
+					{{outlet}}
+				
 			</div>
 		</div>
 	</div>
 </script>
-<!-- List of friends sharing expenses -->
-<script type="text/x-handlebars" id="people">
-	<div class="people">
-		<button class="add-people btn btn-success">Add Person</button>
-			<table class="table table-striped table-bordered">
-				<thead>
-					<tr>
-						<th></th>
-						<th>Name</th>
-						<th>Screen Name</th>
-						<th>Description</th>
-					</tr>
-				</thead>
-				<tbody>					
-					{{#each}}						
-						<tr>
-							<td>{{#link-to 'people.edit'}}Edit{{/link-to}}
-							<td>{{name}}</td>
-							<td>{{scrname}}</td>
-							<td>{{description}}</td>
-						</tr>
-					{{else}}
-						<p>No users!. Why dont you add one? </p>						
-					{{/each}}	
-					{{outlet}}				
-				</tbody>
-			</table>
 
-	</div>
-</script>
-<!-- End list of friends -->
-<!-- New Person entry form -->
-<script type="text/x-handlebars" id="people-edit">
-	<div class="new-people">
-		<table>
+<!-- Friends template -->
+<script type="text/x-handlebars" id="friends">
+ 	{{#if isEditing}}
+		{{partial new}}
+		<p><button {{action 'done'}} class="btn btn-success">Done</button></p>
+ 	{{else}}
+ 		<p><button {{action 'addFriend'}} class="btn btn-primary">(+) New Friend </button></p>
+ 	{{/if}}
+	<table class="table table-bordered">
+		<thead>
 			<tr>
-				<td><label>Name:</label></td>
-				<td><input type="text" id="name"></td>
+				<th>Name</th>
+				<th>Screen Name</th>
+				<th>Description</th>
 			</tr>
-
-			<tr>
-				<td><label>Screen name:</label></td>
-				<td><input type="text" id="scrname"></td>
-			</tr>
-
-			<tr>
-				<td><label>Description:</label></td>
-				<td><input type="text" id="description"></td>
-			</tr>
-		</table>
-	</div>
-</script>
-<!-- End of new person entry form -->
-<!-- Expenses entry -->
-<script type="text/x-handlebars" id="expenses">
-	<div class="expenses">
-	<button class="add-people btn btn-success">Add New Expense</button>
-		<table class="table table-striped table-bordered">
-			<thead>
-				<tr>
-					<th>Date</th>
-					<th>Description</th>
-					<th>Who paid?</th>
-					<th>Amount</th>
-					<th>For whom?</th>
-				</tr>
-			</thead>
-			<tbody>
+		</thead>
+		<tbody>
 			{{#each model}}
-				<tr>
-					<td>{{date}}</td>
-					<td>{{description}}</td>
-					<td>{{whopaid}}</td>
-					<td>{{amt}}</td>
-					<td>{{forwhom}}</td>
-				</tr>
+				<tr><td>{{name}}</td></tr>
+				<tr><td>{{screenName}}</td></tr>
+				<tr><td>{{description}}</td></tr>
 			{{/each}}
-			</tbody>
-		</table>
-	</div>
+		</tbody>
+	</table>
 </script>
-<!-- End of expenses entry -->
+<!-- End -->
+<!-- Adding/Editing Friends - Partial Template-->
+<script type="text/x-handlebars" id="_new">
+	<p> Add New Friend </p>
+	<table class="table table-bordered">
+		<tr>
+			<td><label for="name">Name: </label></td>
+			<td>{{input type="text" value=name id="name"}}</td>
+		</tr>
+		<tr>
+			<td><label for="screenName">Screen Name: </label></td>
+			<td>{{input type="text" value=screenName id="screenName"}}</td>
+		</tr>
+		<tr>
+			<td><label for="description">Description: </label></td>
+			<td>{{input type="text" value=description id="description"}}</td>
+		</tr>
+	</table>
+</script>
+<!-- End -->
+
+<!-- Expenses Template -->
+<script type="text/x-handlebars" id="expenses">
+	{{#if isEditing}}
+		{{partial newExpense}}
+		<p><button {{action 'done'}} class="btn btn-success">Done</button></p>
+ 	{{else}}
+ 		<p><button {{action 'addExpense'}} class="btn btn-primary">(+) New Expense </button></p>
+ 	{{/if}}
+	<table class="table table-bordered">
+		<thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Who paid?</th>
+                <th>Amount</th>
+                <th>For whom?</th>
+            </tr>
+         </thead>
+		<tbody>
+            {{#each model}}
+	            <tr>
+                    <td>{{date}}</td>
+                    <td>{{description}}</td>
+                    <td>{{whopaid}}</td>
+                    <td>{{amt}}</td>
+                    <td>{{forwhom}}</td>
+	            </tr>
+            {{/each}}
+        </tbody>
+	</table>
+</script>
+<!-- End of expenses template -->
+<!-- Expenses partail template -->
+<script type="text/x-handlebars" id="_newExpense">
+	<p> Add New Expense </p>
+	<table class="table table-bordered">
+		<tr>
+			<td><label for="date">Date: </label></td>
+			<td>{{input type="text" value=date id="date"}}</td>
+		</tr>
+		<tr>
+			<td><label for="description">Description: </label></td>
+			<td>{{input type="text" value=description id="description"}}</td>
+		</tr>
+		<tr>
+			<td><label for="whoPaid">Who Paid: </label></td>
+			<td>{{input type="text" value=whoPaid id="whoPaid"}}</td>
+		</tr>
+		<tr>
+			<td><label for="amount">Amount: </label></td>
+			<td>{{input type="text" value=amount id="amount"}}</td>
+		</tr>
+		<tr>
+			<td><label for="forwhom">For Whom: </label></td>
+			<td>{{input type="text" value=forwhom id="forwhom"}}</td>
+		</tr>
+	</table>
+</script>
+
+<script type="text/x-handlebars" id="summary">
+	Summary Tab
+</script>
   <script src="js/libs/jquery-1.10.2.min.js"></script>
   <script src="js/libs/handlebars-1.0.0.js"></script>
   <script src="js/libs/ember.js"></script>
@@ -119,5 +147,6 @@
   <script src="js/application.js"></script>
   <script src="js/router.js"></script>
   <script src="js/store.js"></script>
+  <script src="js/controller.js"></script>
 </body>
 </html>

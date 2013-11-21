@@ -1,21 +1,12 @@
 App.Router.map(function(){
-	this.resource('app', {path: '/'});
-	this.resource('people', function(){
-		this.route('edit');
-	});
+	this.resource('friends');
 	this.resource('expenses');
 	this.resource('summary');
-
 });
 
-App.PeopleRoute = Ember.Route.extend({
+App.FriendRoute = Em.Route.extend({
 	model: function(){
-		return this.store.find('people');
+		return this.store.find();
 	}
 });
 
-App.ExpensesRoute = Ember.Route.extend({
-	model: function(){
-		return this.store.find('expenses');
-	}
-});
