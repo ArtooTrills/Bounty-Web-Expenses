@@ -4,9 +4,15 @@ App.Router.map(function(){
 	this.resource('summary');
 });
 
-App.FriendRoute = Em.Route.extend({
+App.FriendsRoute = Ember.Route.extend({
 	model: function(){
-		return this.store.find();
+		return this.store.find('friend');
+	}
+});
+
+App.ExpensesRoute = Ember.Route.extend({
+	model: function(){
+		return this.store.find('expense');
 	}
 });
 

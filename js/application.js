@@ -1,6 +1,6 @@
 App = Em.Application.create();
 
-App.ApplicationAdapter = DS.FixtureAdapter;
+App.ApplicationAdapter = DS.LSAdapter.extend();
 
 
 

@@ -12,7 +12,7 @@
 	<div class="container content-wrapper">
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Expense Tracker</h2>
+				<h2>{{#linkTo 'index'}}Expense Tracker{{/linkTo}}</h2>
 			</div>
 			<hr>
 			<div class="nav well col-md-4 master">
@@ -35,11 +35,14 @@
 <script type="text/x-handlebars" id="friends">
  	{{#if isEditing}}
 		{{partial new}}
-		<p><button {{action 'done'}} class="btn btn-success">Done</button></p>
+		<p>
+			<button {{action 'cancel'}} class="btn btn-success">Cancel</button>
+			<button {{action 'addFriend'}} class="btn btn-info">Save</button>
+		</p>
  	{{else}}
- 		<p><button {{action 'addFriend'}} class="btn btn-primary">(+) New Friend </button></p>
+ 		<p><button {{action 'add_friend'}} class="btn btn-primary">(+) New Friend </button></p>
  	{{/if}}
-	<table class="table table-bordered">
+	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
 				<th>Name</th>
@@ -49,9 +52,11 @@
 		</thead>
 		<tbody>
 			{{#each model}}
-				<tr><td>{{name}}</td></tr>
-				<tr><td>{{screenName}}</td></tr>
-				<tr><td>{{description}}</td></tr>
+				<tr>
+					<td>{{name}}</td>
+					<td>{{screenName}}</td>
+					<td>{{description}}</td>
+				</tr>
 			{{/each}}
 		</tbody>
 	</table>
@@ -81,9 +86,13 @@
 <script type="text/x-handlebars" id="expenses">
 	{{#if isEditing}}
 		{{partial newExpense}}
-		<p><button {{action 'done'}} class="btn btn-success">Done</button></p>
+		<p>
+			<button {{action 'cancel'}} class="btn btn-success">Cancel</button>
+			<button {{action 'addExpense'}} class="btn btn-info">Save</button>
+		</p>
+
  	{{else}}
- 		<p><button {{action 'addExpense'}} class="btn btn-primary">(+) New Expense </button></p>
+ 		<p><button {{action 'add_expense'}} class="btn btn-primary">(+) New Expense </button></p>
  	{{/if}}
 	<table class="table table-bordered">
 		<thead>
@@ -98,11 +107,11 @@
 		<tbody>
             {{#each model}}
 	            <tr>
-                    <td>{{date}}</td>
+	            	<td>{{date}}</td>
                     <td>{{description}}</td>
-                    <td>{{whopaid}}</td>
-                    <td>{{amt}}</td>
-                    <td>{{forwhom}}</td>
+                    <td>{{whoPaid}}</td>
+                    <td>Rs. {{amount}}</td>
+                    <td>{{forWhom}}</td>
 	            </tr>
             {{/each}}
         </tbody>
@@ -115,7 +124,7 @@
 	<table class="table table-bordered">
 		<tr>
 			<td><label for="date">Date: </label></td>
-			<td>{{input type="text" value=date id="date"}}</td>
+			<td>{{input type="date" value=date id="date"}}</td>
 		</tr>
 		<tr>
 			<td><label for="description">Description: </label></td>
@@ -131,7 +140,7 @@
 		</tr>
 		<tr>
 			<td><label for="forwhom">For Whom: </label></td>
-			<td>{{input type="text" value=forwhom id="forwhom"}}</td>
+			<td>{{input type="text" value=forWhom id="forwhom"}}</td>
 		</tr>
 	</table>
 </script>
@@ -143,6 +152,7 @@
   <script src="js/libs/handlebars-1.0.0.js"></script>
   <script src="js/libs/ember.js"></script>
   <script src="js/libs/ember-data.js"></script>
+  <script src="js/libs/localstorage_adapter.js"></script>
 
   <script src="js/application.js"></script>
   <script src="js/router.js"></script>
