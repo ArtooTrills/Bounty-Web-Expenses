@@ -80,8 +80,12 @@ App.ExpensesController = Ember.Controller.extend({
 });
 
 
-App.SummaryController = Ember.Controller.extend({
-    needs: 'expense'
+App.SummaryController = Ember.ArrayController.extend({
+    myFunction: function(){
+       return this.store.get('amount');
+       return this.store.get('whoPaid');
+       return this.store.get('date');
+    }
 });
 
 

@@ -158,15 +158,17 @@
 			<tr>
 				<th>Name</th>
 				<th>Total Expenses</th>
+				<th>Date</th>
 			</tr>
 		</thead>
 		<tbody>
-		
+		{{#each model}}
 			<tr>
-				<td>{{controllers.expense.name}}</td>
-				<td>{{totalExpenses}}</td>
+				<td>{{whoPaid}}</td>
+				<td>{{amount}}</td>
+				<td>{{date}}</td>
 			</tr>
-		
+		{{/each}}
 		</tbody>
 	</table>
 </script>

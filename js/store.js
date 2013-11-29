@@ -1,7 +1,7 @@
 var attr = DS.attr;
 
 App.Friend = DS.Model.extend({
-	name: DS.hasMany('Expense'),
+	name: attr('string'),
 	screenName: attr('string'),
 	description: attr('string')
 });
@@ -9,7 +9,7 @@ App.Friend = DS.Model.extend({
 App.Expense = DS.Model.extend({
 	date: attr('date'),
 	description: attr('string'),
-	whoPaid: DS.belongsTo('Friend'),
+	whoPaid: DS.attr('string'),
 	amount: attr('number'),
 	forWhom: attr('string')
 });

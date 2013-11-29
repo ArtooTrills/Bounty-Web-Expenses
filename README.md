@@ -1,30 +1,9 @@
-Bounty-Web-Expenses
-===================
+Notes on the expenses app --
 
-Tracking expenses accurately can be the biggest headache among a group of roommates or co-workers. There are many apps which do this kind of task.
+Basically 3 sections :
 
-Your task is to build a similar webapp using a client side Javascript MVC framework.
+1 -- Friends (to view / add new friends)
+2 -- Expenses (to view / add new expenses b/w friends)
+3 -- Summary (displays all expenses chrnologically)
 
-**Snaps for Reference - Basic Functionalities Required**
-
-Add New Member
-
-![Add New Member](http://artoogithubdocs.s3.amazonaws.com/bounty/add-new-member.png)
-
-Add New Expense
-
-![Add New Expense](http://artoogithubdocs.s3.amazonaws.com/bounty/add-expense.png)
-
-Summary Sheet
-
-![Summary Sheet](http://artoogithubdocs.s3.amazonaws.com/bounty/summary.png) 
-
-**Brownie Points**
-
-1.  Data Visualization - Charts and graphs to show division of expenses
-2.  Options like Print, Export to xls etc 
-3.  Server Side Synchronization
-
-**Technologies we love**
-
-Ember.js, Backbone.js, D3.js, Node.js, Phantom.js, CouchDB
+Finished up the friends and expenses tab but unable to get the summary tab to work. Thinking I should use the SummaryController to get data from the expenses model and display it on the summary tab. Tried it, but that doesn't seem to be working. I'm missing something here.
