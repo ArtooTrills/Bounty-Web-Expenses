@@ -26,7 +26,8 @@ App.FriendsController = Ember.Controller.extend({
 
     	newFriend.save();
     	this.set('isEditing',false);
-    }  
+    },
+
   }
 
 });
@@ -50,6 +51,12 @@ App.ExpensesController = Ember.Controller.extend({
     	var amount = this.get('amount');
     	var forWhom = this.get('forWhom');
 
+        if(!date.trim()) { return; }
+        if(!description.trim()) { return; }
+        if(!whoPaid.trim()) { return; }
+        if(!amount.trim()) { return; }
+        if(!forWhom.trim()) { return; }
+
     	var newExpense = this.store.createRecord('expense', {
     		date: date,
     		description: description,
@@ -64,8 +71,27 @@ App.ExpensesController = Ember.Controller.extend({
     	this.set('amount','');
     	this.set('forWhom','');
 
-    	newExpense.save();
-    	
+    	newExpense.save(); 
+        this.set('isEditing', false);
+
+            	
 	}
   }
 });
+
+
+App.SummaryController = Ember.Controller.extend({
+    needs: 'expense'
+});
+
+
+
+
+
+
+
+
+
+
+
+
