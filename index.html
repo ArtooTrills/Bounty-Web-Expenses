@@ -32,7 +32,7 @@
 </script>
 
 <!-- Friends template -->
-<script type="text/x-handlebars" id="friends">
+<script type="text/x-handlebars" id="friends"> 
   	{{#if isEditing}}
 		{{partial newFriend}}
 		<p>
@@ -48,18 +48,14 @@
 				<th>Name</th>
 				<th>Screen Name</th>
 				<th>Description</th>
-				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
-			{{#each model}}
+			{{#each friend in model}}
 				<tr>
-					<td>{{name}}</td>
-					<td>{{screenName}}</td>
-					<td>{{description}}</td>
-					<td>
-						<button action 'delete_friend' class="btn btn-danger">Delete</button>					
-					</td>
+					<td>{{friend.name}}</td>
+					<td>{{friend.screenName}}</td>
+					<td>{{friend.description}}</td>
 				</tr>
 			{{/each}}
 		</tbody>
@@ -87,7 +83,7 @@
 <!-- End -->
 
 <!-- Expenses Template -->
-<script type="text/x-handlebars" id="expenses">
+<script type="text/x-handlebars" id="expenses"> 
 	{{#if isEditing}}
 		{{partial newExpense}}
 		<p>
@@ -100,8 +96,7 @@
  	{{/if}}
 	<table class="table table-bordered table-striped">
 		<thead>
-            <tr>
-            	
+            <tr>            	
                 <th>Date</th>
                 <th>Description</th>
                 <th>Who paid?</th>
@@ -112,7 +107,7 @@
 		<tbody>
             {{#each model}}
 	            <tr>
-	            	<td>{{date}}</td>
+	            	<td>{{formattedDate date}}</td>
                     <td>{{description}}</td>
                     <td>{{whoPaid}}</td>
                     <td>{{amount}}</td>
@@ -137,7 +132,7 @@
 		</tr>
 		<tr>
 			<td><label for="whoPaid">Who Paid: </label></td>
-			<td>{{input type="text" value=whoPaid}}</td>
+			<td>{{input type="text" value=whoPaid id="whoPaid"}}</td>
 				
 			</td>
 		</tr>
@@ -152,7 +147,7 @@
 	</table>
 </script>
 
-<script type="text/x-handlebars" id="summary">
+<script type="text/x-handlebars" id="summary"> 
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
@@ -166,15 +161,17 @@
 			<tr>
 				<td>{{whoPaid}}</td>
 				<td>{{amount}}</td>
-				<td>{{date}}</td>
+				<td>{{formattedDate date}}</td>
 			</tr>
 		{{/each}}
 		</tbody>
+		<p>Total : {{ totalExpense }}</p>
 	</table>
 </script>
   <script src="js/libs/jquery-1.10.2.min.js"></script>
   <script src="js/libs/handlebars-1.0.0.js"></script>
   <script src="js/libs/ember.js"></script>
+  <script src="js/libs/moment.js"></script>
   <script src="js/libs/ember-data.js"></script>
   <script src="js/libs/localstorage_adapter.js"></script>
   <script src="js/bootstrap.min.js"></script>

@@ -7,11 +7,11 @@ App.Friend = DS.Model.extend({
 });
 
 App.Expense = DS.Model.extend({
-	date: attr('date'),
+	date: attr(),
 	description: attr('string'),
 	whoPaid: DS.attr('string'),
 	amount: attr('number'),
 	forWhom: attr('string')
 });
 
-App.Summary = DS.Model.extend({});
+App.Summary = DS.Model.extend();
