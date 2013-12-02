@@ -84,9 +84,17 @@ App.ExpensesController = Ember.ArrayController.extend({
 App.SummaryController = Ember.ObjectController.extend({
     needs: 'expenses',
     totalExpense: function(){
-        return 100;
-    }.property('totalExpense.@each.amount')
+        var total = 0;
+        var expenses = this.get('controllers.expenses');
+        expenses.forEach(function(expense){
+            total += expense.get('amount');
+        });
+        return total;
+    }.property('controllers.expenses.@each.amount'),
+
+    
 });
+
 
 
 
