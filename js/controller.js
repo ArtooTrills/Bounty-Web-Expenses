@@ -1,5 +1,6 @@
 App.FriendsController = Ember.ArrayController.extend({
-	isEditing: false,		
+	isEditing: false,
+    isEdit: false,		
   actions: {
     add_friend: function() {
 		this.set('isEditing',true);
@@ -27,6 +28,10 @@ App.FriendsController = Ember.ArrayController.extend({
     	newFriend.save();
     	this.set('isEditing',false);
     },
+
+    edit: function() {
+        this.set('isEditing',true);
+    }
 
   }
 
@@ -82,7 +87,7 @@ App.ExpensesController = Ember.ArrayController.extend({
 
 
 App.SummaryController = Ember.ObjectController.extend({
-    needs: 'expenses',
+    needs: ['expenses','friends'],
     totalExpense: function(){
         var total = 0;
         var expenses = this.get('controllers.expenses');
@@ -93,7 +98,20 @@ App.SummaryController = Ember.ObjectController.extend({
     }.property('controllers.expenses.@each.amount'),
 
     
+    userExpense: function() {
+        
+        var total = 0;
+        var expenses = this.get('controllers.expenses');
+        var user = this.get('controllers.friends');
+        expenses.forEach(function(expense){
+            if('whoPaid' == user){
+                total += expense.get('amount');
+            }
+        });
+        return total;     
+    }.property('controllers.expenses.@each.amount','user')    
 });
+
 
 
 
