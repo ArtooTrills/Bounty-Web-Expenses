@@ -15,6 +15,12 @@ App.FriendsRoute = Ember.Route.extend({
 	}
 });
 
+App.FriendRoute = Ember.Route.extend({
+	model: function(params) {
+		return Friends.find(params.friend_id);
+	}
+});
+
 App.ExpensesRoute = Ember.Route.extend({
 	model: function(){
 		return this.store.find('expense');
@@ -24,7 +30,7 @@ App.ExpensesRoute = Ember.Route.extend({
 
 
 App.SummaryRoute = Ember.Route.extend({
-	model: function(){
+	model: function() {
 		return this.store.find('expense');
 	}
 });

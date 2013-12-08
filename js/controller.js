@@ -29,13 +29,11 @@ App.FriendsController = Ember.ArrayController.extend({
     	this.set('isEditing',false);
     },
 
-    edit: function() {
-        this.set('isEditing',true);
-    }
-
-  }
+}
 
 });
+
+
 
 App.ExpensesController = Ember.ArrayController.extend({
 	needs: 'friends',
@@ -86,30 +84,39 @@ App.ExpensesController = Ember.ArrayController.extend({
 });
 
 
-App.SummaryController = Ember.ObjectController.extend({
-    needs: ['expenses','friends'],
-    totalExpense: function(){
-        var total = 0;
-        var expenses = this.get('controllers.expenses');
-        expenses.forEach(function(expense){
-            total += expense.get('amount');
-        });
-        return total;
-    }.property('controllers.expenses.@each.amount'),
-
-    
+App.SummaryController = Ember.ArrayController.extend({
+    needs: ['expenses'],
     userExpense: function() {
-        
-        var total = 0;
-        var expenses = this.get('controllers.expenses');
-        var user = this.get('controllers.friends');
-        expenses.forEach(function(expense){
-            if('whoPaid' == user){
-                total += expense.get('amount');
-            }
-        });
-        return total;     
-    }.property('controllers.expenses.@each.amount','user')    
+       var userExpenseMap = {}
+       var expenses = this.get('controllers.expenses');
+       
+       expenses.forEach(function(expense){
+       
+           if(userExpenseMap[expense.get('whoPaid')]){
+               userExpenseMap[expense.get('whoPaid')] += expense.get('amount');
+           }
+       
+           else{
+               userExpenseMap[expense.get('whoPaid')] = expense.get('amount');   
+           }
+       });
+
+       userExpenseList = []
+       
+       for(var key in userExpenseMap){
+    
+           var obj = {};
+    
+           obj.name = key;
+           obj.expense = userExpenseMap[key];
+    
+           userExpenseList.push(obj);
+       }
+    
+       // console.log(userExpenseList);
+    
+       return userExpenseList;
+    }.property('controllers.expenses.@each.amount')   
 });
 
 

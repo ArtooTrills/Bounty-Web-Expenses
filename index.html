@@ -48,6 +48,7 @@
 				<th>Name</th>
 				<th>Screen Name</th>
 				<th>Description</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -56,6 +57,7 @@
 					<td>{{name}}</td>
 					<td>{{screenName}}</td>
 					<td>{{description}}</td>
+					<td><button class="btn btn-success" {{action 'edit'}}>Edit</button>
 				</tr>
 			{{/each}}
 		</tbody>
@@ -153,29 +155,21 @@
 		<thead>
 			<tr>
 				<th>Name</th>
-				<th>Total Expenses</th>
-				<th>Date</th>
+				<th>Total Expenses</th>				
 			</tr>
 		</thead>
 		<tbody>
-		{{#each model}}
-			<tr>
-				<td>{{whoPaid}}</td>
-				<td>{{amount}}</td>
-				<td>{{formattedDate date}}</td>
-			</tr>
-		{{/each}}
-		<tr>
-			<td><strong>Total</strong></td>
-			<td colspan="2"><strong>{{ totalExpense }}</strong></td>
-		</tr>
+			{{#each userExpense}}
+				<tr>
+					<td>{{name}}</td>
+					<td>{{expense}}</td>
+				</tr>			
 		</tbody>
+		{{else}}
+				<p>Nothing to display here!</p>
+		{{/each}}
 	</table>
 </script>
-
-<script type="text/x-handlebars" id="friend">
-	
-</script> 
 
 
   <script src="js/libs/jquery-1.10.2.min.js"></script>
