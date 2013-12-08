@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<title>Expenses Tracker</title>
+</head>
+<body>
+
+<script type="text/x-handlebars">
+	<div class="container content-wrapper">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>{{#linkTo 'index'}}Expense Tracker{{/linkTo}}</h2>
+			</div>
+			<hr>
+			<div class="nav well col-md-12 master">
+				<ul>
+					<li>{{#linkTo 'friends'}}Friends{{/linkTo}}</li>
+					<li>{{#linkTo 'expenses'}}Expenses{{/linkTo}}</li>
+					<li>{{#linkTo 'summary'}}Summary{{/linkTo}}</li>
+				</ul>
+			</div>
+			<div class="well col-md-12 detail">
+				
+					{{outlet}}
+				
+			</div>
+		</div>
+	</div>
+</script>
+
+<!-- Friends template -->
+<script type="text/x-handlebars" id="friends"> 
+  	{{#if isEditing}}
+		{{partial newFriend}}
+		<p>
+			<button {{action 'cancel'}} class="btn btn-success">Cancel</button>
+			<button {{action 'addFriend'}} class="btn btn-info">Save</button>
+		</p>
+ 	{{else}}
+ 		<p><button {{action 'add_friend'}} class="btn btn-primary">(+) New Friend </button></p>
+ 	{{/if}}
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Screen Name</th>
+				<th>Description</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each model}}
+				<tr>
+					<td>{{name}}</td>
+					<td>{{screenName}}</td>
+					<td>{{description}}</td>
+					<td><button class="btn btn-success" {{action 'edit'}}>Edit</button>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+
+</script>
+<!-- End -->
+<!-- Adding/Editing Friends - Partial Template-->
+<script type="text/x-handlebars" id="_newFriend">
+	<p> Add New Friend </p>
+	<table class="table table-bordered">
+		<tr>
+			<td><label for="name">Name: </label></td>
+			<td>{{input type="text" value=name id="name"}}</td>
+		</tr>
+		<tr>
+			<td><label for="screenName">Screen Name: </label></td>
+			<td>{{input type="text" value=screenName id="screenName"}}</td>
+		</tr>
+		<tr>
+			<td><label for="description">Description: </label></td>
+			<td>{{input type="text" value=description id="description"}}</td>
+		</tr>
+	</table>
+</script>
+<!-- End -->
+
+<!-- Expenses Template -->
+<script type="text/x-handlebars" id="expenses"> 
+	{{#if isEditing}}
+		{{partial newExpense}}
+		<p>
+			<button {{action 'cancel'}} class="btn btn-success">Cancel</button>
+			<button {{action 'addExpense' 'addSummary'}} class="btn btn-info">Save</button>
+		</p>
+
+ 	{{else}}
+ 		<p><button {{action 'add_expense'}} class="btn btn-primary">(+) New Expense </button></p>
+ 	{{/if}}
+	<table class="table table-bordered table-striped">
+		<thead>
+            <tr>            	
+                <th>Date</th>
+                <th>Description</th>
+                <th>Who paid?</th>
+                <th>Amount</th>
+                <th>For whom?</th>
+            </tr>
+         </thead>
+		<tbody>
+            {{#each model}}
+	            <tr>
+	            	<td>{{formattedDate date}}</td>
+                    <td>{{description}}</td>
+                    <td>{{whoPaid}}</td>
+                    <td>{{amount}}</td>
+                    <td>{{forWhom}}</td>
+	            </tr>
+            {{/each}}
+        </tbody>
+	</table>
+</script>
+<!-- End of expenses template -->
+<!-- Expenses partail template -->
+<script type="text/x-handlebars" id="_newExpense">
+	<p> Add New Expense </p>
+	<table class="table table-bordered">
+		<tr>
+			<td><label for="date">Date: </label></td>
+			<td>{{input type="date" value=date id="date"}}</td>
+		</tr>
+		<tr>
+			<td><label for="description">Description: </label></td>
+			<td>{{input type="text" value=description id="description"}}</td>
+		</tr>
+		<tr>
+			<td><label for="whoPaid">Who Paid: </label></td>
+			<td>{{input type="text" value=whoPaid id="whoPaid"}}</td>
+				
+			</td>
+		</tr>
+		<tr>
+			<td><label for="amount">Amount: </label></td>
+			<td>{{input type="text" value=amount id="amount"}}</td>
+		</tr>
+		<tr>
+			<td><label for="forwhom">For Whom: </label></td>
+			<td>{{input type="text" value=forWhom id="forwhom"}}</td>
+		</tr>
+	</table>
+</script>
+
+<script type="text/x-handlebars" id="summary"> 
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Total Expenses</th>				
+			</tr>
+		</thead>
+		<tbody>
+			{{#each userExpense}}
+				<tr>
+					<td>{{name}}</td>
+					<td>{{expense}}</td>
+				</tr>			
+		</tbody>
+		{{else}}
+				<p>Nothing to display here!</p>
+		{{/each}}
+	</table>
+</script>
+
+
+  <script src="js/libs/jquery-1.10.2.min.js"></script>
+  <script src="js/libs/handlebars-1.0.0.js"></script>
+  <script src="js/libs/ember.js"></script>
+  <script src="js/libs/moment.js"></script>
+  <script src="js/libs/ember-data.js"></script>
+  <script src="js/libs/localstorage_adapter.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+  <script src="js/application.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/controller.js"></script>
+  <script src="js/views.js"></script>
+</body>
+</html>

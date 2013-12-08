@@ -1,0 +1,22 @@
+body{
+	font-size: 1.5em;
+}
+
+.headline{
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.content-wrapper{
+	margin-top: 2.5%;
+}
+
+.master ul li {
+	float: left;
+	display: inline-block;
+	padding: 10px;
+}
+
+.add-people {
+	margin-bottom: 10px;
+}
