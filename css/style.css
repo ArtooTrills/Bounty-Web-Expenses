@@ -1,0 +1,32 @@
+
+.btn-primary {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 1 );
+	border-radius: 3px;
+	background-color: #CBD4D6;
+	border-color: #666;
+	color: black;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+	background-color: #666;
+	border-color: #666;
+}
+
+
+.btn-sm {
+	height: 20px;
+	line-height: 10px;
+	text-align: center;
+}
+
+.table {
+	width: 50%;
+}
+
+.table>tbody>tr>td {
+	border-top: none;
+}
+
+.edit {
+	width: 3%;
+}

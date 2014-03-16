@@ -1,0 +1,34 @@
+<div class="main">
+	<div>
+		<button {{action addPerson personsCount}} class="btn btn-primary btn-xs">Add Person [+]</button>
+		<button class="btn btn-primary btn-xs">Delete Selected</button>
+		<button class="btn btn-primary btn-xs">Enter Expenses >> </button>
+	</div>
+	<br />
+	<div>
+		<table class="table table-hover table-bordered">
+			<tr>
+				<th>all</th>
+				<th></th>
+				<th>Person Name</th>
+				<th>Display Name</th>
+				<th>Description or Comment</th>
+			</tr>
+			{{#each}}
+			<tr>
+				<td>{{input type="checkbox" value=id id="deletePerson"}}</td>
+				<td class="edit"><button class="btn btn-primary btn-sm">Edit</button></td>
+				<td> {{name}} </td>
+				<td> {{displayName}} </td>
+				<td> {{comment}} </td>
+			</tr>
+			{{else}}
+				<li class="no-users-yet">No persons added yet... </li>
+			{{/each}}
+		</table>
+	</div>
+
+	{{outlet modal}}
+</div>
+
+
