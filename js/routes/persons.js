@@ -1,8 +1,7 @@
 App.PersonsRoute = Ember.Route.extend({
 	actions: {
-		addPerson: function(count) {
+		addPerson: function() {
 			this.render('newPerson', { into: 'persons', outlet: 'modal', view: 'modal' });
-                        this.transitionTo('newPerson');
 
 		},
 		deletePersons: function() {
@@ -11,7 +10,6 @@ App.PersonsRoute = Ember.Route.extend({
 		
 		close: function() {
                         this.disconnectOutlet({outlet: 'modal', parentView: 'persons'});
-			this.transitionTo('persons');
                 }
 	},
 	model: function() {
