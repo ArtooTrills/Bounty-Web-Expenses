@@ -12,10 +12,6 @@ App.ModalView = Ember.View.extend({
 				view.controller.send('close');
 			});
 			this.$('.modal, .modal-backdrop').removeClass('in');
-		},
-
-		save: function() {
-			var name = this.get('name');
 		}
 	}
 });

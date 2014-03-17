@@ -1,11 +1,9 @@
 <div class="main">
 	<div>
 		<button {{action addPerson personsCount}} class="btn btn-primary btn-xs">Add Person [+]</button>
-		<button class="btn btn-primary btn-xs">Delete Selected</button>
+		<button {{action deletePersons}} class="btn btn-primary btn-xs">Delete Selected</button>
 		<button class="btn btn-primary btn-xs">Enter Expenses >> </button>
-	</div>
-	<br />
-	<div>
+		<br/>
 		<table class="table table-hover table-bordered">
 			<tr>
 				<th>all</th>
@@ -16,7 +14,7 @@
 			</tr>
 			{{#each}}
 			<tr>
-				<td>{{input type="checkbox" value=id id="deletePerson"}}</td>
+				<td>{{input type="checkbox" checked=isChecked}}</td>
 				<td class="edit"><button class="btn btn-primary btn-sm">Edit</button></td>
 				<td> {{name}} </td>
 				<td> {{displayName}} </td>
@@ -27,7 +25,6 @@
 			{{/each}}
 		</table>
 	</div>
-
 	{{outlet modal}}
 </div>
 

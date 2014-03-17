@@ -1,0 +1,15 @@
+<div class="modal-header">
+	<button type="button" class="close" {{action close}}>&times;</button>
+	<h3>Delete Persons</h3>
+</div>
+<div>
+<form {{action "confirmDelete" on="submit"}}>
+<div class="modal-body">
+	Are you sure you want to delete the selected persons?
+</div>
+<div class="modal-footer">
+	<input type="button" class="btn" {{action "close"}} value="Cancel"/>
+        <input type="submit" class="btn btn-primary" value="Confirm Delete"/>
+</div>
+</form>
+</div>
