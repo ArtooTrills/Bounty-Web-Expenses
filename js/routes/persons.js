@@ -8,6 +8,10 @@ App.PersonsRoute = Ember.Route.extend({
 			this.render('confirmDelete', { into: 'persons', outlet: 'modal', view: 'modal' });
 		},
 		
+		editPerson: function(person) {
+			this.transitionTo('editPerson', person);
+		},
+
 		close: function() {
                         this.disconnectOutlet({outlet: 'modal', parentView: 'persons'});
                 }
