@@ -22,7 +22,13 @@
 				<td> {{description}} </td>
 				<td> {{payer.name}} </td>
 				<td> {{amount}} </td>
-				<td> {{payees}} </td>
+				<td>
+				<ul class='payees'>
+				{{#each person in payees}}
+					<li>{{person.name}}</li>
+				{{/each}}
+				</ul>
+				</td>
 			</tr>
 			{{else}}
 				<li>No expenses added yet... </li>

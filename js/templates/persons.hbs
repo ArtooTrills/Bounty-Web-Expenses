@@ -2,7 +2,7 @@
 	<div>
 		<button {{action addPerson}} class="btn btn-primary btn-xs">Add Person [+]</button>
 		<button {{action deletePersons}} class="btn btn-primary btn-xs">Delete Selected</button>
-		<button class="btn btn-primary btn-xs">Enter Expenses >> </button>
+		{{#link-to 'expenses' class="btn btn-primary btn-xs"}} Enter Expenses >> {{/link-to}}
 		<br/><br/>
 		<table class="table table-hover table-bordered">
 			<tr>

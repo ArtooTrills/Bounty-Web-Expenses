@@ -3,7 +3,7 @@ App.Expense = DS.Model.extend({
 	description: DS.attr('string'),
 	payer: DS.belongsTo('person'),
 	amount: DS.attr('number'),
-	payees: DS.attr('string'),
+	payees: DS.hasMany('person', {async: true})
 });
 
 App.Expense.FIXTURES = [
@@ -13,7 +13,7 @@ App.Expense.FIXTURES = [
      description: 'pizza',
      payer: 1,
      amount: 1000,
-     payees: '1, 2, 3'
+     payees: [1, 2, 3]
   },
 
   {
@@ -22,7 +22,7 @@ App.Expense.FIXTURES = [
      description: 'laundry',
      payer: 2,
      amount: 400,
-     payees: '1, 2'
+     payees: [1, 2]
   },
 
   {
@@ -31,6 +31,6 @@ App.Expense.FIXTURES = [
      description: 'bus travel',
      payer: 3,
      amount: 600,
-     payees: '1, 2, 3'
+     payees: [1, 2, 3]
   }
 ];
