@@ -1,0 +1,35 @@
+<div class="main">
+	<div>
+		<button {{action addExpense}} class="btn btn-primary btn-xs">Add Expense [+]</button>
+		<button {{action deleteExpenses}} class="btn btn-primary btn-xs">Delete Selected</button>
+		<button class="btn btn-primary btn-xs">Compute Payments >> </button>
+		<br/><br/>
+		<table class="table table-hover table-bordered">
+			<tr>
+				<th>all</th>
+				<th></th>
+				<th>Date</th>
+				<th>Description</th>
+				<th>Who paid?</th>
+				<th>Amount</th>
+				<th>For whom?</th>
+			</tr>
+			{{#each expense in controller}}
+			<tr>
+				<td>{{input type="checkbox" checked=isChecked}}</td>
+				<td class="edit"><button {{action editExpense expense}} class="btn btn-primary btn-sm">Edit</button></td>
+				<td> {{date}} </td>
+				<td> {{description}} </td>
+				<td> {{payer.name}} </td>
+				<td> {{amount}} </td>
+				<td> {{payees}} </td>
+			</tr>
+			{{else}}
+				<li>No expenses added yet... </li>
+			{{/each}}
+		</table>
+	</div>
+	{{outlet modal}}
+</div>
+
+
