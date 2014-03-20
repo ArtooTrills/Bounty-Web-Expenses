@@ -7,7 +7,13 @@ App.PersonsController = Ember.ArrayController.extend({
 		return ((this.objectAt(lastRecord - 1)).get('id'));
 	}.property('@each'),
 	actions: {
-		save: function(count) {
+		close: function() {
+			this.set('name', '');
+			this.set('displayName', '');
+			this.set('comment', '');
+			this.send("closeModal");
+		},
+		saveChanges: function(count) {
 			var name = this.get('name');
                         var displayName = this.get('displayName');
                         var comment = this.get('comment');
@@ -21,9 +27,14 @@ App.PersonsController = Ember.ArrayController.extend({
 			this.set('name', '');
 			this.set('displayName', '');
 			this.set('comment', '');
+		},
+		save: function(count) {
+			this.send("saveChanges", count);
 			this.send("close");
 		},
-	
+		saveAndNew: function(count) {
+			this.send("saveChanges", count);
+		},	
 		confirmDelete: function() {
 		var toDelete = this.filterBy('isChecked', true);
 		toDelete.forEach(function(item) {

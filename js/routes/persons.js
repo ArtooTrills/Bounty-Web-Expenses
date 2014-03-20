@@ -12,7 +12,7 @@ App.PersonsRoute = Ember.Route.extend({
 			this.transitionTo('editPerson', person);
 		},
 
-		close: function() {
+		closeModal: function() {
                         this.disconnectOutlet({outlet: 'modal', parentView: 'persons'});
                 }
 	},
