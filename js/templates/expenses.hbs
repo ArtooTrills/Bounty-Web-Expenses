@@ -18,7 +18,7 @@
 			<tr>
 				<td>{{input type="checkbox" checked=isChecked}}</td>
 				<td class="edit"><button {{action editExpense expense}} class="btn btn-primary btn-sm">Edit</button></td>
-				<td> {{date}} </td>
+				<td> {{formatDate date 'DD-MM-YYYY'}} </td>
 				<td> {{description}} </td>
 				<td> {{payer.name}} </td>
 				<td> {{amount}} </td>

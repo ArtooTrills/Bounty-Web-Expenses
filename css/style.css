@@ -20,7 +20,20 @@
 }
 
 .table {
+
 	width: 50%;
+}
+
+.modaltable {
+	width: 100%;
+}
+
+.modaltable td:first-child {
+	width: 15%;
+}
+
+.modaltable td:first-child + td {
+	width: 85%;
 }
 
 .table>tbody>tr>td {
@@ -29,4 +42,21 @@
 
 .edit {
 	width: 3%;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+ul li {
+	display: inline; 
+}
+
+.payees li:after {
+	content: ',';
+}
+
+.payees li:nth-last-child(3):after {
+	content: " ";
 }
