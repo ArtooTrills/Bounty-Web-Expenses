@@ -111,8 +111,7 @@ App.ExpensesController = Ember.ArrayController.extend({
 		//update payees 'Owes' and 'Balance 'values in summary
 		updateSummaryPayees: function(payeeId, payeeName, payeesCount, spentAmount) {
 			//calculate the amount that the payee owes for the current expense
-			var owesAmount = parseFloat(spentAmount / payeesCount).toFixed(2);
-			
+			var owesAmount = parseFloat(spentAmount) / parseFloat(payeesCount).toFixed(2);
 			//if payee already present in summary report, update the details
 			if(this.store.getById('summary', payeeId) != null) {
 				this.store.find('summary', payeeId).then(function(summaryRecord) {
