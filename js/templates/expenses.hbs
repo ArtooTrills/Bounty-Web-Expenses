@@ -2,7 +2,7 @@
 	<div>
 		<button {{action addExpense}} class="btn btn-primary btn-xs">Add Expense [+]</button>
 		<button {{action deleteExpenses}} class="btn btn-primary btn-xs">Delete Selected</button>
-		<button class="btn btn-primary btn-xs">Compute Payments >> </button>
+		{{#link-to 'summary' class="btn btn-primary btn-xs"}} Compute Payments >> {{/link-to}}
 		<br/><br/>
 		<table class="table table-hover table-bordered">
 			<tr>

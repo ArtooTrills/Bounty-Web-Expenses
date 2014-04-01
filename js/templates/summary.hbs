@@ -1,0 +1,24 @@
+<div class="main">
+	<table class="table table-hover table-bordered">
+		<tr>
+			<th>Name</th>
+			<th>Total Spent</th>
+			<th>Owes</th>
+			<th>Is Owed</th>
+			<th>Balance</th>
+		</tr>
+		{{#each}}
+		<tr>
+			<td> {{name}} </td>
+			<td> {{spent}} </td>
+			<td> {{owes}} </td>
+			<td> {{owed}} </td>
+			<td> {{balance}} </td>
+		</tr>
+		{{else}}
+			<li>No summary detail exist... </li>
+		{{/each}}
+	</table>
+</div>
+
+

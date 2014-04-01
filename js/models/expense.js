@@ -33,4 +33,5 @@ App.Expense.FIXTURES = [
      amount: 600,
      payees: [1, 2, 3]
   }
+
 ];

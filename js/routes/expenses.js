@@ -23,5 +23,6 @@ App.ExpensesRoute = Ember.Route.extend({
 	setupController: function(controller, model) {
 		this._super(controller, model);
 		this.controllerFor('persons').set('content', this.store.find('person'));
+		this.controllerFor('summary').set('content', this.store.find('summary'));
 	}
 });
