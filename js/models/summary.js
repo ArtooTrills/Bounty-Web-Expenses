@@ -14,7 +14,16 @@ App.Summary.FIXTURES = [
      spent: 450.00,
      owes: 8166.67,
      owed: 225.00,
-     balance: 7941.67
+     balance: -7941.67
+  },
+
+  {
+     id: 2,
+     name: 'Kishore',
+     spent: 20000.00,
+     owes: 0.00,
+     owed: 13333.33,
+     balance: 13333.33
   },
 
   {
@@ -23,7 +32,7 @@ App.Summary.FIXTURES = [
      spent: 3000.00,
      owes: 6891.67,
      owed: 1500.00,
-     balance: 5391.67
+     balance: -5391.67
   }
 
  ];

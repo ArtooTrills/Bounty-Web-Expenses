@@ -1,3 +1,4 @@
 App.SummaryController = Ember.ArrayController.extend({
-	content: []
+	content: [],
+	itemController: 'summaryItem'
 });

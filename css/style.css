@@ -60,3 +60,11 @@ ul li {
 .payees li:nth-last-child(3):after {
 	content: " ";
 }
+
+.positive {
+	color: green;
+}
+
+.negative {
+	color: red;
+}
