@@ -111,7 +111,7 @@ App.ExpensesController = Ember.ArrayController.extend({
 		//update payees 'Owes' and 'Balance 'values in summary
 		updateSummaryPayees: function(payeeId, payeeName, payeesCount, spentAmount) {
 			//calculate the amount that the payee owes for the current expense
-			var owesAmount = parseFloat(spentAmount) / parseFloat(payeesCount).toFixed(2);
+			var owesAmount = (parseFloat(spentAmount) / parseFloat(payeesCount)).toFixed(2);
 			//if payee already present in summary report, update the details
 			if(this.store.getById('summary', payeeId) != null) {
 				this.store.find('summary', payeeId).then(function(summaryRecord) {
@@ -134,12 +134,24 @@ App.ExpensesController = Ember.ArrayController.extend({
 			}
 		},
 		
-		//delete selected records after confirmation
+		//delete selected records after confirmation and update summary details
 		confirmDelete: function() {
 		var toDelete = this.filterBy('isChecked', true);
+		var self = this;
 		toDelete.forEach(function(item) {
-				item.get('model').deleteRecord();
-				item.get('model').save();
+				var model = item.get('model');
+
+				//use negative amount value to deduct from summary
+			  	self.send("updateSummaryPayer", model.get('payer').get('id'), model.get('payer').get('name'), model.get('payees.length'), parseFloat(- model.get('amount')));
+
+				var payees = model.get('payees');
+				payees.forEach(function(payee) {
+					self.send("updateSummaryPayees", payee.get('id'), payee.get('name'), model.get('payees.length'), parseFloat(- model.get('amount')));
+				});
+			
+				//delete the expense record		
+				model.deleteRecord();
+				model.save();
 			}, toDelete);
 		this.send("close");
 		}
