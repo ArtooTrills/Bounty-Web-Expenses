@@ -90,7 +90,7 @@ App.ExpensesController = Ember.ArrayController.extend({
 					summaryRecord.set('spent', parseFloat(summaryRecord.get('spent')) + spentAmount);
 					summaryRecord.set('owed', parseFloat(summaryRecord.get('owed')) + parseFloat(owedAmount));
 				
-					summaryRecord.set('balance', (parseFloat(summaryRecord.get('owes')) - parseFloat(summaryRecord.get('owed'))).toFixed(2));
+					summaryRecord.set('balance', (parseFloat(summaryRecord.get('owed')) - parseFloat(summaryRecord.get('owes'))).toFixed(2));
 					summaryRecord.save();
 				});
 			}
@@ -116,7 +116,7 @@ App.ExpensesController = Ember.ArrayController.extend({
 			if(this.store.getById('summary', payeeId) != null) {
 				this.store.find('summary', payeeId).then(function(summaryRecord) {
 					summaryRecord.set('owes', parseFloat(summaryRecord.get('owes')) + parseFloat(owesAmount));
-					summaryRecord.set('balance', (parseFloat(summaryRecord.get('owes')) - parseFloat(summaryRecord.get('owed'))).toFixed(2));
+					summaryRecord.set('balance', (parseFloat(summaryRecord.get('owed')) - parseFloat(summaryRecord.get('owes'))).toFixed(2));
 					summaryRecord.save();
 				});
 			}
@@ -129,7 +129,7 @@ App.ExpensesController = Ember.ArrayController.extend({
 					spent: 0,
 					owes: parseFloat(owesAmount),
 					owed: 0,
-					balance: parseFloat(owesAmount)
+					balance: parseFloat(- owesAmount)
 				});
 			}
 		},

@@ -22,6 +22,35 @@
 			<li>No summary detail exist... </li>
 		{{/each}}
 	</table>
+	<br/>
+	<button {{action computePayments}} class="btn btn-primary btn-xs">Compute Payments</button>
+	<br/><br/>
+	{{#if isComputing}}
+		It would take {{payments.length}} payments to even out all debts:
+		<br/>
+		<table id="payments">
+		{{#each payment in payments}}
+		<tr>
+			<td class="negative">{{payment.owesName}}</td>
+			<td>
+				<div class="arrow">
+				<span class="line"></span>
+				<span class="point"></span>
+				</div>
+			</td>
+			<td>{{payment.amount}}</td>
+			<td>
+				<div class="arrow">
+				<span class="line"></span>
+				<span class="point"></span>
+				</div>
+			</td>
+			<td class="positive">{{payment.owedName}}</td>
+		</tr>
+		{{else}}
+			<li> No payments to be done... </li>
+		{{/each}}
+	{{/if}}
 </div>
 
 

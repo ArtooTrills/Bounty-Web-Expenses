@@ -19,7 +19,7 @@ App.Summary.FIXTURES = [
 
   {
      id: 2,
-     name: 'Kishore',
+     name: 'Ashwini',
      spent: 20000.00,
      owes: 0.00,
      owed: 13333.33,

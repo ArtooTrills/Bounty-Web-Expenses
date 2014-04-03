@@ -68,3 +68,26 @@ ul li {
 .negative {
 	color: red;
 }
+
+#payments {
+	width: 50%;
+}
+.arrow {
+    width:75px;
+}
+
+.line {
+    margin-top:10px;
+    width:60px;
+    background:orange;
+    height:7px;
+    float:left;
+}
+.point {    
+    width: 0;
+    height: 0; 
+    border-top: 15px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid orange;
+    float:right;
+}
