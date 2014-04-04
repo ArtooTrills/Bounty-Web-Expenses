@@ -24,6 +24,13 @@ App.Person.FIXTURES = [
      name: 'Yuvi',
      displayName: 'panda',
      comment: 'Coder'
+  },
+
+  {
+     id: 4,
+     name: 'Sunny',
+     displayName: 'sunny',
+     comment: 'Graphic designer'
   }
 
 ];

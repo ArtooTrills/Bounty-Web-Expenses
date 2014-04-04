@@ -11,28 +11,37 @@ App.Summary.FIXTURES = [
   {
      id: 1,
      name: 'Archana',
-     spent: 450.00,
-     owes: 8166.67,
-     owed: 225.00,
-     balance: -7941.67
+     spent: 400.00,
+     owes: 750.00,
+     owed: 400.00,
+     balance: -350.00
   },
 
   {
      id: 2,
-     name: 'Ashwini',
-     spent: 20000.00,
-     owes: 0.00,
-     owed: 13333.33,
-     balance: 13333.33
+     name: 'Kishore',
+     spent: 800.00,
+     owes: 750.00,
+     owed: 800.00,
+     balance: 50
   },
 
   {
      id: 3,
      name: 'Yuvi',
-     spent: 3000.00,
-     owes: 6891.67,
-     owed: 1500.00,
-     balance: -5391.67
+     spent: 600.00,
+     owes: 750.00,
+     owed: 600.00,
+     balance: -150.00
+  },
+
+  {
+     id: 4,
+     name: 'Sunny',
+     spent: 1200.00,
+     owes: 750.00,
+     owed: 1200.00,
+     balance: 450.00
   }
 
  ];

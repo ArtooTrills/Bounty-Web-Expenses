@@ -7,13 +7,14 @@ App.Expense = DS.Model.extend({
 });
 
 App.Expense.FIXTURES = [
+
   {
      id: 1,
      date: '2013-10-30',
      description: 'pizza',
      payer: 1,
-     amount: 1000,
-     payees: [1, 2, 3]
+     amount: 400,
+     payees: [1, 2, 3, 4]
   },
 
   {
@@ -21,8 +22,8 @@ App.Expense.FIXTURES = [
      date: '2013-11-14',
      description: 'laundry',
      payer: 2,
-     amount: 400,
-     payees: [1, 2]
+     amount: 800,
+     payees: [1, 2, 3, 4]
   },
 
   {
@@ -31,7 +32,16 @@ App.Expense.FIXTURES = [
      description: 'bus travel',
      payer: 3,
      amount: 600,
-     payees: [1, 2, 3]
+     payees: [1, 2, 3, 4]
+  },
+
+  {
+     id: 4,
+     date: '2014-03-26',
+     description: 'movie',
+     payer: 4,
+     amount: 1200,
+     payees: [1, 2, 3, 4]
   }
 
 ];
