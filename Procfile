@@ -1,1 +1,1 @@
-web: bundle exec rakep server --port $PORT
+web: ./node_modules/grunt-cli/bin/grunt expressServer:dist:keepalive
