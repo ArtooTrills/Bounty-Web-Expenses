@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 		server: {
 		options: {
 			port: 8080,
-			base: '.'
+			base: 'index.html'
 		} } },
 		pkg: grunt.file.readJSON('package.json'),
 	
