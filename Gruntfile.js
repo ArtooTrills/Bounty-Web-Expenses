@@ -1,5 +1,11 @@
 module.exports = function(grunt) {
 	grunt.initConfig({
+		connect: {
+		server: {
+		options: {
+			port: 8080,
+			base: '.'
+		} } },
 		pkg: grunt.file.readJSON('package.json'),
 	
 		emberTemplates: {
@@ -36,6 +42,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-ember-templates');
+	grunt.loadNpmTasks('grunt-connect');
 
 	// Default task(s).
 	grunt.registerTask('default', ['concat', 'emberTemplates']);
