@@ -1,0 +1,29 @@
+<div class="main">
+	<div>
+		<button {{action addPerson}} class="btn btn-primary btn-xs">Add Person [+]</button>
+		<button {{action deletePersons}} class="btn btn-primary btn-xs">Delete Selected</button>
+		{{#link-to 'expenses' class="btn btn-primary btn-xs"}} Enter Expenses >> {{/link-to}}
+		<br/><br/>
+		<table class="table table-hover table-bordered">
+			<tr>
+				<th>all</th>
+				<th></th>
+				<th>Person Name</th>
+				<th>Display Name</th>
+				<th>Description or Comment</th>
+			</tr>
+			{{#each person in controller}}
+			<tr>
+				<td>{{input type="checkbox" checked=isChecked}}</td>
+				<td class="edit"><button {{action editPerson person}} class="btn btn-primary btn-sm">Edit</button></td>
+				<td> {{name}} </td>
+				<td> {{displayName}} </td>
+				<td> {{comment}} </td>
+			</tr>
+			{{/each}}
+		</table>
+	</div>
+	{{outlet modal}}
+</div>
+
+

@@ -1,0 +1,54 @@
+<div class="main">
+	<button {{action exportToExcel}} class="btn btn-primary btn-xs">Export to Excel</button>
+	<button {{action printTable}} class="btn btn-primary btn-xs">Print Table</button>
+	<br/><br/>
+	<table class="table table-hover table-bordered" id="summary">
+		<tr>
+			<th>Name</th>
+			<th>Total Spent</th>
+			<th>Owes</th>
+			<th>Is Owed</th>
+			<th>Balance</th>
+		</tr>
+		{{#each summaryItem in controller}}
+		<tr>
+			<td> {{name}} </td>
+			<td> {{spent}} </td>
+			<td> {{owes}} </td>
+			<td> {{owed}} </td>
+			<td {{bind-attr class="balanceColor"}}> {{balance}} </td>
+		</tr>
+		{{/each}}
+	</table>
+	<br/>
+	<button {{action computePayments}} class="btn btn-primary btn-xs">Compute Payments</button>
+	<br/><br/>
+	{{#if isComputing}}
+		It would take {{payments.length}} payments to even out all debts:
+		<br/>
+		<table id="payments">
+		{{#each payment in payments}}
+		<tr>
+			<td class="negative">{{payment.owesName}}</td>
+			<td>
+				<div class="arrow">
+				<span class="line"></span>
+				<span class="point"></span>
+				</div>
+			</td>
+			<td>{{payment.amount}}</td>
+			<td>
+				<div class="arrow">
+				<span class="line"></span>
+				<span class="point"></span>
+				</div>
+			</td>
+			<td class="positive">{{payment.owedName}}</td>
+		</tr>
+		{{else}}
+			<li> No payments to be done... </li>
+		{{/each}}
+	{{/if}}
+</div>
+
+

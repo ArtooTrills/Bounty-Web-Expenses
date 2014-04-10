@@ -1,0 +1,93 @@
+
+.btn-primary {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 1 );
+	border-radius: 3px;
+	background-color: #CBD4D6;
+	border-color: #666;
+	color: black;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+	background-color: #666;
+	border-color: #666;
+}
+
+
+.btn-sm {
+	height: 20px;
+	line-height: 10px;
+	text-align: center;
+}
+
+.table {
+
+	width: 50%;
+}
+
+.modaltable {
+	width: 100%;
+}
+
+.modaltable td:first-child {
+	width: 15%;
+}
+
+.modaltable td:first-child + td {
+	width: 85%;
+}
+
+.table>tbody>tr>td {
+	border-top: none;
+}
+
+.edit {
+	width: 3%;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+ul li {
+	display: inline; 
+}
+
+.payees li:after {
+	content: ',';
+}
+
+.payees li:nth-last-child(3):after {
+	content: " ";
+}
+
+.positive {
+	color: green;
+}
+
+.negative {
+	color: red;
+}
+
+#payments {
+	width: 50%;
+}
+.arrow {
+    width:75px;
+}
+
+.line {
+    margin-top:10px;
+    width:60px;
+    background:orange;
+    height:7px;
+    float:left;
+}
+.point {    
+    width: 0;
+    height: 0; 
+    border-top: 15px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid orange;
+    float:right;
+}

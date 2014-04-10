@@ -1,0 +1,29 @@
+<div class="modal-header">
+	<button type="button" class="close" {{action close}}>&times;</button>
+	<h3>New Person</h3>
+</div>
+<div>
+<form {{action "save" personsMaxId on="submit"}}>
+<div class="modal-body">
+	<table class="table">
+		<tr>
+			<td><label for="name">Person Name </label></td>
+			<td>{{input type="text" value=name id="name"}}</td>
+		</tr>
+		<tr>
+			<td><label for="displayName">Display Name </label></td>
+			<td>{{input type="text" value=displayName id="displayName"}}</td>
+		</tr>
+		<tr>
+			<td><label for="comment">Comment </label></td>
+			<td>{{input type="text" value=comment id="comment"}}</td>
+		</tr>
+	</table>
+</div>
+<div class="modal-footer">
+	<input type="button" class="btn" {{action "saveAndNew" personsMaxId}} value="Save and New"/>
+        <input type="submit" class="btn btn-primary" value="Save"/>
+	<input type="button" class="btn" {{action "close"}} value="Cancel"/>
+</div>
+</form>
+</div>

@@ -1,0 +1,39 @@
+<div class="main">
+	<div>
+		<button {{action addExpense}} class="btn btn-primary btn-xs">Add Expense [+]</button>
+		<button {{action deleteExpenses}} class="btn btn-primary btn-xs">Delete Selected</button>
+		{{#link-to 'summary' class="btn btn-primary btn-xs"}} Compute Payments >> {{/link-to}}
+		<br/><br/>
+		<table class="table table-hover table-bordered">
+			<tr>
+				<th>all</th>
+				<th></th>
+				<th>Date</th>
+				<th>Description</th>
+				<th>Who paid?</th>
+				<th>Amount</th>
+				<th>For whom?</th>
+			</tr>
+			{{#each expense in controller}}
+			<tr>
+				<td>{{input type="checkbox" checked=isChecked}}</td>
+				<td class="edit"><button {{action editExpense expense}} class="btn btn-primary btn-sm">Edit</button></td>
+				<td> {{formatDate date 'DD-MM-YYYY'}} </td>
+				<td> {{description}} </td>
+				<td> {{payer.name}} </td>
+				<td> {{amount}} </td>
+				<td>
+				<ul class='payees'>
+				{{#each person in payees}}
+					<li>{{person.name}}</li>
+				{{/each}}
+				</ul>
+				</td>
+			</tr>
+			{{/each}}
+		</table>
+	</div>
+	{{outlet modal}}
+</div>
+
+

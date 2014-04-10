@@ -1,0 +1,4 @@
+1. Data Visualization graphs of expenses
+2. Form input validation
+3. Integrate with facebook api to find friends
+4. Option to create and maintain different expense sharing groups - roommates, colleagues, family
