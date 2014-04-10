@@ -4,7 +4,10 @@ App.PersonsController = Ember.ArrayController.extend({
 //	compute the maximum id to generate the next id.
 	personsMaxId: function() {
 		var lastRecord = this.get('model.length');
-		return ((this.objectAt(lastRecord - 1)).get('id'));
+                if (lastRecord == 0)
+                        return 0;
+                return ((this.objectAt(lastRecord - 1)).get('id'));
+
 	}.property('@each'),
 	actions: {
 		close: function() {

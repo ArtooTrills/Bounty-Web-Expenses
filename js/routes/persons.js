@@ -2,7 +2,6 @@ App.PersonsRoute = Ember.Route.extend({
 	actions: {
 		addPerson: function() {
 			this.render('newPerson', { into: 'persons', outlet: 'modal', view: 'modal' });
-
 		},
 		deletePersons: function() {
 			this.render('confirmDelete', { into: 'persons', outlet: 'modal', view: 'modal' });

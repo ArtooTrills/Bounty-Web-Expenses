@@ -164,12 +164,6 @@ function program4(depth0,data) {
   return buffer;
   }
 
-function program6(depth0,data) {
-  
-  
-  data.buffer.push("\n				<li>No expenses added yet... </li>\n			");
-  }
-
   data.buffer.push("<div class=\"main\">\n	<div>\n		<button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "addExpense", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data})));
   data.buffer.push(" class=\"btn btn-primary btn-xs\">Add Expense [+]</button>\n		<button ");
@@ -180,7 +174,7 @@ function program6(depth0,data) {
   },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "summary", options) : helperMissing.call(depth0, "link-to", "summary", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n		<br/><br/>\n		<table class=\"table table-hover table-bordered\">\n			<tr>\n				<th>all</th>\n				<th></th>\n				<th>Date</th>\n				<th>Description</th>\n				<th>Who paid?</th>\n				<th>Amount</th>\n				<th>For whom?</th>\n			</tr>\n			");
-  stack1 = helpers.each.call(depth0, "expense", "in", "controller", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(6, program6, data),fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  stack1 = helpers.each.call(depth0, "expense", "in", "controller", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n		</table>\n	</div>\n	");
   data.buffer.push(escapeExpression((helper = helpers.outlet || (depth0 && depth0.outlet),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "modal", options) : helperMissing.call(depth0, "outlet", "modal", options))));
@@ -327,12 +321,6 @@ function program3(depth0,data) {
   return buffer;
   }
 
-function program5(depth0,data) {
-  
-  
-  data.buffer.push("\n				<li>No persons added yet... </li>\n			");
-  }
-
   data.buffer.push("<div class=\"main\">\n	<div>\n		<button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "addPerson", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data})));
   data.buffer.push(" class=\"btn btn-primary btn-xs\">Add Person [+]</button>\n		<button ");
@@ -343,7 +331,7 @@ function program5(depth0,data) {
   },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "expenses", options) : helperMissing.call(depth0, "link-to", "expenses", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n		<br/><br/>\n		<table class=\"table table-hover table-bordered\">\n			<tr>\n				<th>all</th>\n				<th></th>\n				<th>Person Name</th>\n				<th>Display Name</th>\n				<th>Description or Comment</th>\n			</tr>\n			");
-  stack1 = helpers.each.call(depth0, "person", "in", "controller", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(5, program5, data),fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  stack1 = helpers.each.call(depth0, "person", "in", "controller", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n		</table>\n	</div>\n	");
   data.buffer.push(escapeExpression((helper = helpers.outlet || (depth0 && depth0.outlet),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "modal", options) : helperMissing.call(depth0, "outlet", "modal", options))));
@@ -385,23 +373,17 @@ function program1(depth0,data) {
 
 function program3(depth0,data) {
   
-  
-  data.buffer.push("\n			<li>No summary detail exist... </li>\n		");
-  }
-
-function program5(depth0,data) {
-  
   var buffer = '', stack1;
   data.buffer.push("\n		It would take ");
   stack1 = helpers._triageMustache.call(depth0, "payments.length", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push(" payments to even out all debts:\n		<br/>\n		<table id=\"payments\">\n		");
-  stack1 = helpers.each.call(depth0, "payment", "in", "payments", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(8, program8, data),fn:self.program(6, program6, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  stack1 = helpers.each.call(depth0, "payment", "in", "payments", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(6, program6, data),fn:self.program(4, program4, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n	");
   return buffer;
   }
-function program6(depth0,data) {
+function program4(depth0,data) {
   
   var buffer = '', stack1;
   data.buffer.push("\n		<tr>\n			<td class=\"negative\">");
@@ -417,7 +399,7 @@ function program6(depth0,data) {
   return buffer;
   }
 
-function program8(depth0,data) {
+function program6(depth0,data) {
   
   
   data.buffer.push("\n			<li> No payments to be done... </li>\n		");
@@ -428,12 +410,12 @@ function program8(depth0,data) {
   data.buffer.push(" class=\"btn btn-primary btn-xs\">Export to Excel</button>\n	<button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "printTable", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data})));
   data.buffer.push(" class=\"btn btn-primary btn-xs\">Print Table</button>\n	<br/><br/>\n	<table class=\"table table-hover table-bordered\" id=\"summary\">\n		<tr>\n			<th>Name</th>\n			<th>Total Spent</th>\n			<th>Owes</th>\n			<th>Is Owed</th>\n			<th>Balance</th>\n		</tr>\n		");
-  stack1 = helpers.each.call(depth0, "summaryItem", "in", "controller", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  stack1 = helpers.each.call(depth0, "summaryItem", "in", "controller", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n	</table>\n	<br/>\n	<button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "computePayments", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data})));
   data.buffer.push(" class=\"btn btn-primary btn-xs\">Compute Payments</button>\n	<br/><br/>\n	");
-  stack1 = helpers['if'].call(depth0, "isComputing", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers['if'].call(depth0, "isComputing", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n</div>\n\n\n");
   return buffer;
