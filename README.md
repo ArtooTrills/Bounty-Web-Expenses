@@ -1,30 +1,36 @@
-Bounty-Web-Expenses
-===================
+starter-kit
+===========
 
-Tracking expenses accurately can be the biggest headache among a group of roommates or co-workers. There are many apps which do this kind of task.
+A starter kit for Ember
 
-Your task is to build a similar webapp using a client side Javascript MVC framework.
+Your Ember.js project is almost ready! Here's how to get started:
 
-**Snaps for Reference - Basic Functionalities Required**
+- Start writing your app in js/app.js.
 
-Add New Member
+- Describe your application HTML in index.html.
 
-![Add New Member](http://artoogithubdocs.s3.amazonaws.com/bounty/add-new-member.png)
+- During development, you can link to js/libs/ember-*.js to get the
+  unminified version of Ember.js.
 
-Add New Expense
+- Add CSS to css/style.css
 
-![Add New Expense](http://artoogithubdocs.s3.amazonaws.com/bounty/add-expense.png)
+- Open index.html in your browser
 
-Summary Sheet
+Tests
+=====
 
-![Summary Sheet](http://artoogithubdocs.s3.amazonaws.com/bounty/summary.png) 
+This starter kit comes with an integration test sample, written for QUnit runner. 
 
-**Brownie Points**
+You can run the tests by opening the `index.html?test` page in your browser.
 
-1.  Data Visualization - Charts and graphs to show division of expenses
-2.  Options like Print, Export to xls etc 
-3.  Server Side Synchronization
+The test is located in the `tests/tests.js` file. You can see how such an 
+integration test should be written, using QUnit assertions and ember-testing helpers.
 
-**Technologies we love**
+For more information about ember-testing package see [ember-testing](http://emberjs.com/guides/testing/integration/)
 
-Ember.js, Backbone.js, D3.js, Node.js, Phantom.js, CouchDB
+For more information about the QUnit testing framework, see [QUnit](http://qunitjs.com/)
+
+Contact
+====
+
+www.emberjs.com

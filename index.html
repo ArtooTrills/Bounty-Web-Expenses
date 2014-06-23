@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Expenses Calculator</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="css/datepicker3.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Expenses Calculator</a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Sign in</a></li>
+        <li><a href="#">Sign up</a></li>
+      </ul>
+    </div>
+  </nav>
+  <script type="text/x-handlebars">
+    <div class="container">
+      <div class="row">
+        <ul class="nav nav-tabs">
+          <li class="active" id="userstab" {{action 'userstab'}}>{{#link-to 'users' data-toggle="tab"}}1. Create Group{{/link-to}}</li>
+          <li id="expensestab"{{action "expensestab"}}>{{#link-to 'expenses' data-toggle="tab"}}2. Enter Expenses{{/link-to}}</li>
+          <li id="paymentstab" {{action "paymentstab"}}>{{#link-to 'payments' data-toggle="tab"}}3. Compute Payments{{/link-to}}</li>
+        </ul>
+      </div>
+      <br/>
+      {{outlet}}
+    </div>
+  </script>
+  <script type="text/x-handlebars" id="users">
+    <div class="row">
+      {{#link-to "users.create" class="btn btn-default"}} Add user {{/link-to}}
+      <button type="button" class="btn btn-default" {{action "expensestab"}}>Enter Expenses ></button>
+    </div>
+    <br/>
+    <div class="row">
+      <table class="table">
+        <tr>
+          <th>Person Name</th>
+          <th>Display Name</th>
+          <th>Description</th>
+          <th></th>
+          <th></th>
+        </tr>
+          {{#each user in model}}
+            <tr>
+              <td>{{user.name}}</td>
+              <td>{{user.displayname}}</td>
+              <td>{{user.comment}}</td>
+              <td>{{#link-to 'user' user}}<button type="button" class="btn btn-primary btn-xs">Edit</button>{{/link-to}}</td>
+              <td><button {{action "removeUser" user}} class="btn btn-primary btn-xs">Delete</button></td>
+            </tr>
+          {{else}}
+            <li>no users… :-(</li>
+          {{/each}}
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-md-5 col-md-offset-3">
+        {{outlet}}
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" id="user">
+    <p>{{input type="text" value=this.name}}</p>
+    <p>{{input type="text" value=this.displayname}}</p>
+    <p>{{textarea value=this.comment}}</p>
+    <button class="btn btn-default btn-xs" {{action 'doneEditing'}}>Done</button>
+    <button class="btn btn-default btn-xs" {{action 'deleteUser' this}}>Delete</button>
+  </script>
+
+  <script type="text/x-handlebars" id="expenses">
+    <div class="row">
+      {{#link-to "expenses.create" class="btn btn-default"}} Add expense {{/link-to}}
+      <button type="button" class="btn btn-default" {{action "paymentstab"}}>Compute Payments ></button>
+    </div>
+    <br/>
+    <div class="row">
+      <table class="table">
+        <tr>
+          <th>#</th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Who Paid?</th>
+          <th>Amount</th>
+          <th>For Whom?</th>
+          <th></th>
+          <th></th>
+        </tr>
+          {{#each expense in model}}
+            <tr>
+              <td>{{expense.id}}</td>
+              <td>{{format-date expense.date}}</td>
+              <td>{{expense.desc}}</td>
+              <td>{{expense.payer.displayname}}</td>
+              <td>{{expense.amount}}</td>
+              <td>{{#each person in expense.forwhom}}{{person.displayname}}, {{else}}expense.payer.displayname{{/each}}</td>
+              <td>{{#link-to 'expense' expense}}<button type="button" class="btn btn-primary btn-xs">Edit</button>{{/link-to}}</td>
+              <td><button {{action "removeExpense" expense}} class="btn btn-primary btn-xs">Delete</button></td>
+            </tr>
+          {{else}}
+            <li>no expenses… :-(</li>
+          {{/each}}
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        {{outlet}}
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name='payer'>
+    {{#each user in model}}{{user.displayname}}, {{else}}No users{{/each}}
+  </script>
+
+  <script type="text/x-handlebars" id="expense">
+    <p><h3><small>Date </small></h3>{{input type="date" value=this.date}}</p>
+    <p><h3><small>Description </small></h3>{{input type="text" value=this.desc}}</p>
+    <p><h3><small>Payer </small></h3>{{render "payer"}}</p>
+  </script>
+
+  <script src="js/libs/jquery-1.10.2.js"></script>
+  <script src="js/libs/bootstrap.min.js"></script>
+  <script src="js/libs/bootstrap-datepicker.js"></script>
+  <script src="js/libs/moment.js"></script>
+  <script src="js/libs/handlebars-1.1.2.js"></script>
+  <script src="js/libs/ember-1.5.1.js"></script>
+  <script src="js/libs/ember-data.js"></script> 
+  <script src="js/app.js"></script>
+  <!-- to activate the test runner, add the "?test" query string parameter -->
+  <script src="tests/runner.js"></script>
+</body>
+</html>
