@@ -14,6 +14,7 @@ User.reopenClass({
     {id: 1, name: 'Donald Draper', displayName: 'Don', comment: 'Mad Men' },
     {id: 2, name: 'Harvey Specter', displayName: 'Harvey', comment: 'Suits' },
     {id: 3, name: 'Sherlock Holmes', displayName: 'Sherlock', comment: 'Sherlock' },
+    {id: 4, name: 'Walter White', displayName: 'Heisenberg', comment: 'Breaking Bad' },
   ]
 });
 

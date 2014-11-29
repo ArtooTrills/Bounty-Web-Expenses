@@ -25,6 +25,7 @@ Expense.reopenClass({
     {id: 1, description: 'Lunch', amount: 1300, paidBy: 1, paidFor: [1, 3] },
     {id: 2, description: 'Dinner', amount: 1230, paidBy: 2, paidFor: [1, 2, 3] },
     {id: 3, description: 'Movie', amount: 990, paidBy: 3, paidFor: [1, 2, 3] },
+    {id: 4, description: 'Meth', amount: 100, paidBy: 4, paidFor: [4] },
   ]
 });
 
