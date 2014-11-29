@@ -6,7 +6,7 @@ var attr = DS.attr,
 
 var Expense = DS.Model.extend({
   description: attr('string'),
-  date: attr('date', {
+  date: attr('string', {
     defaultValue: function() {
       var now = new Date();
       return now.getDate() + '-' + now.getMonth() + '-' + now.getFullYear();
