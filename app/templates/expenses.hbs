@@ -1,0 +1,42 @@
+{{partial "components/nav-buttons"}}
+<div>
+  <button {{action "create"}} class="btn btn-success btn-xs">Add Expense [+]</button>
+  <button {{action "removeSelected"}} class="btn btn-danger btn-xs" {{bind-attr disabled=notSelected}}>Delete Selected [-]</button>
+  <div class="mt-10">
+    {{#if model}}
+      <table class="table table-bordered">
+        <tr>
+          <th>{{input type="checkbox" checked=toggleSelections}}</th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Paid by</th>
+          <th>Amount</th>
+          <th>Paid for</th>
+          <th>Action</th>
+        </tr>
+        {{#each model itemController="expense"}}
+        <tr>
+          <td>{{input type="checkbox" checked=model.isSelected}}</td>
+          <td>{{model.date}}</td>
+          <td>{{model.description}}</td>
+          <td>{{model.paidBy.displayName}}</td>
+          <td>{{model.amount}}</td>
+          <td>
+            <ul class="ul-comma">
+              {{#each user in model.paidFor}}
+                <li>{{user.displayName}}</li>
+              {{/each}}
+            </ul>
+          </td>
+          <td>
+            <button {{action "edit" model}} class="btn btn-default btn-xs">Edit</button>
+            <button {{action "remove" model}} class="btn btn-default btn-xs">Delete</button>
+          </td>
+        </tr>
+        {{/each}}
+      </table>
+    {{else}}
+      <strong>Please add a expense</strong>
+    {{/if}}
+  </div>
+</div>

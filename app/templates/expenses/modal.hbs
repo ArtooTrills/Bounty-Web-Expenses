@@ -1,0 +1,57 @@
+<div class="modal fade" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        {{#if isNew }}
+          Add expense
+        {{else}}
+          Edit expense
+        {{/if}}
+      </div>
+      <form {{action "save" on="submit"}}>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Date</label>
+            {{date-picker value=date format="DD-MM-YYYY"}}
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            {{view Ember.TextField valueBinding="description" class="form-control"}}
+          </div>
+          <div class="form-group">
+            <label>Amount</label>
+            {{view "number-field" type="number" valueBinding="amount" class="form-control" min="0" step="0.01"}}
+          </div>
+          <div class="form-group">
+            <label>Paid by</label>
+            <div class="clearfix">
+              <ul class="list-inline">
+                {{#each user in users}}
+                <li>
+                  {{radio-button value=user.id name="paidBy" label=user.displayName value-object=user selected=paidBy}}
+                </li>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Paid for</label>
+            <div class="clearfix">
+              <ul class="list-inline">
+                {{#each user in users}}
+                <li>
+                  {{check-box value=user.id name="paidFor" label=user.displayName value-object=user selected=paidFor}}
+                </li>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success btn-sm" type="submit">Save</button>
+          <button class="btn btn-default btn-sm" {{action "close"}}>Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
