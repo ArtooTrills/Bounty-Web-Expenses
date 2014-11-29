@@ -12,7 +12,9 @@ var Expense = DS.Model.extend({
       return now.getDate() + '-' + now.getMonth() + '-' + now.getFullYear();
     }
   }),
-  amount: attr('number'),
+  amount: attr('number', {
+    defaultValue: 0
+  }),
   paidBy: belongsTo('user', { async: true }),
   paidFor: hasMany('user', { async: true })
 });
