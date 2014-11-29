@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 var PaymentController = Ember.ObjectController.extend({
+  needs: ['expenses', 'users'],
+
   // payments
   payments: [],
   // totals for all users
@@ -28,7 +30,7 @@ var PaymentController = Ember.ObjectController.extend({
       var totals = [];
 
       // Fetch all expenses
-      var expenses = this.store.all('expense');
+      var expenses = this.get('model.expenses');
 
       //
       // Compute totals
@@ -51,20 +53,29 @@ var PaymentController = Ember.ObjectController.extend({
 
       // update total object in
       expenses.forEach(function(expense) {
-        var total = _userTotal(expense.get('paidBy'));
+        var payer = expense.get('paidBy');
+        var payee = expense.get('paidFor');
+
+        var total = _userTotal(payer);
+        var payerIncluded = !!expense.get('paidFor').findBy('id', payer.get('id'));
+
         if (!expense.get('amount')) {
           return;
         }
         var amount = parseFloat(expense.get('amount'));
         total.spent += amount;
         total.expPaid += 1;
-        expense.get('paidFor').forEach(function(e) {
+
+        payee.forEach(function(e) {
           var _ut = _userTotal(e);
-          _ut.owes += amount;
+          if (e.get('id') !== payer.get('id')) {
+            _ut.owes += amount/payee.get('length');
+          }
           _ut.expIn += 1;
         });
-        if (expense.get('paidFor').contains(expense.get('paidBy'))) {
-          total.own += amount - (amount/expense.paidFor.length);
+
+        if (payerIncluded) {
+          total.own += amount - (amount/payee.get('length'));
         } else {
           total.own += amount;
         }
