@@ -15,7 +15,10 @@ var ModalController = Ember.ObjectController.extend({
     },
 
     close: function() {
-      this.get('model').rollback();
+      var model = this.get('model');
+      if (model) {
+        model.rollback();
+      }
       this.send("closeModal");
     }
   }

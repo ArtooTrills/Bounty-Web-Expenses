@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-success btn-sm" type="submit">Save</button>
+          <button class="btn btn-success btn-sm" type="submit" {{bind-attr disabled=notValid}}>Save</button>
           <button class="btn btn-default btn-sm" {{action "close"}}>Cancel</button>
         </div>
       </form>

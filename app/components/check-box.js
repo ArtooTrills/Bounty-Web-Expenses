@@ -6,7 +6,12 @@ var CheckBoxComponent = Ember.Component.extend({
   attributeBindings: ["id", "name", "type", "value", "checked:checked" ],
   click: function() {
     var selected = this.get('selected') || [];
-    selected.addObject(this.get('value-object'));
+    var obj = this.get('value-object');
+    if (selected.contains(obj)) {
+      selected.removeObject(obj);
+    } else {
+      selected.addObject(obj);
+    }
   },
   checked: function() {
     var selected = this.get('selected');
