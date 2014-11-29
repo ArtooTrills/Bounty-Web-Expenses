@@ -20,9 +20,42 @@ var PaymentController = Ember.ObjectController.extend({
 
     //compute payments
     payments: function(){
-      var payments = [];
+      var _payments = [];
+      var payers = [], payees = [];
+
+      this.get('totals').forEach(function(t) {
+        var b = t.balance;
+        if(b >= 0) {
+          payees.push({user: t.paidBy, bal: b});
+        } else {
+          payers.push({user: t.paidBy, bal: -b});
+        }
+      });
+      // sort payers asc
+      payers.sort(function(u1, u2) { return u1.bal - u2.bal; });
+      // sort payees desc
+      payees.sort(function(u1, u2) { return u2.bal - u1.bal; });
+
+      payers.forEach(function(payer) {
+        if (payer.bal > 0) {
+          payees.forEach(function(payee) {
+            if (payee.bal > 0) {
+              if (payer.bal > payee.bal) {
+                _payments.push({payer: payer.user, payee: payee.user, amount: payee.bal});
+                payer.bal -= payee.bal;
+                payee.bal = 0;
+              } else {
+                _payments.push({payer: payer.user, payee: payee.user, amount: payer.bal});
+                payee.bal -= payer.bal;
+                payer.bal = 0;
+              }
+            }
+          });
+        }
+      });
+
       // set results for view
-      this.set('payments', payments);
+      this.set('payments', _payments);
     },
 
     // compute totals

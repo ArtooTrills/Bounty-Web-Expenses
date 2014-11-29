@@ -8,6 +8,7 @@
         {{#if payments}}
           It would take {{payments.length}} payments to even out all debts:
           <table class="mt-20">
+            <tbody>
             {{#each payment in payments}}
               <tr>
                 <td>{{payment.payer.displayName}}</td>
@@ -21,6 +22,7 @@
                 <td>{{payment.payee.displayName}}</td>
               </tr>
             {{/each}}
+            </tbody>
           </table>
         {{else}}
           <strong>No payments</strong>
