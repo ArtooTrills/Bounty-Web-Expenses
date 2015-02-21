@@ -1,0 +1,55 @@
+{{partial "components/nav-buttons"}}
+<div>
+  <button {{action "export"}} class="btn btn-default btn-xs">Export to excel</button>
+  <button {{action "print"}} class="btn btn-default btn-xs">Print</button>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mt-10">
+        {{#if payments}}
+          It would take {{payments.length}} payments to even out all debts:
+          <table class="mt-20">
+            <tbody>
+            {{#each payment in payments}}
+              <tr>
+                <td>{{payment.payer.displayName}}</td>
+                <td>
+                  &rarr;
+                </td>
+                <td>{{payment.amount}}</td>
+                <td>
+                  &rarr;
+                </td>
+                <td>{{payment.payee.displayName}}</td>
+              </tr>
+            {{/each}}
+            </tbody>
+          </table>
+        {{else}}
+          <strong>No payments</strong>
+        {{/if}}
+      </div>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-bordered">
+        <tr>
+          <th>Name</th>
+          <th>Expenses</th>
+          <th>Total Spent</th>
+          <th>Owes</th>
+          <th>Is Owed</th>
+          <th>Balance</th>
+        </tr>
+        {{#each t in totals}}
+          <tr>
+            <td>{{t.paidBy.displayName}}</td>
+            <td>{{t.expPaid}}({{t.expIn}})</td>
+            <td>{{t.spent}}</td>
+            <td>{{t.owes}}</td>
+            <td>{{t.own}}</td>
+            <td>{{t.balance}}</td>
+          </tr>
+        {{/each}}
+      </table>
+    </div>
+  </div>
+</div>

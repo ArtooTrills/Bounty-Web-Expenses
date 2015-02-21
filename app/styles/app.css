@@ -1,0 +1,42 @@
+html, body {
+  margin: 20px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-10 {
+  margin-top: 10px;
+}
+
+.mb-20 {
+  margin-top: 20px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.ul-comma {
+  list-style: none;
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+.ul-comma li {
+  display: inline;
+}
+
+.ul-comma li:after {
+    content: ','
+}
+
+.ul-comma li:last-of-type:after {
+    content:''
+}

@@ -1,0 +1,32 @@
+{{partial "components/nav-buttons"}}
+<div>
+  <button {{action "create"}} class="btn btn-success btn-xs">Add Person [+]</button>
+  <button {{action "removeSelected"}} class="btn btn-danger btn-xs" {{bind-attr disabled=notSelected}}>Delete Selected [-]</button>
+  <div class="mt-10">
+  {{#if model}}
+    <table class="table table-bordered">
+      <tr>
+        <th>{{input type="checkbox" id="users-toggle" name="toggleSelections" checked=toggleSelections}}</th>
+        <th>Name</th>
+        <th>Display Name</th>
+        <th>Comment</th>
+        <th>Actions</th>
+      </tr>
+      {{#each model itemController="user" }}
+      <tr>
+        <td>{{input type="checkbox" checked=model.isSelected}}</td>
+        <td>{{model.name}}</td>
+        <td>{{model.displayName}}</td>
+        <td>{{model.comment}}</td>
+        <td>
+          <button {{action "edit" model}} class="btn btn-default btn-xs">Edit</button>
+          <button {{action "remove" model}} class="btn btn-default btn-xs">Delete</button>
+        </td>
+      </tr>
+      {{/each}}
+    </table>
+  {{else}}
+    <strong>Please add a person</strong>
+  {{/if}}
+  </div>
+</div>
