@@ -1,7 +1,7 @@
 Bounty-Web-Expenses
 ===================
 
-Tracking expenses accurately can be the biggest headache among roommates or co-workers - especially if you have a "kanjoos". Today there are quite a few apps (mobile or web) that allow you to do this, but we want to see your take on this problem.
+Tracking expenses accurately can be a real headache for roommates / co-workers - especially if you have a "kanjoos". Today there are quite a few apps (mobile or web) that allow you to do this, but we want to see your take on this problem.
 
 Your task is to build a simple (yet functional) Expense Manager app using Ember.js. Remember we are going to evaluate you on the following parameters:
  * How you think and how creative you are
