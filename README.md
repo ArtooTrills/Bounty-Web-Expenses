@@ -1,11 +1,14 @@
 Bounty-Web-Expenses
 ===================
 
-Tracking expenses accurately can be the biggest headache among a group of roommates or co-workers. There are many apps which do this kind of task.
+Tracking expenses accurately can be the biggest headache among roommates or co-workers. Today there are quite a few apps (mobile or web) that allow you to do this. We want to see your take on this problem.
 
-Your task is to build a similar webapp using a client side Javascript MVC framework.
+Your task is to build a simple (yet functional) Expense Manager app using Ember.js Remember we are going to evaluate you on the following:
+ * How you think and how creativity
+ * How you code
+ * And how quickly can you learn
 
-**Snaps for Reference - Basic Functionalities Required**
+We have included a few graphics to get you started below. Be creative in your approach.
 
 Add New Member
 
@@ -19,12 +22,16 @@ Summary Sheet
 
 ![Summary Sheet](http://artoogithubdocs.s3.amazonaws.com/bounty/summary.png) 
 
-**Brownie Points**
+If you are going for the kill and you really want to wow us:
 
-1.  Data Visualization - Charts and graphs to show division of expenses
+1.  Data Visualization
 2.  Options like Print, Export to xls etc 
 3.  Server Side Synchronization
 
-**Technologies we love**
+** Starting with Ember **
+* http://emberjs.com - Its the official website of Ember. Good guides and API docs
+* http://ember-cli.com - its a simple tool / project structure that helps you get started with ember very quickly. Definitely use this and build the project with it
+* https://github.com/foraker/ember-reading-group - a good set of links that helps you learn Ember the pro-way.
 
-Ember.js, Backbone.js, D3.js, Node.js, Phantom.js, CouchDB
+** Final Words **
+When you are done, please just create a pull request. We would like you to come in and present your code to the whole team. May the force be with you!
