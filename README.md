@@ -31,7 +31,7 @@ If you are going for the kill and you really want to wow us:
 ### Starting with Ember
 * http://emberjs.com - Its the official website of Ember. Good guides and API docs
 * http://ember-cli.com - Its a simple tool / project structure that helps you get started with ember very quickly. Definitely use this and build the project with it
-* [Ember CLI + Firebase](https://www.youtube.com/watch?v=Cs3Fdup7aUo) - A 9 min video where you'll learn how to build a chat application that uses Ember and Firebase to persist data.
+* [Ember CLI + Firebase](https://www.youtube.com/watch?v=Cs3Fdup7aUo) - a 9 min video where you'll learn how to build a chat application that uses Ember and Firebase to persist data.
 * https://github.com/foraker/ember-reading-group - a good set of links that helps you learn Ember the pro-way.
 
 ### Final Words
