@@ -4,5 +4,7 @@ App.Expense = DS.Model.extend({
     amount          : DS.attr(),
     user            : DS.belongsTo('User'),
     affected_users  : DS.attr(),
-    date            : DS.attr()
+    createdAt       : ds.attr('string', {
+                        defaultValue: function() { return new Date(); }
+                      })
 });
