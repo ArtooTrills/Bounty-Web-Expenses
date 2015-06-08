@@ -107,7 +107,7 @@
                                 {{input type="text" placeholder="Amount" value=amount class="form-control" action="addExpense"}}
                             </div>
                             <div class="form-group">
-                                <label>Spending User</label>
+                                <label>Who Paid?</label>
                                 {{view Ember.Select
                                                     content=users
                                                     class="form-control"
@@ -119,7 +119,7 @@
                                                     }}
                             </div>
                             <div class="form-group">
-                                <label> Affected Users</label>
+                                <label>For Whom?</label>
                                 {{view Ember.Select
                                                     multiple=true
                                                     class="form-control"
