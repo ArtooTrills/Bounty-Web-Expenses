@@ -1,5 +1,4 @@
 App.ExpensesController = Ember.ArrayController.extend({
-    
     actions : {
         addExpense : function(){
             var description = this.get('description');
@@ -8,14 +7,14 @@ App.ExpensesController = Ember.ArrayController.extend({
             var affectedUsers = this.get('affectedUsers');
             
             var self = this;
-            // clean input
+            // pull users list to morph expense data before persist
             this.users.then(function(response) {
-                //console.log(response.toString()); //(you can return the models here if all is good)
                 var userBuffer = [];
                 for (var i=0;i<response.content.length;i++){
                     userBuffer.push(response.content[i]._data);
                 }
                 delete i;
+                // implement convenience method; return name w.r.t. provided ID
                 userBuffer.findNameById = function(id){
                     for (var i=0;i<userBuffer.length;i++){
                         if (userBuffer[i].id == id) {
@@ -24,8 +23,7 @@ App.ExpensesController = Ember.ArrayController.extend({
                     }
                     delete i;
                 };
-                
-                
+                // clean input userID of type <App:Ember121:-J31883GTPML>
                 spendingUser = spendingUser.toString().split(":")[2];
                 spendingUser = userBuffer.findNameById(spendingUser.substring(0,spendingUser.length-1));
 
@@ -37,7 +35,7 @@ App.ExpensesController = Ember.ArrayController.extend({
                     affectedUsers[i] = userBuffer.findNameById(x);
                 }
                 affectedUsers = affectedUsers.toString();
-
+                // validate not-empty
                 if (!amount.trim()&&!description.trim()&&!spendingUser.trim()&&!affectedUsers.trim()){return;}
 
                 var expense = self.store.createRecord('expense', {
@@ -46,14 +44,13 @@ App.ExpensesController = Ember.ArrayController.extend({
                     'spendingUser'	  : spendingUser,
                     'affectedUsers'  : affectedUsers
                 });
-                console.log("spending_user => "+spendingUser);
+                // reset fields to empty
                 self.set('amount', '');
                 self.set('description', '');
                 self.set('spendingUser', '');
                 self.set('affectedUsers', '');
-
+                // persist
                 expense.save();
-            
             });
             
             
