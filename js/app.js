@@ -13,3 +13,7 @@ App.ApplicationView = Ember.View.extend({
         });
     }.observes('controller.currentPath')
 });
+
+Ember.Handlebars.helper('format-date', function(date){
+    return moment(date).fromNow();
+});

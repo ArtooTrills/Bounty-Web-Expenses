@@ -93,7 +93,7 @@
         
         <script type="text/x-handlebars" id="expenses">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <fieldset>
                         <legend>Add Expense</legend>
 
@@ -137,7 +137,7 @@
                         </form>
                     </fieldset>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-8">
                     
                     <table class="table table-striped">
                         <thead>
@@ -146,6 +146,7 @@
                                 <th>Amount</th>
                                 <th>Who Paid?</th>
                                 <th>For Whom?</th>
+                                <th>When?</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -155,6 +156,7 @@
                                     <td>{{expense.amount}}</td>
                                     <td>{{expense.spendingUser}}</td>
                                     <td>{{expense.affectedUsers}}</td>
+                                    <td>{{format-date expense.createdAt}}</td>
                                 </tr>
                             {{/each}}
                         </tbody>
@@ -170,7 +172,9 @@
 		<!-- Ember + Ember Data -->
 		<script src="js/libs/ember.min.js"></script>
 		<script src="js/libs/ember-data.min.js"></script>
-
+        <!--Moment Js-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
+        
 		<!-- Firebase -->
 		<script src="js/libs/firebase.js"></script>
 
