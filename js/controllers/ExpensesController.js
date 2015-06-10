@@ -44,13 +44,38 @@ App.ExpensesController = Ember.ArrayController.extend({
                     'spendingUser'	  : spendingUser,
                     'affectedUsers'  : affectedUsers
                 });
+                
+                
+                // persist
+                expense.save();
+                
+                // build settlement object
+                affectedUsers = affectedUsers.split(",");
+                len = affectedUsers.length;
+                var settlements = [];
+                for(var i=0;i<len;i++) {
+                    var ob = {
+                        user : affectedUsers[i],
+                        settled: false
+                    };
+                    settlements.push(ob);
+                }
+                var amt = Number(amount);
+                amt = Math.ceil(amt/len);
+                var settlement = self.store.createRecord('settlement', {
+                    'expenseID' : expense.id,
+                    'spendingUser' : spendingUser,
+                    'amount'    : amt,
+                    'settlements' : settlements
+                });
+                settlement.save();
+                
                 // reset fields to empty
                 self.set('amount', '');
                 self.set('description', '');
                 self.set('spendingUser', '');
                 self.set('affectedUsers', '');
-                // persist
-                expense.save();
+                
             });
             
             

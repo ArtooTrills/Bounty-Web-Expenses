@@ -159,7 +159,7 @@
                                     <td>{{expense.affectedUsers}}</td>
                                     <td>{{format-date expense.createdAt}}</td>
                                     <td>
-                                        {{#link-to 'expenses.info' expense}}
+                                        {{#link-to 'settlements' expense.id}}
                                         <button class="btn btn-default">
                                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                         </button>
@@ -176,35 +176,43 @@
             
         </script>
         
-        <script type="text/x-handlebars" id="expenses/info">
+        <script type="text/x-handlebars" id="settlements">
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-striped">
+                     {{#each item in model}}
+                    <table class="table">
                         <thead>
                             <tr>
-                                <th>Description</th>
-                                <th>Amount</th>
-                                <th>Who Paid?</th>
-                                <th>For Whom?</th>
-                                <th>When?</th>
+                                <th>Who?</th>
+                                <th>To pay</th>
+                                <th>To Whom?</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            
-                                <tr>
-                                    <td>{{model.description}}</td>
-                                    <td>{{model.amount}}</td>
-                                    <td>{{model.spendingUser}}</td>
-                                    <td>{{model.affectedUsers}}</td>
-                                    <td>{{format-date model.createdAt}}</td>
-                                </tr>
-                            
+                         {{#each settlement in item.settlements}}
+                            <tr>
+                                <td>
+                                    {{settlement.user}}  
+                                </td>    
+                                <td>    
+                                    {{item.amount}} 
+                                </td>
+                                <td>
+                                   {{item.spendingUser}}
+                                </td>
+                                <td>
+                                    {{input type="checkbox" checked=settlement.settled}}
+                                </td>
+                            </tr>
+                        {{/each}}
                         </tbody>
                     </table>
-                    
-                    {{#each settlement in settlements}}
-                        {{settlement.user}} has to pay {{settlement.amount}} to {{model.spendingUser}}
+                    <button class="btn btn-default" {{action 'save' model.id}}>
+                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                    </button>
                     {{/each}}
+                    
                 </div>
             </div>
         </script>
@@ -227,8 +235,9 @@
         <script type="text/javascript" src="js/router.js"></script>
         <script type="text/javascript" src="js/controllers/UsersController.js"></script>
         <script type="text/javascript" src="js/controllers/ExpensesController.js"></script>
-        <script type="text/javascript" src="js/controllers/ExpensesInfoController.js"></script>
+        <script type="text/javascript" src="js/controllers/SettlementsController.js"></script>
         <script type="text/javascript" src="js/models/User.js"></script>
         <script type="text/javascript" src="js/models/Expense.js"></script>
+        <script type="text/javascript" src="js/models/Settlement.js"></script>
     </body>
 </html>
