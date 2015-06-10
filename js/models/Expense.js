@@ -5,5 +5,8 @@ App.Expense = DS.Model.extend({
     affectedUsers   : DS.attr('string'),
     createdAt       : DS.attr('string', {
                         defaultValue: function() { return new Date(); }
+                      }),
+    settled         : DS.attr('boolean', {
+                        defaultValue: function() { return false; }
                       })
 });

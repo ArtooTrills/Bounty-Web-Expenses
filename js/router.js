@@ -1,7 +1,9 @@
 App.Router.map(function(){
     this.resource("users", { path : '/users' });
     
-    this.resource("expenses", { path : '/expenses' });
+    this.resource("expenses", { path : '/expenses' }, function() {
+        this.route("info", {path : ':expense_id/info'})
+    });
 });
 
 App.UsersRoute = Ember.Route.extend({
@@ -17,6 +19,12 @@ App.ExpensesRoute = Ember.Route.extend({
         controller.set('selectedValue', null);
     }
     
+});
+
+App.ExpensesInfoRoute = Ember.Route.extend({
+    model: function(params) {
+        return this.store.find('expense', params.expense_id);
+    }
 });
 
 App.IndexRoute = Ember.Route.extend({

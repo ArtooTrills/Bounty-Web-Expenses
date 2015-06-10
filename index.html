@@ -147,6 +147,7 @@
                                 <th>Who Paid?</th>
                                 <th>For Whom?</th>
                                 <th>When?</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -157,15 +158,56 @@
                                     <td>{{expense.spendingUser}}</td>
                                     <td>{{expense.affectedUsers}}</td>
                                     <td>{{format-date expense.createdAt}}</td>
+                                    <td>
+                                        {{#link-to 'expenses.info' expense}}
+                                        <button class="btn btn-default">
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                        </button>
+                                        {{/link-to}}
+                                    </td>
                                 </tr>
                             {{/each}}
                         </tbody>
                     </table>
+                    
+                    {{outlet}}
                 </div>
             </div>
             
         </script>
         
+        <script type="text/x-handlebars" id="expenses/info">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Who Paid?</th>
+                                <th>For Whom?</th>
+                                <th>When?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                                <tr>
+                                    <td>{{model.description}}</td>
+                                    <td>{{model.amount}}</td>
+                                    <td>{{model.spendingUser}}</td>
+                                    <td>{{model.affectedUsers}}</td>
+                                    <td>{{format-date model.createdAt}}</td>
+                                </tr>
+                            
+                        </tbody>
+                    </table>
+                    
+                    {{#each settlement in settlements}}
+                        {{settlement.user}} has to pay {{settlement.amount}} to {{model.spendingUser}}
+                    {{/each}}
+                </div>
+            </div>
+        </script>
         
         <script src="js/libs/jquery.min.js"></script>
         <script src="js/libs/handlebars.js"></script>
@@ -185,6 +227,7 @@
         <script type="text/javascript" src="js/router.js"></script>
         <script type="text/javascript" src="js/controllers/UsersController.js"></script>
         <script type="text/javascript" src="js/controllers/ExpensesController.js"></script>
+        <script type="text/javascript" src="js/controllers/ExpensesInfoController.js"></script>
         <script type="text/javascript" src="js/models/User.js"></script>
         <script type="text/javascript" src="js/models/Expense.js"></script>
     </body>
