@@ -93,8 +93,104 @@
         
         <script type="text/x-handlebars" id="expenses">
             <div class="row">
-                <div class="col-md-4">
-                    <fieldset>
+                
+                <div class="col-md-12">
+                    
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Who Paid?</th>
+                                <th>For Whom?</th>
+                                <th>When?</th>
+                                <th>
+                                    {{#link-to 'expenses.add'}}
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                                            
+                                    </button>
+                                    {{/link-to}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each expense in model}}
+                                <tr>
+                                    <td>{{expense.description}}</td>
+                                    <td>{{expense.amount}}</td>
+                                    <td>{{expense.spendingUser}}</td>
+                                    <td>{{expense.affectedUsers}}</td>
+                                    <td>{{format-date expense.createdAt}}</td>
+                                    <td>
+                                        {{#link-to 'expenses.settlements' expense.settlementID}}
+                                        <button class="btn btn-default">
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                        </button>
+                                        {{/link-to}}
+                                        
+                                        <button class="btn btn-default" {{action "remove" expense}}>
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    
+                    {{outlet}}
+                </div>
+            </div>
+            
+        </script>
+        
+        <script type="text/x-handlebars" id="expenses/settlements">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th colspan="4">
+                                    Settling expense for {{model.expenseDescription}}
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Who?</th>
+                                <th>To pay</th>
+                                <th>To Whom?</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                         {{#each settlement in model.settlements}}
+                            <tr>
+                                <td>
+                                    {{settlement.user}}  
+                                </td>    
+                                <td>    
+                                    {{model.amount}} 
+                                </td>
+                                <td>
+                                   {{model.spendingUser}}
+                                </td>
+                                <td>
+                                    {{input type="checkbox" checked=settlement.settled}}
+                                </td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                    <button class="btn btn-default" {{action 'save' model}}>
+                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                        Mark selected as paid
+                    </button>
+                    
+                </div>
+            </div>
+        </script>
+        
+        <script type="text/x-handlebars" id="expenses/add">
+            <fieldset>
                         <legend>Add Expense</legend>
 
                         <form>
@@ -136,85 +232,6 @@
                             </button>
                         </form>
                     </fieldset>
-                </div>
-                <div class="col-md-8">
-                    
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Description</th>
-                                <th>Amount</th>
-                                <th>Who Paid?</th>
-                                <th>For Whom?</th>
-                                <th>When?</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{#each expense in model}}
-                                <tr>
-                                    <td>{{expense.description}}</td>
-                                    <td>{{expense.amount}}</td>
-                                    <td>{{expense.spendingUser}}</td>
-                                    <td>{{expense.affectedUsers}}</td>
-                                    <td>{{format-date expense.createdAt}}</td>
-                                    <td>
-                                        {{#link-to 'settlements' expense.id}}
-                                        <button class="btn btn-default">
-                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                                        </button>
-                                        {{/link-to}}
-                                    </td>
-                                </tr>
-                            {{/each}}
-                        </tbody>
-                    </table>
-                    
-                    {{outlet}}
-                </div>
-            </div>
-            
-        </script>
-        
-        <script type="text/x-handlebars" id="settlements">
-            <div class="row">
-                <div class="col-md-12">
-                     {{#each item in model}}
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Who?</th>
-                                <th>To pay</th>
-                                <th>To Whom?</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                         {{#each settlement in item.settlements}}
-                            <tr>
-                                <td>
-                                    {{settlement.user}}  
-                                </td>    
-                                <td>    
-                                    {{item.amount}} 
-                                </td>
-                                <td>
-                                   {{item.spendingUser}}
-                                </td>
-                                <td>
-                                    {{input type="checkbox" checked=settlement.settled}}
-                                </td>
-                            </tr>
-                        {{/each}}
-                        </tbody>
-                    </table>
-                    <button class="btn btn-default" {{action 'save' model.id}}>
-                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-                    </button>
-                    {{/each}}
-                    
-                </div>
-            </div>
         </script>
         
         <script src="js/libs/jquery.min.js"></script>
@@ -225,17 +242,14 @@
         <!--Moment Js-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
         
-		<!-- Firebase -->
-		<script src="js/libs/firebase.js"></script>
-
-		<!-- EmberFire -->
-		<script src="js/libs/emberfire.min.js"></script>
+        <script type="text/javascript" src="js/libs/local_storage_adapter.js"></script>
             
         <script type="text/javascript" src="js/app.js"></script>
         <script type="text/javascript" src="js/router.js"></script>
         <script type="text/javascript" src="js/controllers/UsersController.js"></script>
         <script type="text/javascript" src="js/controllers/ExpensesController.js"></script>
-        <script type="text/javascript" src="js/controllers/SettlementsController.js"></script>
+        <script type="text/javascript" src="js/controllers/ExpensesAddController.js"></script>
+        <script type="text/javascript" src="js/controllers/ExpensesSettlementsController.js"></script>
         <script type="text/javascript" src="js/models/User.js"></script>
         <script type="text/javascript" src="js/models/Expense.js"></script>
         <script type="text/javascript" src="js/models/Settlement.js"></script>

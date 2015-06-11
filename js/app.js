@@ -1,9 +1,14 @@
 var App = Ember.Application.create({});
 
-App.ApplicationAdapter = DS.FirebaseAdapter.extend({
+/*App.ApplicationAdapter = DS.FirebaseAdapter.extend({
     firebase: new Firebase('https://artooexpensetracker.firebaseio.com/')
-});
+});*/
 
+//App.ApplicationAdapter = DS.FixtureAdapter.extend();
+
+App.ApplicationAdapter = DS.LSAdapter.extend({
+    namespace: 'artoo-app'
+});
 
 App.ApplicationView = Ember.View.extend({
     currentPathDidChange: function() {
