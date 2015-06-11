@@ -1,11 +1,13 @@
 App.Router.map(function(){
-    this.resource("users", { path : '/users' });
+    this.resource("users", { path : '/users' }, function(){
+        this.route("add", { path : '/add' });
+        this.route("info", { path : '/info' });
+    });
     
     this.resource("expenses", { path : '/expenses' }, function() {
         this.route("add", { path : '/add' });
         this.route("settlements", { path : '/settlements/:settlement_id' });
     });
-
     
 });
 
