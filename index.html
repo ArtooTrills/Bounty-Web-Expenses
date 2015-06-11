@@ -69,7 +69,7 @@
                                     <td>{{user.name}}</td>
                                     <td>{{user.description}}</td>
                                     <td>
-                                        {{#link-to 'users.info'}}
+                                        {{#link-to 'users.info' user}}
                                             <button class="btn btn-default">
                                                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                             </button>
@@ -112,6 +112,14 @@
                     </button>
                 </form>
             </fieldset>
+        </script>
+        
+        <script type="text/x-handlebars" id="users/info">
+            Owes</hr>
+            {{#each owes in summary.owes}}
+                {{owes.amount}} => {{owes.user}}
+                <br>
+            {{/each}}
         </script>
         
         <script type="text/x-handlebars" id="expenses">
@@ -271,6 +279,7 @@
         <script type="text/javascript" src="js/router.js"></script>
         <script type="text/javascript" src="js/controllers/UsersController.js"></script>
         <script type="text/javascript" src="js/controllers/UsersAddController.js"></script>
+        <script type="text/javascript" src="js/controllers/UsersInfoController.js"></script>
         <script type="text/javascript" src="js/controllers/ExpensesController.js"></script>
         <script type="text/javascript" src="js/controllers/ExpensesAddController.js"></script>
         <script type="text/javascript" src="js/controllers/ExpensesSettlementsController.js"></script>
