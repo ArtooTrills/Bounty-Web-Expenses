@@ -12,16 +12,16 @@ App.UsersUserController = Ember.ArrayController.extend({
                 
             self.users.then(function(users) {
                 
-                for (var i=0;i<users.content.content.length;i++){
-                    var userObject = users.content.content[i]._data;
+                for (var i=0;i<users.content.length;i++){
+                    var userObject = users.content[i]._data;
                     
                     if ( userObject.id == userID ) {
                         userName = userObject.name;
                     }
                 }
                 
-                for (var i=0;i<expensesModel.content.content.length;i++){
-                    var expenseObject = expensesModel.content.content[i]._data;
+                for (var i=0;i<expensesModel.content.length;i++){
+                    var expenseObject = expensesModel.content[i]._data;
 
                     if (expenseObject.spendingUser === userName) {
                         var settlementID = expenseObject.settlementID;
