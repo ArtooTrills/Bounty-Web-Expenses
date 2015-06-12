@@ -1,7 +1,7 @@
 App.Router.map(function(){
     this.resource("users", { path : '/users' }, function(){
         this.route("add", { path : '/add' });
-        this.route("info", { path : '/info/:user_id' });
+        this.route("user", { path : '/info/:user_id' });
     });
     
     this.resource("expenses", { path : '/expenses' }, function() {
@@ -17,11 +17,21 @@ App.UsersRoute = Ember.Route.extend({
     }
 });
 
-App.UsersInfoRoute = Ember.Route.extend({
+App.UsersUserRoute = Ember.Route.extend({
+    /*model : function(params) {
+        return {
+            userID : params.user_id
+        };
+    },*/
     
-    setupController: function(controller, params) {
+    model: function(params) {
+        //return this.store.find('user', params.user_id);
+        return [{user:params.user_id}];
+    },
+    setupController: function(controller, model, params) {
         controller.set('expenses', this.store.find('expense'));
-        controller.set('user', this.store.find('user', params.user_id));
+        controller.set('users', this.store.find('user'));
+        controller.set('model', model);
     }
 });
 

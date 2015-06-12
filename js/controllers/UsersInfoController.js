@@ -1,17 +1,27 @@
-App.UsersInfoController = Ember.ArrayController.extend({
+App.UsersUserController = Ember.ArrayController.extend({
     summary: function() {
         var self = this;
         self.expenses.then(function(expensesModel) {
             // user whose summary is to be calculated
             
             var isOwed  = [],
-                Owes    = [];
-            self.user.then(function(user) {
+                Owes    = [],
+                model = self.get('model'),
+                userID = model.user,
+                userName;
                 
-                var userName = user.get('name');
+            self.users.then(function(users) {
                 
-                for (var i=0;i<expensesModel.content.length;i++){
-                    var expenseObject = expensesModel.content[i]._data;
+                for (var i=0;i<users.content.content.length;i++){
+                    var userObject = users.content.content[i]._data;
+                    
+                    if ( userObject.id == userID ) {
+                        userName = userObject.name;
+                    }
+                }
+                
+                for (var i=0;i<expensesModel.content.content.length;i++){
+                    var expenseObject = expensesModel.content.content[i]._data;
 
                     if (expenseObject.spendingUser === userName) {
                         var settlementID = expenseObject.settlementID;
@@ -58,12 +68,14 @@ App.UsersInfoController = Ember.ArrayController.extend({
                         }
                     }
                 }
+            
+                var ob = {
+                    owes    : Owes,
+                    isOwed  : isOwed
+                }
+                return ob;
             });
-            var ob = {
-                owes    : Owes,
-                isOwed  : isOwed
-            }
-            return ob;
+            
          });
     }.property('expenses')
 });
