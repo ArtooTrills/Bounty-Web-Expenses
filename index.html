@@ -69,7 +69,7 @@
                                     <td>{{user.name}}</td>
                                     <td>{{user.description}}</td>
                                     <td>
-                                        {{#link-to 'users.user' user}}
+                                        {{#link-to 'users.summary' user}}
                                             <button class="btn btn-default">
                                                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                             </button>
@@ -114,10 +114,18 @@
             </fieldset>
         </script>
         
-        <script type="text/x-handlebars" id="users/user">
-            Owes</hr>
+        <script type="text/x-handlebars" id="users/summary">
+            Owes
+            <hr>
             {{#each owes in summary.owes}}
-                {{owes.amount}} => {{owes.user}}
+                {{owes.who}} owes {{owes.amount}} to {{owes.toWhom}}
+                <br>
+            {{/each}}
+            <br>
+            Is Owed
+            <hr>
+            {{#each owed in summary.isOwed}}
+                {{owed.amount}} is owed to {{owed.who}} by {{owed.toWhom}}
                 <br>
             {{/each}}
         </script>
@@ -279,7 +287,7 @@
         <script type="text/javascript" src="js/router.js"></script>
         <script type="text/javascript" src="js/controllers/UsersController.js"></script>
         <script type="text/javascript" src="js/controllers/UsersAddController.js"></script>
-        <script type="text/javascript" src="js/controllers/UsersInfoController.js"></script>
+        <script type="text/javascript" src="js/controllers/UsersSummaryController.js"></script>
         <script type="text/javascript" src="js/controllers/ExpensesController.js"></script>
         <script type="text/javascript" src="js/controllers/ExpensesAddController.js"></script>
         <script type="text/javascript" src="js/controllers/ExpensesSettlementsController.js"></script>

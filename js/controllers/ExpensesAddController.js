@@ -7,7 +7,10 @@ App.ExpensesAddController = Ember.ArrayController.extend({
             var spendingUser = this.get('spendingUser');
             var affectedUsers = this.get('affectedUsers');
             
-            var self = this;
+            var self = this,
+                expense, 
+                settlement, settlements, amt;
+            
             // pull users list to morph expense data before persist
             this.users.then(function(response) {
                 var userBuffer = [];
@@ -39,7 +42,7 @@ App.ExpensesAddController = Ember.ArrayController.extend({
                 // validate not-empty
                 if (!amount.trim()&&!description.trim()&&!spendingUser.trim()&&!affectedUsers.trim()){return;}
 
-                var expense = self.store.createRecord('expense', {
+                expense = self.store.createRecord('expense', {
                     'amount'		  : amount,
                     'description'	  : description,
                     'spendingUser'	  : spendingUser,
@@ -53,7 +56,7 @@ App.ExpensesAddController = Ember.ArrayController.extend({
                 // build settlement object
                 affectedUsers = affectedUsers.split(",");
                 len = affectedUsers.length;
-                var settlements = [];
+                settlements = [];
                 for(var i=0;i<len;i++) {
                     if ( affectedUsers[i] !== spendingUser ) {
                         var ob = {
@@ -63,9 +66,10 @@ App.ExpensesAddController = Ember.ArrayController.extend({
                         settlements.push(ob);
                     }
                 }
-                var amt = Number(amount);
+                amt = Number(amount);
                 amt = Math.ceil(amt/len);
-                var settlement = self.store.createRecord('settlement', {
+                
+                settlement = self.store.createRecord('settlement', {
                     'expenseDescription'    : expense.get('description'),
                     'settlements'           : settlements,
                     'spendingUser'          : spendingUser,
@@ -74,13 +78,15 @@ App.ExpensesAddController = Ember.ArrayController.extend({
                 settlement.save();
                 expense.set("settlementID", settlement.id);
                 expense.save();
-                // reset fields to empty
+                /*// reset fields to empty
                 self.set('amount', '');
                 self.set('description', '');
                 self.set('spendingUser', '');
-                self.set('affectedUsers', '');
+                self.set('affectedUsers', '');*/
                 
             });
+            
+            
             
             
         }
