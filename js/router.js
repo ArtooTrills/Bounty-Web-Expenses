@@ -74,17 +74,6 @@ App.UsersSummaryRoute = Ember.Route.extend({
                         for (var j=0;j<settlementsRecord.content.length;j++){
                             var settlementObject = settlementsRecord.content[j]._data;
 
-                            // morph settlement record to include latest expense item
-                            if ( undefined === settlementObject.spendingUser ) {
-                                settlementObject = {
-                                    'id'                    : settlement.id,
-                                    'expenseDescription'    : description,
-                                    'settlements'           : settlements,
-                                    'spendingUser'          : spendingUser,
-                                    'amount'                : amt
-                                };
-                            }
-
                             if (settlementObject.id == settlementID) {
 
                                 for (var k=0; k<settlementObject.settlements.length; k++){
@@ -117,16 +106,7 @@ App.UsersSummaryRoute = Ember.Route.extend({
 
                                     for (var k=0; k<settlementObject.settlements.length; k++){
                                         var settlementBuffer = settlementObject.settlements[k];
-                                        // morph settlement record to include latest expense item
-                                        if ( undefined === settlementObject.spendingUser ) {
-                                            settlementObject = {
-                                                'id'                    : settlement.id,
-                                                'expenseDescription'    : description,
-                                                'settlements'           : settlements,
-                                                'spendingUser'          : spendingUser,
-                                                'amount'                : amt
-                                            };
-                                        }
+                                        
                                         if ( settlementBuffer.user == userName && settlementBuffer.settled != true ) {
                                             var o = {
                                                 amount  : settlementObject.amount,
@@ -142,11 +122,19 @@ App.UsersSummaryRoute = Ember.Route.extend({
                     }
                 }
             }
-
+            
+            // nullify objects if empty
+            if (Owes.length == 0 || isOwed.length == 0) {
+                var emptySummary = true;
+            } else {
+                var emptySummary = false;
+            }
+            
             var ob = {
-                userID  : userID,
-                owes    : Owes,
-                isOwed  : isOwed
+                userName        : user.name,
+                owes            : Owes,
+                isOwed          : isOwed,
+                emptySummary    : emptySummary
             }
             controller.set("summary", ob);
 

@@ -115,19 +115,68 @@
         </script>
         
         <script type="text/x-handlebars" id="users/summary">
-            Owes
-            <hr>
-            {{#each owes in summary.owes}}
-                {{owes.who}} owes {{owes.amount}} to {{owes.toWhom}}
-                <br>
-            {{/each}}
-            <br>
-            Is Owed
-            <hr>
-            {{#each owed in summary.isOwed}}
-                {{owed.amount}} is owed to {{owed.who}} by {{owed.toWhom}}
-                <br>
-            {{/each}}
+            
+            <table class="table">
+                <tr>
+                    <th>
+                        Showing details for {{summary.userName}}
+                    </th>
+                </tr>
+                
+                {{#if summary.owes}}
+                    <tr>
+                        <th>
+                            Owes (Rs.)
+                        </th>
+                        <th>
+                            To
+                        </th>
+                    </tr>
+                    
+                    {{#each owes in summary.owes}}
+                        <tr>
+                            <td>
+                                {{owes.amount}}
+                            </td>
+                            <td>
+                                {{owes.toWhom}}
+                            </td>
+                        </tr>
+                    {{/each}}
+                {{/if}}
+                
+                {{#if summary.isOwed}}
+                    <tr>
+                        <th>
+                            Is Owed (Rs.)
+                        </th>
+                        <th>
+                            By
+                        </th>
+                    </tr>
+                    {{#each owed in summary.isOwed}}
+                        <tr>
+                            <td>
+                                {{owed.amount}}
+                            </td>
+                            <td>
+                                {{owed.toWhom}}
+                            </td>
+                        </tr>
+                    {{/each}}
+                
+                
+                {{/if}}
+                
+                
+                {{#if summary.emptySummary}}
+                    <tr>
+                        <td colspan="2" class="info">
+                            Looks like {{summary.userName}} has not made or is not a part of any transaction!
+                        </td>
+                    </tr>
+                {{/if}}
+            </table>
         </script>
         
         <script type="text/x-handlebars" id="expenses">
