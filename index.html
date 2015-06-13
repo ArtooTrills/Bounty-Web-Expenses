@@ -118,7 +118,7 @@
             
             <table class="table">
                 <tr>
-                    <th>
+                    <th colspan="2">
                         Showing details for {{summary.userName}}
                     </th>
                 </tr>
@@ -173,6 +173,7 @@
                     <tr>
                         <td colspan="2" class="info">
                             Looks like {{summary.userName}} has not made or is not a part of any transaction!
+                            Go to {{#link-to 'expenses'}}Expenses{{/link-to}} to begin a transaction
                         </td>
                     </tr>
                 {{/if}}
@@ -207,7 +208,9 @@
                                 <tr>
                                     <td>{{expense.description}}</td>
                                     <td>{{expense.amount}}</td>
-                                    <td>{{expense.spendingUser}}</td>
+                                    <td>
+                                        {{expense.spendingUser}}
+                                    </td>
                                     <td>{{expense.affectedUsers}}</td>
                                     <td>{{format-date expense.createdAt}}</td>
                                     <td>

@@ -1,7 +1,7 @@
 App.Expense = DS.Model.extend({
     description     : DS.attr('string'),
     amount          : DS.attr('string'),
-    spendingUser    : DS.attr('string'),
+    spendingUser    : DS.attr(),
     affectedUsers   : DS.attr('string'),
     createdAt       : DS.attr('string', {
                         defaultValue: function() { return new Date(); }

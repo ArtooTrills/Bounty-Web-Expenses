@@ -23,22 +23,21 @@ App.UsersSummaryRoute = Ember.Route.extend({
     },
     setupController: function(controller, model) {
         controller.set('userID', model);
-        this.setupSummary(controller,model);
-    },
-    setupSummary: function(controller, model){
-        var expensesRecord = this.store.find('expense');
+        
+        var expensesRecord = this.store.find('expense'); 
         var usersRecord = this.store.find('user');
         var settlementsRecord = this.store.find('settlement');
+        
+        this.setupSummary(controller, model, expensesRecord, usersRecord, settlementsRecord);
+    },
+    setupSummary: function(controller, model, expensesRecord, usersRecord, settlementsRecord){
         var self = this;
         var isOwed  = [],
             Owes    = [],
             userID = model.get('id'),
-            user;
+            user = {name:undefined};
 
         Em.RSVP.Promise.all([expensesRecord,usersRecord,settlementsRecord]).then(function(results){
-           //code that must be executed only after all of the promises in arrayOfPromises is resolved
-            console.log('all promises have resolved');
-
             expensesRecord = results[0];
             usersRecord = results[1];
             settlementsRecord = results[2];
@@ -124,7 +123,7 @@ App.UsersSummaryRoute = Ember.Route.extend({
             }
             
             // nullify objects if empty
-            if (Owes.length == 0 || isOwed.length == 0) {
+            if (Owes.length == 0 && isOwed.length == 0) {
                 var emptySummary = true;
             } else {
                 var emptySummary = false;

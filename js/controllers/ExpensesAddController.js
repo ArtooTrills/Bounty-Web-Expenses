@@ -78,11 +78,11 @@ App.ExpensesAddController = Ember.ArrayController.extend({
                 settlement.save();
                 expense.set("settlementID", settlement.id);
                 expense.save();
-                /*// reset fields to empty
+                // reset fields to empty
                 self.set('amount', '');
                 self.set('description', '');
                 self.set('spendingUser', '');
-                self.set('affectedUsers', '');*/
+                self.set('affectedUsers', '');
                 
             });
             
