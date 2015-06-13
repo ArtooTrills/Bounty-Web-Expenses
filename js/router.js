@@ -152,7 +152,6 @@ App.ExpensesRoute = Ember.Route.extend({
 
 App.ExpensesAddRoute = Ember.Route.extend({
     setupController: function(controller) {
-        /*controller.set('model',this.store.find('user', params.user_id));*/
         var usersRecord = this.store.find('user');
         controller.set('users', usersRecord);
         controller.set('selectedValue', null);

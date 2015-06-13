@@ -79,7 +79,7 @@ App.ExpensesAddController = Ember.ArrayController.extend({
                 amt = Math.ceil(amt/len);
                 
                 settlement = self.store.createRecord('settlement', {
-                    'expenseDescription'    : expense.get('description'),
+                    'expenseDescription'    : description,
                     'settlements'           : settlements,
                     'spendingUser'          : spendingUser.name,
                     'amount'                : amt
