@@ -29,16 +29,25 @@ App.ExpensesAddController = Ember.ArrayController.extend({
                 };
                 // clean input userID of type <App:Ember121:-J31883GTPML>
                 spendingUser = spendingUser.toString().split(":")[2];
-                spendingUser = userBuffer.findNameById(spendingUser.substring(0,spendingUser.length-1));
+                var id = spendingUser.substring(0,spendingUser.length-1);
+                
+                spendingUser = {
+                    id      : id,
+                    name    : userBuffer.findNameById(id)
+                };
+                
 
                 affectedUsers = affectedUsers.toString().split(",");
                 len = affectedUsers.length;
                 for(var i=0;i<len;i++) {
                     var x = affectedUsers[i].split(":")[2];
                     x = x.substring(0,x.length-1); 
-                    affectedUsers[i] = userBuffer.findNameById(x);
+                    affectedUsers[i] = {
+                        id      : x,
+                        name    : userBuffer.findNameById(x),
+                    };
                 }
-                affectedUsers = affectedUsers.toString();
+                //affectedUsers = affectedUsers.toString();
                 // validate not-empty
                 if (!amount.trim()&&!description.trim()&&!spendingUser.trim()&&!affectedUsers.trim()){return;}
 
@@ -46,7 +55,7 @@ App.ExpensesAddController = Ember.ArrayController.extend({
                     'amount'		  : amount,
                     'description'	  : description,
                     'spendingUser'	  : spendingUser,
-                    'affectedUsers'  : affectedUsers
+                    'affectedUsers'   : affectedUsers
                 });
                 
                 
@@ -54,13 +63,13 @@ App.ExpensesAddController = Ember.ArrayController.extend({
                 expense.save();
                 
                 // build settlement object
-                affectedUsers = affectedUsers.split(",");
+                //affectedUsers = affectedUsers.split(",");
                 len = affectedUsers.length;
                 settlements = [];
                 for(var i=0;i<len;i++) {
-                    if ( affectedUsers[i] !== spendingUser ) {
+                    if ( affectedUsers[i].name !== spendingUser.name ) {
                         var ob = {
-                            user : affectedUsers[i],
+                            user : affectedUsers[i].name,
                             settled: false
                         };
                         settlements.push(ob);
@@ -72,7 +81,7 @@ App.ExpensesAddController = Ember.ArrayController.extend({
                 settlement = self.store.createRecord('settlement', {
                     'expenseDescription'    : expense.get('description'),
                     'settlements'           : settlements,
-                    'spendingUser'          : spendingUser,
+                    'spendingUser'          : spendingUser.name,
                     'amount'                : amt
                 });
                 settlement.save();

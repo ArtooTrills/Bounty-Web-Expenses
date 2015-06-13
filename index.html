@@ -197,7 +197,6 @@
                                     {{#link-to 'expenses.add'}}
                                     <button class="btn btn-default">
                                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
-                                            
                                     </button>
                                     {{/link-to}}
                                 </th>
@@ -209,9 +208,17 @@
                                     <td>{{expense.description}}</td>
                                     <td>{{expense.amount}}</td>
                                     <td>
-                                        {{expense.spendingUser}}
+                                        {{#link-to 'users.summary' expense.spendingUser.id}}
+                                            {{expense.spendingUser.name}}
+                                        {{/link-to}}
                                     </td>
-                                    <td>{{expense.affectedUsers}}</td>
+                                    <td>
+                                        {{#each affectedUser in expense.affectedUsers}}
+                                            {{#link-to 'users.summary' affectedUser.id}}
+                                                {{affectedUser.name}}
+                                            {{/link-to}}
+                                        {{/each}}
+                                    </td>
                                     <td>{{format-date expense.createdAt}}</td>
                                     <td>
                                         {{#link-to 'expenses.settlements' expense.settlementID}}

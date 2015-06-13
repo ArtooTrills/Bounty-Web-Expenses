@@ -36,7 +36,11 @@ App.UsersSummaryRoute = Ember.Route.extend({
             Owes    = [],
             userID = model.get('id'),
             user = {name:undefined};
-
+        
+        if (undefined === userID) {
+            userID = model[0].userID;
+        }
+        
         Em.RSVP.Promise.all([expensesRecord,usersRecord,settlementsRecord]).then(function(results){
             expensesRecord = results[0];
             usersRecord = results[1];
@@ -55,19 +59,8 @@ App.UsersSummaryRoute = Ember.Route.extend({
 
                 for (var i=0;i<expensesRecord.content.length;i++){
                     var expenseObject = expensesRecord.content[i]._data;
-                    // morph expense record to include latest expense item
-                    if ( undefined === expenseObject.spendingUser ) {
-                        expenseObject = {
-                            'id'              : expense.id,
-                            'amount'		  : amount,
-                            'description'	  : description,
-                            'spendingUser'	  : spendingUser,
-                            'affectedUsers'   : affectedUsers.toString(),
-                            'settlementID'    : settlement.id
-                        };
-                    } 
 
-                    if (expenseObject.spendingUser === userName) {
+                    if (expenseObject.spendingUser.name === userName) {
                         var settlementID = expenseObject.settlementID;
 
                         for (var j=0;j<settlementsRecord.content.length;j++){
@@ -94,8 +87,16 @@ App.UsersSummaryRoute = Ember.Route.extend({
 
                     else {
                         // check if user is part of affected users in expense object
+                        var affectedUsersBuffer;
+                        for (a=0;a<expenseObject.affectedUsers.length;a++){
+                            if ( undefined == affectedUsersBuffer ) {
+                                affectedUsersBuffer = expenseObject.affectedUsers[a].name;
+                            }else {
+                                affectedUsersBuffer += expenseObject.affectedUsers[a].name;
+                            }
+                        }
                         if ( undefined !== expenseObject.affectedUsers 
-                            && expenseObject.affectedUsers.indexOf(userName) != -1 ) {
+                            && affectedUsersBuffer.indexOf(userName) != -1 ) {
                             var settlementID = expenseObject.settlementID;
 
                             for (var j=0;j<settlementsRecord.content.length;j++){
@@ -110,7 +111,7 @@ App.UsersSummaryRoute = Ember.Route.extend({
                                             var o = {
                                                 amount  : settlementObject.amount,
                                                 who     : userName,
-                                                toWhom  : expenseObject.spendingUser
+                                                toWhom  : expenseObject.spendingUser.name
                                             };
                                             Owes.push(o);
                                         }
@@ -143,7 +144,8 @@ App.UsersSummaryRoute = Ember.Route.extend({
 
 App.ExpensesRoute = Ember.Route.extend({
     setupController: function(controller) {
-        controller.set('model', this.store.find('expense'));
+        var expensesRecord = this.store.find('expense'); 
+        controller.set('model', expensesRecord);
     }
     
 });
@@ -151,14 +153,16 @@ App.ExpensesRoute = Ember.Route.extend({
 App.ExpensesAddRoute = Ember.Route.extend({
     setupController: function(controller) {
         /*controller.set('model',this.store.find('user', params.user_id));*/
-        controller.set('users', this.store.find('user'));
+        var usersRecord = this.store.find('user');
+        controller.set('users', usersRecord);
         controller.set('selectedValue', null);
     }
 });
 
 App.ExpensesSettlementsRoute = Ember.Route.extend({
     model: function(params) {
-        return this.store.find('settlement', params.settlement_id);
+        var settlementRecord = this.store.find('settlement', params.settlement_id);
+        return settlementRecord;
     }
 });
 
