@@ -246,39 +246,62 @@
         <script type="text/x-handlebars" id="expenses/settlements">
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table">
-                        <thead>
-                            
-                            <tr>
-                                <th>Who?</th>
-                                <th>To pay</th>
-                                <th>To Whom?</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                         {{#each payable in payables}}
-                            <tr>
-                                <td>
-                                    {{payable.by}}  
-                                </td>    
-                                <td>    
-                                    {{payable.amt}} 
-                                </td>
-                                <td>
-                                   {{payable.to}}
-                                </td>
-                                <td>
-                                    {{input type="checkbox" checked=payable.settled}}
-                                </td>
-                            </tr>
-                        {{/each}}
-                        </tbody>
-                    </table>
-                    <button class="btn btn-default" {{action 'save' model}}>
-                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-                        Mark selected as paid
-                    </button>
+                    
+                    
+                        {{#if payables.length}}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th colspan="4" class="info">
+                                        Showing cumulative settlements for all expenses made
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Who?</th>
+                                    <th>To pay</th>
+                                    <th>To Whom?</th>
+                                    <th>Settled</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                             {{#each payable in payables}}
+                                <tr>
+                                    <td>
+                                        {{payable.by}}  
+                                    </td>    
+                                    <td>    
+                                        {{payable.amt}} 
+                                    </td>
+                                    <td>
+                                       {{payable.to}}
+                                    </td>
+                                    <td>
+                                        {{input type="checkbox" checked=payable.settled}}
+                                    </td>
+                                </tr>
+
+
+                            {{/each}}
+                            </tbody>
+                        </table>
+                        <button class="btn btn-default" {{action 'save' payables}}>
+                            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                            Save
+                        </button>
+
+                        {{else}}
+
+                            <div class="alert alert-success" role="alert">
+                                    Looks like all transactions are settled;
+                                    Go to {{#link-to 'expenses.add'}}
+                                            <button class="btn btn-default">
+                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                                            </button>
+                                        {{/link-to}} 
+                                    to begin a new transaction
+                            </div>
+
+                        {{/if}}
                     
                 </div>
             </div>
@@ -335,7 +358,7 @@
 		<script src="js/libs/ember.min.js"></script>
 		<script src="js/libs/ember-data.min.js"></script>
         <!--Moment Js-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
+        <script src="js/libs/moment.min.js"></script>
         
         <script type="text/javascript" src="js/libs/local_storage_adapter.js"></script>
             
