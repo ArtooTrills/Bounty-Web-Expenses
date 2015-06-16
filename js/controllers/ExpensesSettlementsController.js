@@ -1,4 +1,5 @@
 App.ExpensesSettlementsController = Ember.ObjectController.extend({
+    payables : {},
     actions: {
         save: function(model) {
             var settlements = this.get('model.settlements');

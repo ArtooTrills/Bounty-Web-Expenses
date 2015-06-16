@@ -195,9 +195,14 @@
                                 <th>When?</th>
                                 <th>
                                     {{#link-to 'expenses.add'}}
-                                    <button class="btn btn-default">
-                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
-                                    </button>
+                                        <button class="btn btn-default">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                                        </button>
+                                    {{/link-to}}
+                                    {{#link-to 'expenses.settlements'}}
+                                        <button class="btn btn-default">
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                        </button>
                                     {{/link-to}}
                                 </th>
                             </tr>
@@ -221,11 +226,7 @@
                                     </td>
                                     <td>{{format-date expense.createdAt}}</td>
                                     <td>
-                                        {{#link-to 'expenses.settlements' expense.settlementID}}
-                                        <button class="btn btn-default">
-                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                                        </button>
-                                        {{/link-to}}
+                                        
                                         
                                         <button class="btn btn-default" {{action "remove" expense}}>
                                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -247,11 +248,7 @@
                 <div class="col-md-12">
                     <table class="table">
                         <thead>
-                            <tr>
-                                <th colspan="4">
-                                    Settling expense for {{model.expenseDescription}}
-                                </th>
-                            </tr>
+                            
                             <tr>
                                 <th>Who?</th>
                                 <th>To pay</th>
@@ -260,19 +257,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                         {{#each settlement in model.settlements}}
+                         {{#each payable in payables}}
                             <tr>
                                 <td>
-                                    {{settlement.user}}  
+                                    {{payable.by}}  
                                 </td>    
                                 <td>    
-                                    {{model.amount}} 
+                                    {{payable.amt}} 
                                 </td>
                                 <td>
-                                   {{model.spendingUser}}
+                                   {{payable.to}}
                                 </td>
                                 <td>
-                                    {{input type="checkbox" checked=settlement.settled}}
+                                    {{input type="checkbox" checked=payable.settled}}
                                 </td>
                             </tr>
                         {{/each}}

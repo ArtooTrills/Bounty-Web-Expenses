@@ -6,7 +6,7 @@ App.Router.map(function(){
     
     this.resource("expenses", { path : '/expenses' }, function() {
         this.route("add", { path : '/add' });
-        this.route("settlements", { path : '/settlements/:settlement_id' });
+        this.route("settlements", { path : '/settlements' });
     });
     
 });
@@ -143,10 +143,25 @@ App.UsersSummaryRoute = Ember.Route.extend({
 });
 
 App.ExpensesRoute = Ember.Route.extend({
+    model : function() {
+        return this.store.find('expense');
+    }
+});
+
+App.ExpensesAddRoute = Ember.Route.extend({
+    setupController: function(controller) {
+        var usersRecord = this.store.find('user');
+        controller.set('users', usersRecord);
+        controller.set('selectedValue', null);
+    }
+});
+
+App.ExpensesSettlementsRoute = Ember.Route.extend({
+    
     setupController: function(controller) {
         var expensesRecord = this.store.find('expense'); 
         var settlementsRecord = this.store.find('settlement');
-        controller.set('model', expensesRecord);
+        //controller.set('model', expensesRecord);
         
         this.buildCumulativeSettlement(controller, expensesRecord, settlementsRecord);
     },
@@ -215,7 +230,8 @@ App.ExpensesRoute = Ember.Route.extend({
                     var ob = {
                         by: y.name,
                         amt: amt,
-                        to: x.to
+                        to: x.to,
+                        settled:false
                     };
                     array2.push(ob);
                 } 
@@ -248,21 +264,6 @@ App.ExpensesRoute = Ember.Route.extend({
                 return findFromObject;
             }
         }
-    }
-});
-
-App.ExpensesAddRoute = Ember.Route.extend({
-    setupController: function(controller) {
-        var usersRecord = this.store.find('user');
-        controller.set('users', usersRecord);
-        controller.set('selectedValue', null);
-    }
-});
-
-App.ExpensesSettlementsRoute = Ember.Route.extend({
-    model: function(params) {
-        var settlementRecord = this.store.find('settlement', params.settlement_id);
-        return settlementRecord;
     }
 });
 
