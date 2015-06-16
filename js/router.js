@@ -184,7 +184,7 @@ App.ExpensesSettlementsRoute = Ember.Route.extend({
         
         for (var i=0;i<expensesRecord.content.length;i++){
             var expenseObject = expensesRecord.content[i]._data;
-            for (var j=0;j<expenseObject.affectedUsers.length;j++){
+            for (var j=0;j<expenseObject.affectedUsers.length;j++) {
                 if (expenseObject.affectedUsers[j].name != expenseObject.spendingUser.name){
                     
                     // check if current affected user has settled his share for this expense
@@ -272,3 +272,4 @@ App.IndexRoute = Ember.Route.extend({
     this.transitionTo('expenses');
   }
 });
+
