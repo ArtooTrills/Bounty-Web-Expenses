@@ -24,7 +24,7 @@ App.ExpensesSettlementsController = Ember.ObjectController.extend({
                     var payableObject = payables[i];
 
                     // operate on items clicked and ignore rest
-                    //if (payableObject.settled == true) {
+                    if (payableObject.settled == true) {
                         var by = payableObject.by;
                         var to = payableObject.to;
 
@@ -37,8 +37,8 @@ App.ExpensesSettlementsController = Ember.ObjectController.extend({
 
                                 for (var k = 0; k < settlementObject.settlements.length; k++) {
                                     var buff = settlementObject.settlements[k];
-                                    if (buff.user == to){
-                                        settlementObject.settlements[k].settled = payableObject.settled;
+                                    if (buff.user == to && buff.settled == false){
+                                        settlementObject.settlements[k].settled = true;
                                         
                                         var ob = {
                                             settlementID : settlementObject.id,
@@ -55,8 +55,8 @@ App.ExpensesSettlementsController = Ember.ObjectController.extend({
 
                                 for (var k = 0; k < settlementObject.settlements.length; k++) {
                                     var buff = settlementObject.settlements[k];
-                                    if (buff.user == by){
-                                        settlementObject.settlements[k].settled = payableObject.settled;
+                                    if (buff.user == by && buff.settled == false) {
+                                        settlementObject.settlements[k].settled = true;
                                         
                                         var ob = {
                                             settlementID : settlementObject.id,
@@ -70,7 +70,7 @@ App.ExpensesSettlementsController = Ember.ObjectController.extend({
 
                             }
                         }
-                    //}
+                    }
                 }
             
                 for (var i = 0; i < arrayOfSettlementIds.length; i++) {
@@ -82,16 +82,9 @@ App.ExpensesSettlementsController = Ember.ObjectController.extend({
                         settlement.save();
                     });
                 }
-                //self.get('target.router').refresh();
-                //self.transitionTo('expenses.temp');
-                var rand = Math.random();
-                self.transitionTo({queryParams: {unique: rand}});
+                self.transitionTo("expenses")
             });
-            /*
-            var promise = this.store.find('settlement',model.id).then(function(settlement){
-                settlement.set('settlements',settlements);
-                settlement.save();
-            });*/
+            
         },
         deleteRecord: function() {
             this.get('model').deleteRecord();
