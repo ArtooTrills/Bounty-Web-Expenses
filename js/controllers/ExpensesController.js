@@ -1,4 +1,5 @@
 App.ExpensesController = Ember.ArrayController.extend({
+    payables : {},
     actions : {
         remove : function(expense){
             var self = this;

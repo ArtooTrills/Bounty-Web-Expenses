@@ -194,17 +194,13 @@
                                 <th>For Whom?</th>
                                 <th>When?</th>
                                 <th>
-                                    {{#link-to 'expenses.add'}}
+                                    {{#link-to 'addexpense'}}
                                         <button class="btn btn-default">
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
                                         </button>
                                     {{/link-to}}
                                     
-                                    {{#link-to 'expenses.settlements'}}
-                                        <button class="btn btn-default">
-                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                                        </button>
-                                    {{/link-to}}
+                                    
                                 </th>
                             </tr>
                         </thead>
@@ -237,6 +233,74 @@
                             {{/each}}
                         </tbody>
                     </table>
+                    {{#if model.length}}
+                        {{#if payables.length}}
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4" class="info">
+                                            Showing cumulative settlements for all expenses made. 
+                                            To settle, click 
+                                            {{#link-to 'settlements'}}
+                                                <button class="btn btn-default">
+                                                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                                </button>
+                                            {{/link-to}}
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>Who?</th>
+                                        <th>To pay</th>
+                                        <th>To Whom?</th>
+                                        <th>
+                                            
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                 {{#each payable in payables}}
+                                    <tr>
+                                        <td>
+                                            {{payable.by}}  
+                                        </td>    
+                                        <td>    
+                                            {{payable.amt}} 
+                                        </td>
+                                        <td>
+                                           {{payable.to}}
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                {{/each}}
+                                </tbody>
+                            </table>
+
+                            {{else}}
+
+                                <div class="alert alert-success" role="alert">
+                                        Looks like all expenses are settled;
+                                        {{#link-to 'addexpense'}}
+                                            <button class="btn btn-default">
+                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                                            </button>
+                                        {{/link-to}} 
+                                        to create a new expense
+                                </div>
+
+                        {{/if}}
+                        
+                        {{else}}
+                            <div class="alert alert-warning" role="alert">
+                                    No expense to settle;
+                                    {{#link-to 'addexpense'}}
+                                        <button class="btn btn-default">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                                        </button>
+                                    {{/link-to}} 
+                                    to create some
+                            </div>
+                    
+                    {{/if}}
                     
                     {{outlet}}
                 </div>
@@ -244,12 +308,10 @@
             
         </script>
         
-        <script type="text/x-handlebars" id="expenses/settlements">
+        <script type="text/x-handlebars" id="settlements">
             <div class="row">
                 <div class="col-md-12">
-                    
-                    
-                        {{#if payables.length}}
+                    {{#if payables.length}}
                         <table class="table">
                             <thead>
                                 <tr>
@@ -265,92 +327,76 @@
                                 </tr>
                             </thead>
                             <tbody>
-                             {{#each payable in payables}}
-                                <tr>
-                                    <td>
-                                        {{payable.by}}  
-                                    </td>    
-                                    <td>    
-                                        {{payable.amt}} 
-                                    </td>
-                                    <td>
-                                       {{payable.to}}
-                                    </td>
-                                    <td>
-                                        {{input type="checkbox" checked=payable.settled}}
-                                    </td>
-                                </tr>
-
-
-                            {{/each}}
+                                {{#each payable in payables}}
+                                    <tr>
+                                        <td>
+                                            {{payable.by}}  
+                                        </td>    
+                                        <td>    
+                                            {{payable.amt}} 
+                                        </td>
+                                        <td>
+                                           {{payable.to}}
+                                        </td>
+                                        <td>
+                                            {{input type="checkbox" checked=payable.settled}}
+                                        </td>
+                                    </tr>
+                                {{/each}}
                             </tbody>
                         </table>
                         <button class="btn btn-default" {{action 'save' payables}}>
                             <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-                            Save and close
+                            Save
                         </button>
-
-                        {{else}}
-
-                            <div class="alert alert-success" role="alert">
-                                    Looks like all transactions are settled;
-                                    Go to {{#link-to 'expenses.add'}}
-                                            <button class="btn btn-default">
-                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
-                                            </button>
-                                        {{/link-to}} 
-                                    to begin a new transaction
-                            </div>
-
-                        {{/if}}
-                    
+                    {{/if}}
                 </div>
             </div>
         </script>
         
-        <script type="text/x-handlebars" id="expenses/add">
+        <script type="text/x-handlebars" id="addexpense">
             <fieldset>
-                        <legend>Add Expense</legend>
+                <legend>Add Expense</legend>
 
-                        <form>
-                            <div class="form-group">
-                                <label>Description</label>
-                                {{input type="text" placeholder="Description" value=description class="form-control" action="addExpense"}}
-                            </div>
-                            <div class="form-group">
-                                <label>Amount</label>
-                                {{input type="text" placeholder="Amount" value=amount class="form-control" action="addExpense"}}
-                            </div>
-                            <div class="form-group">
-                                <label>Who Paid?</label>
-                                {{view Ember.Select
-                                                    content=users
-                                                    class="form-control"
-                                                    value=selectedValue
-                                                    selectionBinding="controller.spendingUser"
-                                                    optionValuePath="content.id"
-                                                    optionLabelPath="content.name"
-                                                    prompt="select"
-                                                    }}
-                            </div>
-                            <div class="form-group">
-                                <label>For Whom?</label>
-                                {{view Ember.Select
-                                                    multiple=true
-                                                    class="form-control"
-                                                    selectionBinding="controller.affectedUsers"
-                                                    content=users
-                                                    optionValuePath="content.id"
-                                                    optionLabelPath="content.name"
-                                                    action = "addExpense"}}
-                            </div>
+                <form>
+                    <div class="form-group">
+                        <label>Description</label>
+                        {{input type="text" placeholder="Description" value=description class="form-control" action="addExpense"}}
+                    </div>
+                    <div class="form-group">
+                        <label>Amount</label>
+                        {{input type="text" placeholder="Amount" value=amount class="form-control" action="addExpense"}}
+                    </div>
+                    <div class="form-group">
+                        <label>Who Paid?</label>
+                        {{view Ember.Select
+                                            content=users
+                                            class="form-control"
+                                            value=selectedValue
+                                            selectionBinding="controller.spendingUser"
+                                            optionValuePath="content.id"
+                                            optionLabelPath="content.name"
+                                            prompt="select"
+                                            }}
+                    </div>
+                    <div class="form-group">
+                        <label>For Whom?</label>
+                        {{view Ember.Select
+                                            multiple=true
+                                            class="form-control"
+                                            selectionBinding="controller.affectedUsers"
+                                            content=users
+                                            optionValuePath="content.id"
+                                            optionLabelPath="content.name"
+                                            action = "addExpense"}}
+                    </div>
 
-                            <button type="submit" class="btn btn-default" {{action 'addExpense'}}>
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
-                                Submit
-                            </button>
-                        </form>
-                    </fieldset>
+                    <button type="submit" class="btn btn-default" {{action 'addExpense'}}>
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                        Add
+                    </button>
+                </form>
+            </fieldset>
         </script>
         
         <script src="js/libs/jquery.min.js"></script>
@@ -368,8 +414,8 @@
         <script type="text/javascript" src="js/controllers/UsersController.js"></script>
         <script type="text/javascript" src="js/controllers/UsersAddController.js"></script>
         <script type="text/javascript" src="js/controllers/ExpensesController.js"></script>
-        <script type="text/javascript" src="js/controllers/ExpensesAddController.js"></script>
-        <script type="text/javascript" src="js/controllers/ExpensesSettlementsController.js"></script>
+        <script type="text/javascript" src="js/controllers/AddexpenseController.js"></script>
+        <script type="text/javascript" src="js/controllers/SettlementsController.js"></script>
         <script type="text/javascript" src="js/models/User.js"></script>
         <script type="text/javascript" src="js/models/Expense.js"></script>
         <script type="text/javascript" src="js/models/Settlement.js"></script>

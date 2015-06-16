@@ -1,4 +1,4 @@
-App.ExpensesAddController = Ember.ArrayController.extend({
+App.AddexpenseController = Ember.ArrayController.extend({
     
     actions : {
         addExpense : function(){
@@ -57,8 +57,6 @@ App.ExpensesAddController = Ember.ArrayController.extend({
                     'spendingUser'	  : spendingUser,
                     'affectedUsers'   : affectedUsers
                 });
-                
-                
                 // persist
                 expense.save();
                 
@@ -93,11 +91,8 @@ App.ExpensesAddController = Ember.ArrayController.extend({
                 self.set('spendingUser', '');
                 self.set('affectedUsers', '');
                 
+                self.transitionTo("expenses");
             });
-            
-            
-            
-            
         }
     }
 });

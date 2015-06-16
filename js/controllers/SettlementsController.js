@@ -1,4 +1,4 @@
-App.ExpensesSettlementsController = Ember.ObjectController.extend({
+App.SettlementsController = Ember.ObjectController.extend({
     payables : {},
     actions: {
         save: function(model) {
