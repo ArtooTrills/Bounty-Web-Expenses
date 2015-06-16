@@ -199,6 +199,7 @@
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
                                         </button>
                                     {{/link-to}}
+                                    
                                     {{#link-to 'expenses.settlements'}}
                                         <button class="btn btn-default">
                                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
@@ -286,7 +287,7 @@
                         </table>
                         <button class="btn btn-default" {{action 'save' payables}}>
                             <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-                            Save
+                            Save and close
                         </button>
 
                         {{else}}
