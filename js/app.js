@@ -1,0 +1,18 @@
+var App = Ember.Application.create({});
+
+App.ApplicationAdapter = DS.LSAdapter.extend({
+    namespace: 'artoo-app'
+});
+
+App.ApplicationView = Ember.View.extend({
+    currentPathDidChange: function() {
+        Ember.run.next( this, function() {
+            this.$("ul.nav li:has(>a.active)").addClass('active');
+            this.$("ul.nav li:not(:has(>a.active))").removeClass('active');
+        });
+    }.observes('controller.currentPath')
+});
+
+Ember.Handlebars.helper('format-date', function(date){
+    return moment(date).fromNow();
+});

@@ -1,0 +1,428 @@
+<html>
+    <head>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="styles/style.css" rel="stylesheet"/>
+		<title>Bounty Web Expense</title>
+    </head>
+    <body>
+        
+        <script type="text/x-handlebars">
+            
+            <div class="container">
+                <nav class="navbar navbar-default navbar-fixed-top navbar-blue-border-bottom">
+                    <div class="container">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" 
+                                    data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            
+                            {{#link-to 'index' class='navbar-brand'}}Bounty Web Expenses{{/link-to}}
+                        </div>
+                
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li>{{#link-to 'users'}}Users{{/link-to}}</li>
+                                <li>{{#link-to 'expenses'}}Expenses{{/link-to}}</li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
+                <div class="row">
+                    <div class="col-md-12">
+                        {{outlet}}
+                    </div>
+                </div>
+            </div>
+        </script>
+        
+        <script type="text/x-handlebars" id="users">
+            <div class="row">
+                
+                <div class="col-md-12">
+                    
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>
+                                    {{#link-to 'users.add'}}
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                                            
+                                    </button>
+                                    {{/link-to}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each user in model}}
+                                <tr>
+                                    <td>{{user.name}}</td>
+                                    <td>{{user.description}}</td>
+                                    <td>
+                                        {{#link-to 'users.summary' user}}
+                                            <button class="btn btn-default">
+                                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                            </button>
+                                        {{/link-to}}
+                                        
+                                        <button class="btn btn-default" {{action "remove" user}}>
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    
+                    {{outlet}}
+                </div>
+            </div>
+        </script>
+        
+        <script type="text/x-handlebars" id="users/add">
+            <fieldset>
+                <legend>Add User</legend>
+
+                <form>
+                    <div class="form-group">
+                        <label>Name</label>
+                        {{input type="text" placeholder="Name" value=name class="form-control" action="addUser"}}
+
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        {{input type="text" placeholder="Description" value=description class="form-control" action="addUser"}}
+                    </div>
+
+
+
+                    <button type="submit" class="btn btn-default" {{action 'addUser'}}>
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        Submit
+                    </button>
+                </form>
+            </fieldset>
+        </script>
+        
+        <script type="text/x-handlebars" id="users/summary">
+            
+            <table class="table">
+                <tr>
+                    <th colspan="2" class="info">
+                        Showing summary for {{summary.userName}}
+                    </th>
+                </tr>
+                
+                {{#if summary.owes}}
+                    <tr>
+                        <th>
+                            Owes (Rs.)
+                        </th>
+                        <th>
+                            To
+                        </th>
+                    </tr>
+                    
+                    {{#each owes in summary.owes}}
+                        <tr>
+                            <td>
+                                {{owes.amount}}
+                            </td>
+                            <td>
+                                {{owes.toWhom}}
+                            </td>
+                        </tr>
+                    {{/each}}
+                {{/if}}
+                
+                {{#if summary.isOwed}}
+                    <tr>
+                        <th>
+                            Is Owed (Rs.)
+                        </th>
+                        <th>
+                            By
+                        </th>
+                    </tr>
+                    {{#each owed in summary.isOwed}}
+                        <tr>
+                            <td>
+                                {{owed.amount}}
+                            </td>
+                            <td>
+                                {{owed.toWhom}}
+                            </td>
+                        </tr>
+                    {{/each}}
+                
+                
+                {{/if}}
+                
+                
+                {{#if summary.emptySummary}}
+                    <tr>
+                        <td colspan="2" class="warning">
+                            Looks like {{summary.userName}} has not made or is not a part of any transaction!
+                            Go to {{#link-to 'expenses'}}Expenses{{/link-to}} to begin a transaction
+                        </td>
+                    </tr>
+                {{/if}}
+            </table>
+        </script>
+        
+        <script type="text/x-handlebars" id="expenses">
+            <div class="row">
+                
+                <div class="col-md-12">
+                    
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Who Paid?</th>
+                                <th>For Whom?</th>
+                                <th>When?</th>
+                                <th>
+                                    {{#link-to 'addexpense'}}
+                                        <button class="btn btn-default">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                                        </button>
+                                    {{/link-to}}
+                                    
+                                    <button {{action "exportExpenses" model}}>Export</button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each expense in model}}
+                                <tr>
+                                    <td>{{expense.description}}</td>
+                                    <td>{{expense.amount}}</td>
+                                    <td>
+                                        {{#link-to 'users.summary' expense.spendingUser.id}}
+                                            {{expense.spendingUser.name}}
+                                        {{/link-to}}
+                                    </td>
+                                    <td>
+                                        {{#each affectedUser in expense.affectedUsers}}
+                                            {{#link-to 'users.summary' affectedUser.id}}
+                                                {{affectedUser.name}}
+                                            {{/link-to}}
+                                        {{/each}}
+                                    </td>
+                                    <td>{{format-date expense.createdAt}}</td>
+                                    <td>
+                                        
+                                        
+                                        <button class="btn btn-default" {{action "remove" expense}}>
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    {{#if model.length}}
+                        {{#if payables.length}}
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4" class="info">
+                                            Showing cumulative settlements for all expenses made. 
+                                            To settle, click 
+                                            {{#link-to 'settlements'}}
+                                                <button class="btn btn-default">
+                                                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                                </button>
+                                            {{/link-to}}
+                                            
+                                            <button {{action "exportSettlements" payables}}>Export</button>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>Who?</th>
+                                        <th>To pay</th>
+                                        <th>To Whom?</th>
+                                        <th>
+                                            
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                 {{#each payable in payables}}
+                                    <tr>
+                                        <td>
+                                            {{payable.by}}  
+                                        </td>    
+                                        <td>    
+                                            {{payable.amt}} 
+                                        </td>
+                                        <td>
+                                           {{payable.to}}
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                {{/each}}
+                                </tbody>
+                            </table>
+
+                            {{else}}
+
+                                <div class="alert alert-success" role="alert">
+                                        Looks like all expenses are settled;
+                                        {{#link-to 'addexpense'}}
+                                            <button class="btn btn-default">
+                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                                            </button>
+                                        {{/link-to}} 
+                                        to create a new expense
+                                </div>
+
+                        {{/if}}
+                        
+                        {{else}}
+                            <div class="alert alert-warning" role="alert">
+                                    No expense to settle;
+                                    {{#link-to 'addexpense'}}
+                                        <button class="btn btn-default">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                                        </button>
+                                    {{/link-to}} 
+                                    to create some
+                            </div>
+                    
+                    {{/if}}
+                    
+                    {{outlet}}
+                </div>
+            </div>
+            
+        </script>
+        
+        <script type="text/x-handlebars" id="settlements">
+            <div class="row">
+                <div class="col-md-12">
+                    {{#if payables.length}}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th colspan="4" class="info">
+                                        Showing cumulative settlements for all expenses made
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Who?</th>
+                                    <th>To pay</th>
+                                    <th>To Whom?</th>
+                                    <th>Settled</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each payable in payables}}
+                                    <tr>
+                                        <td>
+                                            {{payable.by}}  
+                                        </td>    
+                                        <td>    
+                                            {{payable.amt}} 
+                                        </td>
+                                        <td>
+                                           {{payable.to}}
+                                        </td>
+                                        <td>
+                                            {{input type="checkbox" checked=payable.settled}}
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        <button class="btn btn-default" {{action 'save' payables}}>
+                            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                            Save
+                        </button>
+                    {{/if}}
+                </div>
+            </div>
+        </script>
+        
+        <script type="text/x-handlebars" id="addexpense">
+            <fieldset>
+                <legend>Add Expense</legend>
+
+                <form>
+                    <div class="form-group">
+                        <label>Description</label>
+                        {{input type="text" placeholder="Description" value=description class="form-control" action="addExpense"}}
+                    </div>
+                    <div class="form-group">
+                        <label>Amount</label>
+                        {{input type="text" placeholder="Amount" value=amount class="form-control" action="addExpense"}}
+                    </div>
+                    <div class="form-group">
+                        <label>Who Paid?</label>
+                        {{view Ember.Select
+                                            content=users
+                                            class="form-control"
+                                            value=selectedValue
+                                            selectionBinding="controller.spendingUser"
+                                            optionValuePath="content.id"
+                                            optionLabelPath="content.name"
+                                            prompt="select"
+                                            }}
+                    </div>
+                    <div class="form-group">
+                        <label>For Whom?</label>
+                        {{view Ember.Select
+                                            multiple=true
+                                            class="form-control"
+                                            selectionBinding="controller.affectedUsers"
+                                            content=users
+                                            optionValuePath="content.id"
+                                            optionLabelPath="content.name"
+                                            action = "addExpense"}}
+                    </div>
+
+                    <button type="submit" class="btn btn-default" {{action 'addExpense'}}>
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                        Add
+                    </button>
+                </form>
+            </fieldset>
+        </script>
+        
+        <script src="js/libs/jquery.min.js"></script>
+        <script src="js/libs/handlebars.js"></script>
+		<!-- Ember + Ember Data -->
+		<script src="js/libs/ember.min.js"></script>
+		<script src="js/libs/ember-data.min.js"></script>
+        <!--Moment Js-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
+        
+        <script type="text/javascript" src="js/libs/local_storage_adapter.js"></script>
+            
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/router.js"></script>
+        <script type="text/javascript" src="js/routes/ExpensesRoute.js"></script>
+        <script type="text/javascript" src="js/routes/UsersSummaryRoute.js"></script>
+        <script type="text/javascript" src="js/routes/SettlementsRoute.js"></script>
+        <script type="text/javascript" src="js/controllers/UsersController.js"></script>
+        <script type="text/javascript" src="js/controllers/UsersAddController.js"></script>
+        <script type="text/javascript" src="js/controllers/ExpensesController.js"></script>
+        <script type="text/javascript" src="js/controllers/AddexpenseController.js"></script>
+        <script type="text/javascript" src="js/controllers/SettlementsController.js"></script>
+        <script type="text/javascript" src="js/models/User.js"></script>
+        <script type="text/javascript" src="js/models/Expense.js"></script>
+        <script type="text/javascript" src="js/models/Settlement.js"></script>
+    </body>
+</html>
