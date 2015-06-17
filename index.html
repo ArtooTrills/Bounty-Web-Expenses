@@ -200,7 +200,7 @@
                                         </button>
                                     {{/link-to}}
                                     
-                                    <button {{action "export" model}}>Export</button>
+                                    <button {{action "exportExpenses" model}}>Export</button>
                                 </th>
                             </tr>
                         </thead>
@@ -246,6 +246,8 @@
                                                     <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                                 </button>
                                             {{/link-to}}
+                                            
+                                            <button {{action "exportSettlements" payables}}>Export</button>
                                         </th>
                                     </tr>
                                     <tr>
