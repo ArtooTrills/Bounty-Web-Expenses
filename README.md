@@ -1,10 +1,17 @@
 # Expense-Tracker
 Create an expense tracker app using Ember.js
 
-## Getting started
-Install Flask
-    sudo pip install Flask
+## Getting started  
+Install Python3    
+`brew install python3`
 
-Setup the server file and run it using:
-    chmod 755 server.py
-    ./server.py
+Install Flask-Restless  
+`pip install Flask-Restless`
+
+Install Flask-SQLAlchemy  
+`pip install Flask-SqlAlchemy`
+
+Install Ember.js  
+`npm install -g ember-cli`
+`npm install -g phantomjs`
+        

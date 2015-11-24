@@ -9,6 +9,11 @@ from flask import Flask, request, redirect, url_for, send_from_directory
 app = Flask(__name__)
 app.debug = True
 
+import json
+@app.route('/dvds', methods=['POST'])
+def dvds():
+  if (request.method == 'POST'):
+    return json.dumps({"dvds": []})
 
 # Routes
 @app.route('/')
