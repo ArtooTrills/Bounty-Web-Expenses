@@ -19,18 +19,14 @@ db = flask.ext.sqlalchemy.SQLAlchemy(app)
 class Person(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Unicode, unique=True)
-    birth_date = db.Column(db.Date)
+    phone = db.Column(db.Integer)
 
-
-class Computer(db.Model):
+class Expense(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Unicode, unique=True)
-    vendor = db.Column(db.Unicode)
-    purchase_time = db.Column(db.DateTime)
-    owner_id = db.Column(db.Integer, db.ForeignKey('person.id'))
-    owner = db.relationship('Person', backref=db.backref('computers',
-                                                         lazy='dynamic'))
-
+    from_id = db.Column(db.Integer, db.ForeignKey('person.name'))
+    to_id = db.Column(db.Integer, db.ForeignKey('person.name'))
+    amount = db.Column(db.Float)
+    date = db.Column(db.Date)
 
 # Create the database tables.
 db.create_all()
@@ -41,7 +37,7 @@ manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
 # Create API endpoints, which will be available at /api/<tablename> by
 # default. Allowed HTTP methods can be specified as well.
 manager.create_api(Person, methods=['GET', 'POST', 'DELETE'])
-manager.create_api(Computer, methods=['GET'])
+manager.create_api(Expense, methods=['GET'])
 
 # start the flask loop
 app.run()
