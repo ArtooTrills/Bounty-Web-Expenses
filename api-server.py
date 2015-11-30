@@ -2,6 +2,7 @@
 import flask
 import flask.ext.sqlalchemy
 import flask.ext.restless
+from flask.ext.restless import APIManager
 
 # Create the Flask application and the Flask-SQLAlchemy object.
 app = flask.Flask(__name__)
@@ -19,7 +20,7 @@ db = flask.ext.sqlalchemy.SQLAlchemy(app)
 class Person(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Unicode, unique=True)
-    phone = db.Column(db.Integer)
+    phone = db.Column(db.Unicode)
 
 class Expense(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,6 +28,12 @@ class Expense(db.Model):
     to_id = db.Column(db.Integer, db.ForeignKey('person.name'))
     amount = db.Column(db.Float)
     date = db.Column(db.Date)
+
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Credentials'] = 'true'
+    # Set whatever other headers you like...
+    return response
 
 # Create the database tables.
 db.create_all()
@@ -38,6 +45,8 @@ manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
 # default. Allowed HTTP methods can be specified as well.
 manager.create_api(Person, methods=['GET', 'POST', 'DELETE'])
 manager.create_api(Expense, methods=['GET','POST'])
+
+app.after_request(add_cors_headers)
 
 # start the flask loop
 app.run()

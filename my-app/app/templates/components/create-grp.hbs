@@ -1,0 +1,14 @@
+<div>Add Member</div>
+<div>
+{{input type="text" placeholder="Name" value=name}}
+{{input type="text" placeholder="Phone number" value=phone}}
+<button {{action 'addUser'}}>Add</button>
+</div>
+<div>
+	<ul>
+		{{#each users as |user|}}
+		<li>{{user.name}}......{{user.phone}}</li>
+		{{/each}}
+	</ul>
+</div>
+{{yield}}

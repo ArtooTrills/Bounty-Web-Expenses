@@ -6,8 +6,8 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-	this.route("createGroup");
-	this.route("expenses");
+    this.route("createGroup");
+    this.route("expenses");
 });
 
 export default Router;
