@@ -11,7 +11,7 @@ define('my-app/tests/components/create-grp.jshint', ['exports'], function (expor
 
   QUnit.module('JSHint - components');
   QUnit.test('components/create-grp.js should pass jshint', function (assert) {
-    assert.ok(false, 'components/create-grp.js should pass jshint.\ncomponents/create-grp.js: line 13, col 47, Missing semicolon.\n\n1 error');
+    assert.ok(true, 'components/create-grp.js should pass jshint.');
   });
 });
 define('my-app/tests/controllers/application.jshint', ['exports'], function (exports) {
@@ -258,12 +258,20 @@ define('my-app/tests/router.jshint', ['exports'], function (exports) {
     assert.ok(true, 'router.js should pass jshint.');
   });
 });
+define('my-app/tests/routes/application.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - routes');
+  QUnit.test('routes/application.js should pass jshint', function (assert) {
+    assert.ok(true, 'routes/application.js should pass jshint.');
+  });
+});
 define('my-app/tests/routes/create-group.jshint', ['exports'], function (exports) {
   'use strict';
 
   QUnit.module('JSHint - routes');
   QUnit.test('routes/create-group.js should pass jshint', function (assert) {
-    assert.ok(false, 'routes/create-group.js should pass jshint.\nroutes/create-group.js: line 5, col 16, \'$\' is not defined.\n\n1 error');
+    assert.ok(false, 'routes/create-group.js should pass jshint.\nroutes/create-group.js: line 12, col 15, Missing semicolon.\nroutes/create-group.js: line 5, col 16, \'$\' is not defined.\nroutes/create-group.js: line 10, col 13, \'$\' is not defined.\nroutes/create-group.js: line 13, col 13, \'$\' is not defined.\n\n4 errors');
   });
 });
 define('my-app/tests/test-helper', ['exports', 'my-app/tests/helpers/resolver', 'ember-qunit'], function (exports, _myAppTestsHelpersResolver, _emberQunit) {
@@ -318,6 +326,26 @@ define('my-app/tests/unit/controllers/create-group-test.jshint', ['exports'], fu
   QUnit.module('JSHint - unit/controllers');
   QUnit.test('unit/controllers/create-group-test.js should pass jshint', function (assert) {
     assert.ok(true, 'unit/controllers/create-group-test.js should pass jshint.');
+  });
+});
+define('my-app/tests/unit/routes/application-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
+
+  (0, _emberQunit.moduleFor)('route:application', 'Unit | Route | application', {
+    // Specify the other units that are required for this test.
+    // needs: ['controller:foo']
+  });
+
+  (0, _emberQunit.test)('it exists', function (assert) {
+    var route = this.subject();
+    assert.ok(route);
+  });
+});
+define('my-app/tests/unit/routes/application-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - unit/routes');
+  QUnit.test('unit/routes/application-test.js should pass jshint', function (assert) {
+    assert.ok(true, 'unit/routes/application-test.js should pass jshint.');
   });
 });
 define('my-app/tests/unit/routes/create-group-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {

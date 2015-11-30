@@ -29,10 +29,10 @@ define('my-app/components/app-version', ['exports', 'ember-cli-app-version/compo
     name: name
   });
 });
-define("my-app/components/create-grp", ["exports", "ember"], function (exports, _ember) {
-	exports["default"] = _ember["default"].Component.extend({
-		users: [{ name: "Prateek", phone: "999999" }, { name: "Srabani", phone: "3423423" }],
-		// users = [];
+define('my-app/components/create-grp', ['exports', 'ember'], function (exports, _ember) {
+	exports['default'] = _ember['default'].Component.extend({
+		// users: [{name: "Prateek", phone: "999999"},{name: "Srabani", phone: "3423423"}],
+		users: [],
 		actions: {
 			addUser: function addUser() {
 				var name = this.get('name');
@@ -41,6 +41,11 @@ define("my-app/components/create-grp", ["exports", "ember"], function (exports, 
 				user.name = name;
 				user.phone = phone;
 				this.get('users').pushObject(user);
+				var temp = JSON.stringify(user);
+				this.sendAction('action', temp);
+			},
+			saveUser: function saveUser() {
+				this.sendAction('action', this.get('users'));
 			}
 		}
 	});
@@ -107,10 +112,23 @@ define('my-app/router', ['exports', 'ember', 'my-app/config/environment'], funct
 
     exports['default'] = Router;
 });
+define('my-app/routes/application', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Route.extend({});
+});
 define('my-app/routes/create-group', ['exports', 'ember'], function (exports, _ember) {
 	exports['default'] = _ember['default'].Route.extend({
 		model: function model() {
 			return $.get('http://localhost:5000/api/person');
+		},
+		actions: {
+			storeUser: function storeUser(user) {
+				console.log("Post Request", user);
+				$.ajaxSetup({
+					contentType: "application/json"
+				});
+				$.post('http://localhost:5000/api/person', user);
+				// return $.get('http://localhost:5000/api/person');
+			}
 		}
 	});
 });
@@ -305,7 +323,7 @@ define("my-app/templates/components/create-grp", ["exports"], function (exports)
             "column": 0
           },
           "end": {
-            "line": 15,
+            "line": 16,
             "column": 0
           }
         },
@@ -358,6 +376,12 @@ define("my-app/templates/components/create-grp", ["exports"], function (exports)
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
+        var el1 = dom.createElement("button");
+        var el2 = dom.createTextNode("Save");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
         var el1 = dom.createComment("");
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
@@ -367,15 +391,17 @@ define("my-app/templates/components/create-grp", ["exports"], function (exports)
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element1 = dom.childAt(fragment, [2]);
         var element2 = dom.childAt(element1, [5]);
-        var morphs = new Array(5);
+        var element3 = dom.childAt(fragment, [6]);
+        var morphs = new Array(6);
         morphs[0] = dom.createMorphAt(element1, 1, 1);
         morphs[1] = dom.createMorphAt(element1, 3, 3);
         morphs[2] = dom.createElementMorph(element2);
         morphs[3] = dom.createMorphAt(dom.childAt(fragment, [4, 1]), 1, 1);
-        morphs[4] = dom.createMorphAt(fragment, 6, 6, contextualElement);
+        morphs[4] = dom.createElementMorph(element3);
+        morphs[5] = dom.createMorphAt(fragment, 8, 8, contextualElement);
         return morphs;
       },
-      statements: [["inline", "input", [], ["type", "text", "placeholder", "Name", "value", ["subexpr", "@mut", [["get", "name", ["loc", [null, [3, 45], [3, 49]]]]], [], []]], ["loc", [null, [3, 0], [3, 51]]]], ["inline", "input", [], ["type", "text", "placeholder", "Phone number", "value", ["subexpr", "@mut", [["get", "phone", ["loc", [null, [4, 53], [4, 58]]]]], [], []]], ["loc", [null, [4, 0], [4, 60]]]], ["element", "action", ["addUser"], [], ["loc", [null, [5, 8], [5, 28]]]], ["block", "each", [["get", "users", ["loc", [null, [9, 10], [9, 15]]]]], [], 0, null, ["loc", [null, [9, 2], [11, 11]]]], ["content", "yield", ["loc", [null, [14, 0], [14, 9]]]]],
+      statements: [["inline", "input", [], ["type", "text", "placeholder", "Name", "value", ["subexpr", "@mut", [["get", "name", ["loc", [null, [3, 45], [3, 49]]]]], [], []]], ["loc", [null, [3, 0], [3, 51]]]], ["inline", "input", [], ["type", "text", "placeholder", "Phone number", "value", ["subexpr", "@mut", [["get", "phone", ["loc", [null, [4, 53], [4, 58]]]]], [], []]], ["loc", [null, [4, 0], [4, 60]]]], ["element", "action", ["addUser"], [], ["loc", [null, [5, 8], [5, 28]]]], ["block", "each", [["get", "users", ["loc", [null, [9, 10], [9, 15]]]]], [], 0, null, ["loc", [null, [9, 2], [11, 11]]]], ["element", "action", ["saveUser"], [], ["loc", [null, [14, 8], [14, 29]]]], ["content", "yield", ["loc", [null, [15, 0], [15, 9]]]]],
       locals: [],
       templates: [child0]
     };
@@ -420,7 +446,7 @@ define("my-app/templates/create-group", ["exports"], function (exports) {
         dom.insertBoundary(fragment, null);
         return morphs;
       },
-      statements: [["inline", "create-grp", [], ["users", ["subexpr", "@mut", [["get", "model.objects", ["loc", [null, [1, 19], [1, 32]]]]], [], []]], ["loc", [null, [1, 0], [1, 34]]]], ["content", "outlet", ["loc", [null, [3, 0], [3, 10]]]]],
+      statements: [["inline", "create-grp", [], ["users", ["subexpr", "@mut", [["get", "model.objects", ["loc", [null, [1, 19], [1, 32]]]]], [], []], "action", "storeUser"], ["loc", [null, [1, 0], [1, 53]]]], ["content", "outlet", ["loc", [null, [3, 0], [3, 10]]]]],
       locals: [],
       templates: []
     };

@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-	users: [{name: "Prateek", phone: "999999"},{name: "Srabani", phone: "3423423"}],
-	// users = [];
+	// users: [{name: "Prateek", phone: "999999"},{name: "Srabani", phone: "3423423"}],
+	users: [],
 	actions: {
 		addUser: function(){
 			let name = this.get('name');
@@ -10,7 +10,12 @@ export default Ember.Component.extend({
 			var user = {};
 			user.name = name;
 			user.phone = phone;
-			this.get('users').pushObject(user)
+			this.get('users').pushObject(user);
+			var temp = JSON.stringify(user);
+			this.sendAction('action', temp);
+		},
+		saveUser: function(){
+			this.sendAction('action', this.get('users'));
 		}
 	}
 });
