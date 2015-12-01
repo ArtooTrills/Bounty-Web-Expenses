@@ -1,0 +1,28 @@
+<div>Add Expense</div>
+<div><button {{action 'addNewExpense'}}>Add new expense</button></div>
+{{#if newExpense}}
+<div>Who paid: {{#each users as |user|}}
+    <label>{{user.name}}</label>
+    {{input type="checkbox" checked=user.hasPaid}}
+{{/each}}</div>
+<div>Description: {{input type="text" placeholder="Item type" value=description}}</div>
+<div>Amount: {{input type="text" placeholder="Amount" value=amount}}</div>
+{{!-- <div>Paid for: {{input type="text" placeholder="Name" value=to_id}}</div> --}}
+<div>
+{{#each users as |user|}}
+    <label>{{user.name}}</label>
+    {{input type="checkbox" checked=user.hasReceived}}
+{{/each}}
+</div>
+<button {{action 'addExpense'}}>Add</button>
+{{/if}}
+<div>Recent Expenses</div>
+<div>
+	<ul>
+		{{#each expenses as |expense|}}
+		<li>{{expense.from_id}}......{{expense.to_id}}......{{expense.amount}}......{{expense.description}}</li>
+		{{/each}}
+	</ul>
+</div>
+
+{{yield}}

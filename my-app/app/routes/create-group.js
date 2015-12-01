@@ -6,12 +6,10 @@ export default Ember.Route.extend({
 	},
 	actions: {
 		storeUser: function(user) {
-			console.log("Post Request", user);
 			$.ajaxSetup({
 			  contentType: "application/json"
 			})
 			$.post('http://localhost:5000/api/person', user);
-			// return $.get('http://localhost:5000/api/person');
 		}
 	}
 });

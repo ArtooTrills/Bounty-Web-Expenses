@@ -7,7 +7,7 @@ from flask.ext.restless import APIManager
 # Create the Flask application and the Flask-SQLAlchemy object.
 app = flask.Flask(__name__)
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./expenseTracker.db'
 db = flask.ext.sqlalchemy.SQLAlchemy(app)
 
 # Create your Flask-SQLALchemy models as usual but with the following two
@@ -21,12 +21,15 @@ class Person(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Unicode, unique=True)
     phone = db.Column(db.Unicode)
+    hasReceived = db.Column(db.Unicode)
+    hasPaid = db.Column(db.Unicode)
 
 class Expense(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     from_id = db.Column(db.Integer, db.ForeignKey('person.name'))
-    to_id = db.Column(db.Integer, db.ForeignKey('person.name'))
+    to_id = db.Column(db.Unicode)
     amount = db.Column(db.Float)
+    description = db.Column(db.Unicode)
     date = db.Column(db.Date)
 
 def add_cors_headers(response):
