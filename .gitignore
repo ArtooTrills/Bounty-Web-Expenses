@@ -1,3 +1,4 @@
 my-app/bower_components
 my-app/node_modules
 my-app/tmp
+my-app/dist
