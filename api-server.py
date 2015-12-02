@@ -23,6 +23,7 @@ class Person(db.Model):
     phone = db.Column(db.Unicode)
     hasReceived = db.Column(db.Unicode)
     hasPaid = db.Column(db.Unicode)
+    unequalAmount = db.Column(db.Float)
 
 class Expense(db.Model):
     id = db.Column(db.Integer, primary_key=True)
