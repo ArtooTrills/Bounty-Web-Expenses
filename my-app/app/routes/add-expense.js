@@ -10,12 +10,23 @@ export default Ember.Route.extend({
 	},
 	actions: {
 		storeExpense: function(expense) {
-			expense.forEach(function(item){
+			if(Ember.isArray(expense)){
+				expense.forEach(function(item){
+					$.ajaxSetup({
+					  contentType: "application/json"
+					})
+					$.post('http://localhost:5000/api/expense', item);
+				});
+			}
+			else{
 				$.ajaxSetup({
-				  contentType: "application/json"
-				})
-				$.post('http://localhost:5000/api/expense', item);
-			});
+					  contentType: "application/json"
+					})
+				$.post('http://localhost:5000/api/expense', expense);
+			}
+		},
+		modelReload: function(){
+			this.refresh();
 		}
 	}
 });

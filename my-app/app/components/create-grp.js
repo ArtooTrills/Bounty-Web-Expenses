@@ -12,6 +12,8 @@ export default Ember.Component.extend({
 			this.get('users').pushObject(user);
 			var temp = JSON.stringify(user);
 			this.sendAction('action', temp);
+			this.set('name',"");
+			this.set('phone',"");
 		}
 	}
 });

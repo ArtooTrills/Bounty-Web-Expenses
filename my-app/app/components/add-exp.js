@@ -5,6 +5,7 @@ export default Ember.Component.extend({
 	users: [],
 	newExpense: false,
 	splitUnequally: false,
+	success: false,
 	actions: {
 		addExpense: function(){
 			var expense = {};
@@ -12,17 +13,16 @@ export default Ember.Component.extend({
 			expense.amount = this.get("amount");
 			expense.description = this.get("description");
 			let users = this.get("users");
-			let expenses = this.get("expenses");
+			users.forEach(function(item){
+				if(item.hasPaid){
+					expense.from_id = item.name;
+				}		
+			});
 			if(this.get('splitUnequally')){
 				users.forEach(function(item){
-					if(item.hasPaid){
-						expense.from_id = item.name;		
-					}
 					if(item.hasReceived){
 						expense.to_id = item.name;
 						expense.amount = item.unequalAmount;
-						console.log("enequal amount", expense.to_id, expense.amount, expense);
-						expenses.pushObject(expense);
 						var temp = JSON.stringify(expense);
 						unequalList.pushObject(temp);
 					}
@@ -31,9 +31,6 @@ export default Ember.Component.extend({
 			}
 			else{
 				users.forEach(function(item){
-					if(item.hasPaid){
-						expense.from_id = item.name;		
-					}
 					if(item.hasReceived){
 						if(expense.to_id){
 							expense.to_id = expense.to_id + ",";
@@ -44,16 +41,39 @@ export default Ember.Component.extend({
 						}
 					}
 				});
-				expenses.pushObject(expense);
 				var temp = JSON.stringify(expense);
 				this.sendAction('action', temp);
 			}
+			this.set('success',true);
+			Ember.run.later((function() {
+			window.location.reload(true);
+			}), 2000);
 		},
 		addNewExpense: function(){
 			this.set("newExpense", true);
 		},
 		splitUnequal: function(){
-			this.set("splitUnequally", true);
+			var count = 0;
+			let users = this.get("users");
+			users.forEach(function(item){
+				if(item.hasReceived){
+					count = count + 1;
+				}
+			});
+			if(count>1){
+				this.set("splitUnequally", true);
+			}
+		},
+		cancelExpense: function(){
+			this.set("newExpense", false);
+			let amount = this.get("amount");
+			this.set("amount", "");
+			let description = this.get("description");
+			this.set("description", "");
+			this.sendAction('reloadModel');
+		},
+		splitUnequalCancel: function(){
+			this.set("splitUnequally", false);
 		}
 	}
 });
