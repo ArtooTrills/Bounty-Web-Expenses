@@ -23,8 +23,10 @@ export default Ember.Component.extend({
 					if(item.hasReceived){
 						expense.to_id = item.name;
 						expense.amount = item.unequalAmount;
-						var temp = JSON.stringify(expense);
-						unequalList.pushObject(temp);
+						if(expense.to_id != expense.from_id){
+							var temp = JSON.stringify(expense);
+							unequalList.pushObject(temp);
+						}
 					}
 				});
 				this.sendAction('action', unequalList);
@@ -70,6 +72,7 @@ export default Ember.Component.extend({
 			this.set("amount", "");
 			let description = this.get("description");
 			this.set("description", "");
+			this.set("splitUnequally", false);
 			this.sendAction('reloadModel');
 		},
 		splitUnequalCancel: function(){
