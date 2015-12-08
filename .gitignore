@@ -3,3 +3,5 @@ my-app/node_modules
 my-app/tmp
 my-app/dist
 expenseTracker.db
+*.xml
+*.iml

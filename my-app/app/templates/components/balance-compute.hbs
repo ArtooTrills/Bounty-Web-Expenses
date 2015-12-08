@@ -1,5 +1,10 @@
 Outstanding Balance
 
 <button {{action "computeBalances"}}>Compute outstanding balances</button>
+{{#if balances}}
+{{#each balances as |balance|}}
+    {{balance.willGive}}..................{{balance.willGet}}......{{balance.amount}}
+{{/each}}
+{{/if}}
 
 {{yield}}
