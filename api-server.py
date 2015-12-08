@@ -33,12 +33,6 @@ class Expense(db.Model):
     description = db.Column(db.Unicode)
     date = db.Column(db.Date)
 
-class Balance(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    from_id = db.Column(db.Unicode)
-    to_id = db.Column(db.Unicode)
-    amount = db.Column(db.Float)
-
 def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Credentials'] = 'true'
@@ -54,9 +48,8 @@ manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
 
 # Create API endpoints, which will be available at /api/<tablename> by
 # default. Allowed HTTP methods can be specified as well.
-manager.create_api(Person, methods=['GET', 'POST', 'DELETE', 'PATCH'])
-manager.create_api(Expense, methods=['GET', 'POST', 'DELETE', 'PATCH'])
-manager.create_api(Balance, methods=['GET', 'POST', 'DELETE', 'PATCH'])
+manager.create_api(Person, methods=['GET', 'POST', 'DELETE'])
+manager.create_api(Expense, methods=['GET', 'POST', 'DELETE'])
 
 app.after_request(add_cors_headers)
 

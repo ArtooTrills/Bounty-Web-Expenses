@@ -11,14 +11,6 @@ export default Ember.Route.extend({
 			  contentType: "application/json"
 			})
 			$.post('http://localhost:5000/api/person', user);
-		},
-		addBlnc: function(blnc) {
-			blnc.forEach(function(item){
-				$.ajaxSetup({
-				  contentType: "application/json"
-				})
-				$.post('http://localhost:5000/api/balance', item);
-			});
 		}
 	}
 });

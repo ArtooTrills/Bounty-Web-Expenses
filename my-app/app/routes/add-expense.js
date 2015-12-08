@@ -4,8 +4,7 @@ export default Ember.Route.extend({
 	model: function(){
 		return Ember.RSVP.hash({
 	    	users: $.get('http://localhost:5000/api/person'),
-	    	expenses: $.get('http://localhost:5000/api/expense'),
-	    	balances: $.get('http://localhost:5000/api/balance')
+	    	expenses: $.get('http://localhost:5000/api/expense')
     });
 	},
 	actions: {
@@ -27,16 +26,6 @@ export default Ember.Route.extend({
 		},
 		modelReload: function(){
 			this.refresh();
-		},
-		balanceStore: function(balance){
-			var url = 'http://localhost:5000/api/balance';
-			url = url + '/';
-			url = url + 'index';
-			console.log("..................url" , url);
-			$.ajaxSetup({
-			  	contentType: "application/json"
-			})
-			$.patch('http://localhost:5000/api/expense', balance);
 		}
 	}
 });

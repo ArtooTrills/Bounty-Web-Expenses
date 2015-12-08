@@ -27,7 +27,6 @@ export default Ember.Component.extend({
 						expense.to_id = users[i].name;
 						expense.amount = users[i].unequalAmount;
 						if(expense.to_id != expense.from_id){
-							this.send("computeBalances", expense);
 							var temp = JSON.stringify(expense);
 							unequalList.pushObject(temp);
 						}
@@ -47,13 +46,12 @@ export default Ember.Component.extend({
 						}
 					}
 				}
-				this.send("computeBalances", expense);
 				var temp = JSON.stringify(expense);
 				this.sendAction('action', temp);
 			}
 			this.set('success',true);
 			Ember.run.later((function() {
-				// window.location.reload(true);
+				window.location.reload(true);
 			}), 2000);
 		},
 		addNewExpense: function(){
@@ -82,11 +80,6 @@ export default Ember.Component.extend({
 		},
 		splitUnequalCancel: function(){
 			this.set("splitUnequally", false);
-		},
-		computeBalances: function(expense){
-			console.log(".................." , expense);
-			var i = 0;
-			this.sendAction('storeBalance', expense);
 		}
 	}
 });
