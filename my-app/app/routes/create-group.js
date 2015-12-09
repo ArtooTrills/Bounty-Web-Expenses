@@ -3,14 +3,14 @@ import Ember from 'ember';
 export default Ember.Route.extend({
     model: function () {
         var url = 'http://localhost:5000/api/person'
-        return $.get(url);
+        return Ember.$.get(url);
     },
     actions: {
         storeUser: function (user) {
-            $.ajaxSetup({
+            Ember.$.ajaxSetup({
                 contentType: "application/json"
-            })
-            $.post('http://localhost:5000/api/person', user);
+            });
+            Ember.$.post('http://localhost:5000/api/person', user);
         }
     }
 });

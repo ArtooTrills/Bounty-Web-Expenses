@@ -12,7 +12,7 @@ export default Ember.Component.extend({
             var i = 0;
             var expense = {};
             var unequalList = [];
-            var balances = [];
+            var temp = "";
             expense.amount = this.get("amount");
             expense.description = this.get("description");
             var d = new Date();
@@ -28,8 +28,8 @@ export default Ember.Component.extend({
                     if (users[i].hasReceived) {
                         expense.to_id = users[i].name;
                         expense.amount = users[i].unequalAmount;
-                        if (expense.to_id != expense.from_id) {
-                            var temp = JSON.stringify(expense);
+                        if (expense.to_id !== expense.from_id) {
+                            temp = JSON.stringify(expense);
                             unequalList.pushObject(temp);
                         }
                     }
@@ -48,7 +48,7 @@ export default Ember.Component.extend({
                         }
                     }
                 }
-                var temp = JSON.stringify(expense);
+                temp = JSON.stringify(expense);
                 this.sendAction('action', temp);
             }
             this.set('success', true);
