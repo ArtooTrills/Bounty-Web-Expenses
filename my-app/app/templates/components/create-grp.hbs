@@ -1,14 +1,22 @@
-<div>Add Member</div>
+<div class="heading">Add New Member</div>
 <div>
-{{input type="text" placeholder="Name" value=name}}
-{{input type="text" placeholder="Phone number" value=phone}}
-<button {{action 'addUser'}}>Add</button>
+{{input type="text" placeholder="Name" value=name class="textBox"}}
+{{input type="text" placeholder="Phone number" value=phone class="textBox"}}
+<button class="buttonStyle" {{action 'addUser'}}>Add</button>
 </div>
+<div class="heading">Group Members</div>
 <div>
-	<ul>
+	<table>
+		<tr>
+			<td style="font-weight: bolder; color: white;">Name</td>
+			<td style="font-weight: bolder; color: white;">Phone</td>
+		</tr>
 		{{#each users as |user|}}
-		<li>{{user.name}}......{{user.phone}}</li>
+		<tr>
+		<td>{{user.name}}</td>
+		<td>{{user.phone}}</td>
+		</tr>
 		{{/each}}
-	</ul>
+	</table>
 </div>
 {{yield}}
