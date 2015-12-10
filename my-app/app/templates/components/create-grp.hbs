@@ -2,14 +2,14 @@
 <div>
 {{input type="text" placeholder="Name" value=name class="textBox"}}
 {{input type="text" placeholder="Phone number" value=phone class="textBox"}}
-<button class="buttonStyle" {{action 'addUser'}}>Add</button>
 </div>
+<button class="buttonStyle" {{action 'addUser'}}>Add</button>
+<div class="division">
 <div class="heading">Group Members</div>
-<div>
 	<table>
 		<tr>
-			<td style="font-weight: bolder; color: white;">Name</td>
-			<td style="font-weight: bolder; color: white;">Phone</td>
+			<td class="tableHeading">Name</td>
+			<td class="tableHeading">Phone</td>
 		</tr>
 		{{#each users as |user|}}
 		<tr>

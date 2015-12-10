@@ -1,42 +1,45 @@
 h2 {
-	color: white;
-    background-color:  #b3b3ff;
+	color: black;
     padding: 20px;
-    border-radius: 25px;
-    margin-left: 7px;
+    border-width: 1px;
+    border-style: solid;
 }
 
 .tabs {
-	color: white;
+	color: black;
     display: inline;
-    background-color: #b3b3ff;
     padding: 10px 20px 12px 15px;
-    border-radius: 25px;
     margin-left: 10px;
-    text-decoration: inherit;
+    float: left;
+    border-style: double;
 }
 
 .group {
-	padding: 10px;
-    background-color: #b3b3ff;
-    margin-left: 12px;
+	margin-top: 90px;
 }
 
 .heading{
 	color: black;
     padding: 10px;
+    font-weight: bolder;
+    border-top-style: double;
 }
 
 .textBox {
-    border-color: white;
+    border-color: black;
     border-style: double;
+    width: 1000px;
+    padding: 10px;
+    margin: 10px;
 }
 
 .buttonStyle {
-	background-color: white;
+    background-color: black;
     border-style: double;
     border-color: white;
-    border-radius: 20px;
+    color: white;
+    padding: 10px;
+    margin: 8px;
 }
 
 table {
@@ -45,6 +48,33 @@ table {
 }
 
 table, th, td {
-    border-bottom: 1px solid #ddd;
-    padding: 5px;
+    border-bottom: 1px solid black;
+    padding: 7px;
+    margin: 10px;
+    width: 1320px;
+}
+
+.aligning {
+    padding: 10px;
+}
+
+.subHeading {
+    border-top-style: solid;   
+}
+
+label {
+    font-size: x-large;
+}
+
+.success {
+    padding: 10px;
+}
+
+.tableHeading {
+    font-weight: bold;
+    color: black;
+}
+
+.centering {
+    text-align: center;
 }

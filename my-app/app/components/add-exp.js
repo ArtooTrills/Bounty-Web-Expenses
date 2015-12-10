@@ -4,11 +4,26 @@ export default Ember.Component.extend({
     expenses: [],
     users: [],
     balances: [],
+    showContent: [],
+    limit: 10,
     newExpense: false,
     splitUnequally: false,
     success: false,
+    expensesInit: function() {
+        var i = 0;
+        let expenses = this.get("expenses");
+        // console.log("...........", expenses);
+        let limit = this.get("limit");
+        let showContent = this.get("showContent");
+        for(i = (expenses.length) - 1; i >= (expenses.length) - limit; i--){
+            if(i >= 0){
+                showContent.pushObject(expenses[i]);
+            }
+        }
+    }.on('init'),
     actions: {
         addExpense: function () {
+            let expenses = this.get("expenses");
             var i = 0;
             var expense = {};
             var unequalList = [];
@@ -82,6 +97,20 @@ export default Ember.Component.extend({
         },
         splitUnequalCancel: function () {
             this.set("splitUnequally", false);
+        },
+        addResults: function() {
+            var i = 0;
+            let expenses = this.get("expenses");
+            let limit = this.get("limit");
+            limit += 10;
+            let showContent = this.get("showContent");
+            showContent = [];
+            for(i = (expenses.length) - 1; i >= (expenses.length) - limit; i--){
+                if(i >= 0){
+                    showContent.pushObject(expenses[i]);
+                }
+            }
+            this.set("showContent", showContent);
         }
     }
 });

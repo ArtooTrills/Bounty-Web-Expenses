@@ -3,7 +3,10 @@ import Ember from 'ember';
 export default Ember.Route.extend({
     model: function () {
         var url = 'http://localhost:5000/api/person';
-        return Ember.$.get(url);
+        return $.ajax({
+            method: 'GET',
+            url: url,
+        });
     },
     actions: {
         storeUser: function (user) {

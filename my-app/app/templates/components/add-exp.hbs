@@ -1,47 +1,47 @@
-<div>Add Expense</div>
-<div><button {{action 'addNewExpense'}}>Add new expense</button></div>
+<div class="heading">Add Expense</div>
+<div><button class="buttonStyle" {{action 'addNewExpense'}}>Add new expense</button></div>
 {{#if newExpense}}
-<div>Who paid: {{#each users as |user|}}
+<div class="aligning subHeading"><h3>Who paid: </h3>{{#each users as |user|}}
+	{{input type="checkbox" checked=user.hasPaid}}
     <label>{{user.name}}</label>
-    {{input type="checkbox" checked=user.hasPaid}}
 {{/each}}</div>
-<div>Description: {{input type="text" placeholder="Item type" value=description}}</div>
-<div>Amount: {{input type="text" placeholder="Amount" value=amount}}</div>
-<div>
-Paid for: {{#each users as |user|}}
-    <label>{{user.name}}</label>
+<div class="aligning subHeading"><h3>Description: </h3>{{input type="text" placeholder="Item type" value=description class="textBox"}}</div>
+<div class="aligning subHeading"><h3>Amount: </h3>{{input type="text" placeholder="Amount" value=amount class="textBox"}}</div>
+<div class="aligning subHeading">
+<h3>Paid for: </h3>{{#each users as |user|}}
     {{input type="checkbox" checked=user.hasReceived}}
+    <label>{{user.name}}</label>
 {{/each}}
 </div>
-<div><button {{action 'splitUnequal'}}>Split Unequally</button>{{#if splitUnequally }}<button {{action 'splitUnequalCancel'}}>X</button>{{/if}}</div>
+<div class="aligning"><button class="buttonStyle"{{action 'splitUnequal'}}>Split Unequally</button>{{#if splitUnequally }}<button {{action 'splitUnequalCancel'}}>X</button>{{/if}}</div>
 {{#if splitUnequally}}
-<div>
+<div class="aligning">
 {{#each users as |user|}}
 {{#if user.hasReceived}}
-    <label>{{user.name}}</label>
-    {{input type="text" placeholder="Amount" value=user.unequalAmount}}
+    <h3><label>{{user.name}}</label></h3>
+    {{input type="text" placeholder="Amount" value=user.unequalAmount class="textBox"}}
 {{/if}}
 {{/each}}
 </div>
 {{/if}}
-<button {{action 'cancelExpense'}}>Cancel</button>
-<button {{action 'addExpense'}}>Add</button>
+<button class="buttonStyle"{{action 'cancelExpense'}}>Cancel</button>
+<button class="buttonStyle"{{action 'addExpense'}}>Add</button>
 {{/if}}
 {{#if success}}
-<div>Expense Successfully Added</div>
+<div class="success">Expense Successfully Added</div>
 {{/if}}
-<div>Recent Expenses</div>
+{{#unless newExpense}}
+<div class="heading">Recent Expenses</div>
 <div>
-	<ul>
 	<table>
-	<th>
-		<td>From...........</td>
-		<td>To...........</td>
-		<td>Amount...........</td>
-		<td>Description...........</td>
-        <td>Date...........</td>
-	</th>
-	{{#each expenses as |expense|}}
+	<tr>
+		<td class="tableHeading">From</td>
+		<td class="tableHeading">To</td>
+		<td class="tableHeading">Amount</td>
+		<td class="tableHeading">Description</td>
+		<td class="tableHeading">Date</td>
+	</tr>
+	{{#each showContent as |expense|}}
 	<tr>
 		<td>{{expense.from_id}}</td>
 		<td>{{expense.to_id}}</td>
@@ -51,7 +51,8 @@ Paid for: {{#each users as |user|}}
 	</tr>
 	{{/each}}
 	</table>
-	</ul>
 </div>
+<div class="centering"><button class="buttonStyle"{{action 'addResults'}}>Show More</button></div>
+{{/unless}}
 
 {{yield}}
