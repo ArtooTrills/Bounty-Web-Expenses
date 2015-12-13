@@ -37,5 +37,8 @@
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
     "phantomjs": "1.9.8"
+  },
+  "dependencies": {
+    "moment": "^2.10.6"
   }
 }

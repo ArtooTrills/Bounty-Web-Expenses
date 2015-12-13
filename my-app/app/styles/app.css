@@ -73,6 +73,7 @@ label {
 .tableHeading {
     font-weight: bold;
     color: black;
+    text-align: left;
 }
 
 .centering {

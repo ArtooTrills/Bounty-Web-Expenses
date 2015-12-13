@@ -83,6 +83,42 @@ export default Ember.Component.extend({
             Ember.run.later((function () {
                 window.location.reload(true);
             }), 1500);
+        },
+        export: function() {
+            var JSONData = this.get("balances");
+            var arrData = typeof JSONData !== 'object' ? JSON.parse(JSONData) : JSONData;
+            var CSV = '';
+            if (true) {
+                var row = "";
+                var headers = ["TO GIVE", "TO RECEIVE", "AMOUNT"];
+                for (var i = 0; i < headers.length; i++) {
+                    row += headers[i] + ',';
+                }
+                row = row.slice(0, -1);
+                CSV += row + '\r\n';
+            }
+            for (var i = 0; i < arrData.length; i++) {
+                var row = "";
+                var headers = ["willGive", "willGet", "amount"];
+                for (var j = 0; j < headers.length; j++) {
+                    var index = headers[j];
+                    row += '"' + arrData[i][index] + '",';
+                }
+                row.slice(0, row.length - 1);
+                CSV += row + '\r\n';
+            }
+            if (CSV === '') {        
+                alert("Invalid data");
+                return;
+            }   
+            var fileName = "Settlements";
+            var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+            var link = document.createElement("a");    
+            link.href = uri;
+            link.download = fileName + ".csv";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     }
 });

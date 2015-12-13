@@ -12,7 +12,6 @@ export default Ember.Component.extend({
     expensesInit: function() {
         var i = 0;
         let expenses = this.get("expenses");
-        // console.log("...........", expenses);
         let limit = this.get("limit");
         let showContent = this.get("showContent");
         for(i = (expenses.length) - 1; i >= (expenses.length) - limit; i--){
@@ -23,7 +22,6 @@ export default Ember.Component.extend({
     }.on('init'),
     actions: {
         addExpense: function () {
-            let expenses = this.get("expenses");
             var i = 0;
             var expense = {};
             var unequalList = [];
@@ -111,6 +109,46 @@ export default Ember.Component.extend({
                 }
             }
             this.set("showContent", showContent);
+        },
+        export: function() {
+            var JSONData = this.get("expenses");
+            var arrData = typeof JSONData !== 'object' ? JSON.parse(JSONData) : JSONData;
+            var CSV = '';
+            if (true) {
+                var row = "";
+                var headers = ["FROM", "TO", "DESCRIPTION", "AMOUNT", "DATE"];
+                for (var i = 0; i < headers.length; i++) {
+                    row += headers[i] + ',';
+                }
+                row = row.slice(0, -1);
+                CSV += row + '\r\n';
+            }
+            for (var i = 0; i < arrData.length; i++) {
+                var row = "";
+                var headers = ["from_id", "to_id", "description", "amount", "date"];
+                for (var j = 0; j < headers.length; j++) {
+                    var index = headers[j];
+                    var data = arrData[i][index];
+                    if(index === "date"){
+                        data = arrData[i][index] + '/';
+                    }
+                    row += '"' + data + '",';
+                }
+                row.slice(0, row.length - 1);
+                CSV += row + '\r\n';
+            }
+            if (CSV === '') {        
+                alert("Invalid data");
+                return;
+            }   
+            var fileName = "Expences";
+            var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+            var link = document.createElement("a");    
+            link.href = uri;
+            link.download = fileName + ".csv";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     }
 });

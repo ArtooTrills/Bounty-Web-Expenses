@@ -10,13 +10,14 @@
 <div class="success">Debt now settled</div>
 {{/if}}
 {{#if balances}}
+<button class="buttonStyle" {{action 'export'}}>Export CSV</button>
 <div>
 	<table>
 	<tr>
-		<td class="tableHeading">To Give</td>
-		<td class="tableHeading">To Receive</td>
-		<td class="tableHeading">Amount</td>
-		<td class="tableHeading"></td>
+		<th class="tableHeading">To Give</th>
+		<th class="tableHeading">To Receive</th>
+		<th class="tableHeading">Amount</th>
+		<th class="tableHeading"></th>
 	</tr>
 	{{#each balances as |balance|}}
 	<tr>
