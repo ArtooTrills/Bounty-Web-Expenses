@@ -16,10 +16,11 @@ Install Ember.js
 
 ## Run the servers
 cd into the directory then run:  
-`python3 api-server.py`  
+`python api-server.py`  
 
 
-`npm install`  
+`npm install`    
+`bower install`      
 `ember serve`
 
 ## Go for http://localhost:4200/ to run the app
