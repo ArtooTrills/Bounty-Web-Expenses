@@ -1,0 +1,61 @@
+<div class="heading"></div>
+<div>
+<button class="buttonStyle" {{action 'addNewExpense'}}>Add new expense</button>
+<button class="buttonStyle" {{action 'export'}}>Export CSV</button>
+</div>
+{{#if newExpense}}
+<div class="aligning subHeading"><h3>Who paid: </h3>{{#each users as |user|}}
+	{{input type="checkbox" checked=user.hasPaid}}
+    <label>{{user.name}}</label>
+{{/each}}</div>
+<div class="aligning subHeading"><h3>Description: </h3>{{input type="text" placeholder="Item type" value=description class="textBox"}}</div>
+<div class="aligning subHeading"><h3>Amount: </h3>{{input type="text" placeholder="Amount" value=amount class="textBox"}}</div>
+<div class="aligning subHeading">
+<h3>Paid for: </h3>{{#each users as |user|}}
+    {{input type="checkbox" checked=user.hasReceived}}
+    <label>{{user.name}}</label>
+{{/each}}
+</div>
+<div class="aligning"><button class="buttonStyle"{{action 'splitUnequal'}}>Split Unequally</button>{{#if splitUnequally }}<button {{action 'splitUnequalCancel'}}>X</button>{{/if}}</div>
+{{#if splitUnequally}}
+<div class="aligning">
+{{#each users as |user|}}
+{{#if user.hasReceived}}
+    <h3><label>{{user.name}}</label></h3>
+    {{input type="text" placeholder="Amount" value=user.unequalAmount class="textBox"}}
+{{/if}}
+{{/each}}
+</div>
+{{/if}}
+<button class="buttonStyle"{{action 'cancelExpense'}}>Cancel</button>
+<button class="buttonStyle"{{action 'addExpense'}}>Add</button>
+{{/if}}
+{{#if success}}
+<div class="success">Expense Successfully Added</div>
+{{/if}}
+{{#unless newExpense}}
+<div class="heading">Recent Expenses</div>
+<div>
+	<table>
+	<tr>
+		<th class="tableHeading">From</th>
+		<th class="tableHeading">To</th>
+		<th class="tableHeading">Amount</th>
+		<th class="tableHeading">Description</th>
+		<th class="tableHeading">Date</th>
+	</tr>
+	{{#each showContent as |expense|}}
+	<tr>
+		<td>{{expense.from_id}}</td>
+		<td>{{expense.to_id}}</td>
+		<td>{{expense.amount}}</td>
+		<td>{{expense.description}}</td>
+        <td>{{expense.date}}</td>
+	</tr>
+	{{/each}}
+	</table>
+</div>
+<div class="centering"><button class="buttonStyle"{{action 'addResults'}}>Show More</button></div>
+{{/unless}}
+
+{{yield}}

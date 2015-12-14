@@ -1,0 +1,34 @@
+<div class="heading">Outstanding Balance</div>
+
+{{#unless balances}}
+<button class="buttonStyle"{{action "computeBalances"}}>Compute outstanding balances</button>
+{{#if failure}}
+<div class="success">No oustanding balance</div>
+{{/if}}
+{{/unless}}
+{{#if success}}
+<div class="success">Debt now settled</div>
+{{/if}}
+{{#if balances}}
+<button class="buttonStyle" {{action 'export'}}>Export CSV</button>
+<div>
+	<table>
+	<tr>
+		<th class="tableHeading">To Give</th>
+		<th class="tableHeading">To Receive</th>
+		<th class="tableHeading">Amount</th>
+		<th class="tableHeading"></th>
+	</tr>
+	{{#each balances as |balance|}}
+	<tr>
+		<td>{{balance.willGive}}</td>
+		<td>{{balance.willGet}}</td>
+		<td>{{balance.amount}}</td>
+		<td><button class="buttonStyle"{{action "settlement" balance}}>Settle Debt</button></td>
+	</tr>
+	{{/each}}
+	</table>
+</div>
+{{/if}}
+
+{{yield}}
