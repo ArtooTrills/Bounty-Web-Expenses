@@ -111,21 +111,25 @@ export default Ember.Component.extend({
             this.set("showContent", showContent);
         },
         export: function() {
+            var i = 0;
+            var row = "";
+            var headers = [];
             var JSONData = this.get("expenses");
             var arrData = typeof JSONData !== 'object' ? JSON.parse(JSONData) : JSONData;
             var CSV = '';
             if (true) {
-                var row = "";
-                var headers = ["FROM", "TO", "DESCRIPTION", "AMOUNT", "DATE"];
-                for (var i = 0; i < headers.length; i++) {
+                row = "";
+                headers = ["FROM", "TO", "DESCRIPTION", "AMOUNT", "DATE"];
+                for (i = 0; i < headers.length; i++) {
                     row += headers[i] + ',';
                 }
                 row = row.slice(0, -1);
                 CSV += row + '\r\n';
             }
-            for (var i = 0; i < arrData.length; i++) {
-                var row = "";
-                var headers = ["from_id", "to_id", "description", "amount", "date"];
+            for (i = 0; i < arrData.length; i++) {
+                row = "";
+                headers = [];
+                headers = ["from_id", "to_id", "description", "amount", "date"];
                 for (var j = 0; j < headers.length; j++) {
                     var index = headers[j];
                     var data = arrData[i][index];

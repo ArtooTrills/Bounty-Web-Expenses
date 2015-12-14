@@ -85,21 +85,25 @@ export default Ember.Component.extend({
             }), 1500);
         },
         export: function() {
+            var i = 0;
+            var row = "";
+            var headers = [];
             var JSONData = this.get("balances");
             var arrData = typeof JSONData !== 'object' ? JSON.parse(JSONData) : JSONData;
             var CSV = '';
             if (true) {
-                var row = "";
-                var headers = ["TO GIVE", "TO RECEIVE", "AMOUNT"];
-                for (var i = 0; i < headers.length; i++) {
+                row = "";
+                headers = ["TO GIVE", "TO RECEIVE", "AMOUNT"];
+                for (i = 0; i < headers.length; i++) {
                     row += headers[i] + ',';
                 }
                 row = row.slice(0, -1);
                 CSV += row + '\r\n';
             }
-            for (var i = 0; i < arrData.length; i++) {
-                var row = "";
-                var headers = ["willGive", "willGet", "amount"];
+            for (i = 0; i < arrData.length; i++) {
+                row = "";
+                headers = [];
+                headers = ["willGive", "willGet", "amount"];
                 for (var j = 0; j < headers.length; j++) {
                     var index = headers[j];
                     row += '"' + arrData[i][index] + '",';
