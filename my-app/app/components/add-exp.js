@@ -66,6 +66,8 @@ export default Ember.Component.extend({
                 this.sendAction('action', temp);
             }
             this.set("success", true);
+            this.set("amount", "");
+            this.set("description", "");
         },
         addNewExpense: function () {
             this.set("newExpense", true);
