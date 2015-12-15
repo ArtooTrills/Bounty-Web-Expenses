@@ -5,7 +5,7 @@
 </div>
 {{#if newExpense}}
 <div class="aligning subHeading"><h3>Who paid: </h3>{{#each users as |user|}}
-	{{input type="checkbox" checked=user.hasPaid}}
+	{{input type="radio" name="Payer" checked=user.hasPaid}}
     <label>{{user.name}}</label>
 {{/each}}</div>
 <div class="aligning subHeading"><h3>Description: </h3>{{input type="text" placeholder="Item type" value=description class="textBox"}}</div>
@@ -32,6 +32,7 @@
 {{/if}}
 {{#if success}}
 <div class="success">Expense Successfully Added</div>
+<button class="buttonStyle"{{action 'viewExpences'}}>View Expenses</button>
 {{/if}}
 {{#unless newExpense}}
 <div class="heading">Recent Expenses</div>
