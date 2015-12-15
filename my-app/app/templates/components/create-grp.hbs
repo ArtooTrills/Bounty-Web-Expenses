@@ -4,6 +4,9 @@
 {{input type="text" placeholder="Phone number" value=phone class="textBox"}}
 </div>
 <button class="buttonStyle" {{action 'addUser'}}>Add</button>
+{{#if failure}}
+<div class="success">Username already exists</div>
+{{/if}}
 <div class="division">
 <div class="heading">Group Members</div>
 	<table>

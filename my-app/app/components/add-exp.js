@@ -13,6 +13,7 @@ export default Ember.Component.extend({
         var i = 0;
         let expenses = this.get("expenses");
         let limit = this.get("limit");
+        this.set("showContent", []);
         let showContent = this.get("showContent");
         for(i = (expenses.length) - 1; i >= (expenses.length) - limit; i--){
             if(i >= 0){
@@ -64,10 +65,7 @@ export default Ember.Component.extend({
                 temp = JSON.stringify(expense);
                 this.sendAction('action', temp);
             }
-            this.set('success', true);
-            Ember.run.later((function () {
-                window.location.reload(true);
-            }), 1500);
+            this.set("success", true);
         },
         addNewExpense: function () {
             this.set("newExpense", true);
@@ -101,6 +99,7 @@ export default Ember.Component.extend({
             let expenses = this.get("expenses");
             let limit = this.get("limit");
             limit += 10;
+            this.set("limit", limit);
             let showContent = this.get("showContent");
             showContent = [];
             for(i = (expenses.length) - 1; i >= (expenses.length) - limit; i--){
@@ -153,6 +152,10 @@ export default Ember.Component.extend({
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+        },
+        viewExpences: function () {
+            this.get("success", false);
+            window.location.reload();
         }
     }
 });
