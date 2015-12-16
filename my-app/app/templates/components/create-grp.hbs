@@ -1,0 +1,25 @@
+<div class="heading">Add New Member</div>
+<div>
+{{input type="text" placeholder="Name" value=name class="textBox"}}
+{{input type="text" placeholder="Phone number" value=phone class="textBox"}}
+</div>
+<button class="buttonStyle" {{action 'addUser'}}>Add</button>
+{{#if failure}}
+<div class="success">Username already exists</div>
+{{/if}}
+<div class="division">
+<div class="heading">Group Members</div>
+	<table>
+		<tr>
+			<th class="tableHeading">Name</th>
+			<th class="tableHeading">Phone</th>
+		</tr>
+		{{#each users as |user|}}
+		<tr>
+		<td>{{user.name}}</td>
+		<td>{{user.phone}}</td>
+		</tr>
+		{{/each}}
+	</table>
+</div>
+{{yield}}
