@@ -1,0 +1,33 @@
+{{#link-to 'person.new' class="btn btn-sm btn-default add-btn" }}Add Person{{/link-to}}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+          Person Name
+      </th>
+      <th>
+        Display Name
+      </th>
+      <th>
+        Comment
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+
+{{#each person in model}}
+  <tr>
+    <td>{{person.person_name}}</td>
+    <td>{{person.display_name}}</td>
+    <td>{{person.comment}}</td>
+    <td><button {{action 'updatePerson' person}} class="btn btn-info">Update</button></td>
+  </tr>
+{{/each}}
+
+</tbody>
+</table>
+
+{{outlet}}

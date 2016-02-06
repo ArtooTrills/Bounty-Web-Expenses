@@ -1,0 +1,12 @@
+html, body{
+  height: 100%;
+}
+.page-container{
+  padding-top: 50px;
+}
+.add-btn {
+    margin: 10px;
+}
+.show{
+  display: block !important;
+}

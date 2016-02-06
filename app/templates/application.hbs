@@ -1,3 +1,33 @@
-<h2 id="title">Welcome to Ember</h2>
-
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	  	<div class="container-fluid">
+	  		<div class="navbar-header">
+	  			<a class="navbar-brand" href="#">Study Flow</a>
+	  			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+	  				<span class="sr-only">Toggle navigation</span>
+	  				<span class="icon-bar"></span>
+	  				<span class="icon-bar"></span>
+	  				<span class="icon-bar"></span>
+	  			</button>
+	  		</div>
+	  	</div>
+	  </nav>
+<div class="page-container container-fluid">
+  <ul class="nav nav-tabs">
+		{{#link-to "person" tagName="li" href=false}}
+		  <a {{bind-attr href="view.href"}}>
+		    Persons
+		  </a>
+		{{/link-to}}
+		{{#link-to "expence" tagName="li" href=false}}
+		  <a {{bind-attr href="view.href"}}>
+		    Expences
+		  </a>
+		{{/link-to}}
+		{{#link-to "summary" tagName="li" href=false}}
+		  <a {{bind-attr href="view.href"}}>
+		    Summary
+		  </a>
+		{{/link-to}}
+  </ul>
 {{outlet}}
+</div>

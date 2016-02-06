@@ -1,0 +1,32 @@
+<div class="modal in show" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        {{#link-to 'person' class="close pull-right" }}<span aria-hidden="true">&times;</span>{{/link-to}}
+
+        <h4 class="modal-title">Add Person</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          {{debugger}}
+          <div class="form-group">
+            <label for="personName">Person Name</label>
+            {{input value=person_name name="personName" placeholder="Full Name" class="form-control"}}
+          </div>
+          <div class="form-group">
+            <label for="displayName">Display Name</label>
+            {{input value=display_name name="displayName" placeholder="Display Name" class="form-control"}}
+          </div>
+          <div class="form-group">
+            <label for="comment">Comment</label>
+            {{input value=comment name="comment" placeholder="Comment" class="form-control"}}
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        {{#link-to 'person' class="btn btn-sm btn-default" class="btn btn-default" }}Close{{/link-to}}
+        <button type="button" class="btn btn-primary" {{action "addPerson"}}>Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>

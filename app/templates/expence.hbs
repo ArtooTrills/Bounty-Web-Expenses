@@ -1,0 +1,42 @@
+{{#link-to 'expence.new' class="btn btn-sm btn-default add-btn"}}Add Expence{{/link-to}}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        Date (yyyy-mm-dd)
+      </th>
+      <th>
+        Description
+      </th>
+      <th>
+        Payee
+      </th>
+      <th>
+        Amount
+      </th>
+      <th>
+        Paid To
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+
+{{#each expence in controller.model}}
+  <tr>
+    <td>{{expence.date}}</td>
+    <td>{{expence.description}}</td>
+    <td>{{expence.payee.display_name}}</td>
+    <td>{{expence.amount}}</td>
+    <td>{{#each expence.paidTo as |person|}}
+          {{person.display_name}}
+        {{/each}}
+    </td>
+    <td><button {{action 'updatePerson'}} class="btn btn-info">Update</button></td>
+  </tr>
+{{/each}}
+
+</tbody>
+</table>
+
+{{outlet}}

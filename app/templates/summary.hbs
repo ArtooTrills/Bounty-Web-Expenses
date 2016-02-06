@@ -1,0 +1,45 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+          Name
+      </th>
+      <th>
+          Expences
+      </th>
+      <th>
+          Total Spent
+      </th>
+      <th>
+          Owes
+      </th>
+      <th>
+          Is Owned
+      </th>
+      <th>
+          Balance
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+
+{{#each person in controller.person}}
+  <tr>
+    <td>{{person.display_name}}</td>
+
+    <td>{{summary.expence-count person controller.expence}}</td>
+
+    <td>{{summary.total-spent person controller.expence}}</td>
+
+    <td>{{summary.total-owes person controller.expence}}</td>
+
+    <td>{{summary.total-owned person controller.expence}}</td>
+
+    <td>{{summary.total-balance person controller.expence}}</td>
+  </tr>
+{{/each}}
+
+</tbody>
+</table>
+
+{{outlet}}

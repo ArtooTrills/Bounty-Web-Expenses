@@ -6,6 +6,16 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.resource('expence', function(){
+    this.route("new");
+  });
+  this.resource('person',function(){
+    this.route("new");
+    this.route("update", { path: "update/:id"});
+  });
+  this.resource('summary', function(){
+    this.route("new");
+  });
 });
 
 export default Router;
