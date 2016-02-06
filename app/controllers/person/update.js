@@ -14,22 +14,15 @@ export default Ember.Controller.extend({
                     },
   actions         : {
 
-                        updatePerson : function()
+                        updatePerson : function(person)
                                     {
-                                      newPerson = this.store.createRecord('person', {
-                                                    person_name   : this.get('person_name'),
-                                                    display_name  : this.get('display_name'),
-                                                    comment       : this.get('comment'),
+                                      if(!this.personIsValid(person)){return;}
+                                      var _this= this;
+                                      person.save().then(function(){
+                                        _this.transitionToRoute('person');
+                                      }).catch(function(){
+                                        alert('Sorry There is some error.');
                                       });
-                                      this.set('person', newPerson)
-                                      if(!this.personIsValid(newPerson)){return;}
-                                      newPerson.save();
-                                      this.setProperties({
-                                                            person_name: '',
-                                                            display_name: '',
-                                                            comment     : '',
-                                                          });
-                                      this.transitionTo('person');
                                       },
                       closePopup   :  function()
                                       {

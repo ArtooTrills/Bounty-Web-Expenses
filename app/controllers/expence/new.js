@@ -32,17 +32,19 @@ export default Ember.Controller.extend({
                                                     });
 
                                       if(!this.isValid(expence)){return;}
-
-                                      expence.save();
-                                      this.setProperties({
-                                        date            : '',
-                                        amount          : '',
-                                        payee           : '',
-                                        paidTo          : '',
-                                        description     : '',
+                                      var _this = this;
+                                      expence.save().then(function(){
+                                        _this.setProperties({
+                                                    date            : '',
+                                                    amount          : '',
+                                                    payee           : '',
+                                                    paidTo          : '',
+                                                    description     : '',
+                                        });
+                                        _this.set('expence', expence);
+                                        _this.transitionToRoute('expence');
                                       });
-                                      this.set('expence', expence);
-                                      this.transitionTo('expence');
+
                                     },
                       changePayee : function()
                                     {
@@ -55,7 +57,7 @@ export default Ember.Controller.extend({
                                       var model = this.get('expence');
                                       var paidTo = [];
                                       newSelection.forEach(function(person){
-                                          paidTo.push(person)
+                                          paidTo.push(person);
                                       });
                                       model.paidTo = paidTo;
                                     },

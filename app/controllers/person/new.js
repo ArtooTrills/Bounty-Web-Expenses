@@ -21,20 +21,25 @@ export default Ember.Controller.extend({
 
                         addPerson : function()
                                     {
-                                      newPerson = this.store.createRecord('person', {
+                                      var person = this.store.createRecord('person', {
                                                     person_name   : this.get('person_name'),
                                                     display_name  : this.get('display_name'),
                                                     comment       : this.get('comment'),
                                       });
-                                      this.set('person', newPerson)
+                                      this.set('person', person);
+                                      var _this = this;
                                       if(!this.personIsValid(newPerson)){return;}
-                                      newPerson.save();
-                                      this.setProperties({
-                                                            person_name: '',
-                                                            display_name: '',
-                                                            comment     : '',
-                                                          });
-                                      this.transitionTo('person');
+                                      person.save().then(function(){
+                                        _this.setProperties({
+                                                              person_name: '',
+                                                              display_name: '',
+                                                              comment     : '',
+                                                            });
+                                        _this.transitionToRoute('person');
+                                      }).catch(function(){
+                                        alert('Sorry There is some error.');
+                                      });
+
                                       },
                       closePopup   :  function()
                                       {
