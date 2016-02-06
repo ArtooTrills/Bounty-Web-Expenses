@@ -1,6 +1,4 @@
-<div class="modal in show" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
+{{#bs-modal body=false footer=false header=false keyboard=false autoClose=false}}
       <div class="modal-header">
         <button type="button" class="close" {{action "closePopup"}}><span aria-hidden="true">&times;</span></button>
 
@@ -53,6 +51,4 @@
         <button type="button" class="btn btn-default" {{action "closePopup"}}>Close</button>
         <button type="button" class="btn btn-primary" {{action "addExpences"}}>Save changes</button>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div>
+  {{/bs-modal}}
