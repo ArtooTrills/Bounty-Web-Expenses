@@ -28,8 +28,8 @@
     <td>{{expence.description}}</td>
     <td>{{expence.payee.display_name}}</td>
     <td>{{expence.amount}}</td>
-    <td>{{#each expence.paidTo as |person|}}
-          {{person.display_name}}
+    <td>{{#each expence.paidTo as |person index|}}
+          {{math index '+' 1}}. {{person.display_name}}
         {{/each}}
     </td>
   </tr>

@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
         init      : function()
                     {
-                      this.set('person',  Ember.Object.create());
+                      
                     },
 
   personIsValid   : function(person)
@@ -26,9 +26,12 @@ export default Ember.Controller.extend({
                                                     display_name  : this.get('display_name'),
                                                     comment       : this.get('comment'),
                                       });
-                                      this.set('person', person);
+                                      if(!this.personIsValid(person))
+                                      {
+
+                                        return;
+                                      }
                                       var _this = this;
-                                      if(!this.personIsValid(newPerson)){return;}
                                       person.save().then(function(){
                                         _this.setProperties({
                                                               person_name: '',

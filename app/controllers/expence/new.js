@@ -1,10 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  init: function() {
-    this.set('person',  this.store.findAll('person'));
-    this.set('expence',  Ember.Object.create());
-  },
+  init        : function()
+                {
+                  this.set('person',  this.store.findAll('person'));
+                },
   isValid     : function(expence)
                 {
                     var isValid = true;
