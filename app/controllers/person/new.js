@@ -38,7 +38,7 @@ export default Ember.Controller.extend({
                                       },
                       closePopup   :  function()
                                       {
-                                        this.transitionToRoute('expence');
+                                        this.transitionToRoute('person');
                                       }
                       }
 });
