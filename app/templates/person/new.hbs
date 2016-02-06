@@ -1,14 +1,11 @@
-<div class="modal in show" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
+{{#bs-modal body=false footer=false header=false}}
       <div class="modal-header">
-        {{#link-to 'person' class="close pull-right" }}<span aria-hidden="true">&times;</span>{{/link-to}}
+        <button type="button" class="close" {{action "closePopup"}}><span aria-hidden="true">&times;</span></button>
 
         <h4 class="modal-title">Add Person</h4>
       </div>
       <div class="modal-body">
         <form>
-          {{debugger}}
           <div class="form-group">
             <label for="personName">Person Name</label>
             {{input value=person_name name="personName" placeholder="Full Name" class="form-control"}}
@@ -24,9 +21,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        {{#link-to 'person' class="btn btn-sm btn-default" class="btn btn-default" }}Close{{/link-to}}
+        <button type="button" class="btn btn-default" {{action "closePopup"}}>Close</button>
         <button type="button" class="btn btn-primary" {{action "addPerson"}}>Save changes</button>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div>
+{{/bs-modal}}
