@@ -1,5 +1,6 @@
 {{#link-to 'expence.new' class="btn btn-sm btn-default add-btn"}}Add Expence{{/link-to}}
-
+<button type="button" class="btn btn-primary" {{action "downloadFile" 'excel'}}>Export As Excel</button>
+<button type="button" class="btn btn-primary" {{action "downloadFile" 'csv'}}>Export As CSV</button>
 <table class="table">
   <thead>
     <tr>
