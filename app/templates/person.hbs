@@ -1,32 +1,36 @@
-{{#link-to 'person.new' class="btn btn-sm btn-default add-btn" }}Add Person{{/link-to}}
+<div class="data-container">
+  <div class="action-btns">
+    {{#link-to 'person.new' class="btn btn-sm btn-default add-btn" }}{{fa-icon icon="plus"}} Add Person{{/link-to}}
+  </div>
 
-<table class="table">
-  <thead>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>
+            Person Name
+        </th>
+        <th>
+          Display Name
+        </th>
+        <th>
+          Comment
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+  {{#each person in model}}
     <tr>
-      <th>
-          Person Name
-      </th>
-      <th>
-        Display Name
-      </th>
-      <th>
-        Comment
-      </th>
-      <th>
-      </th>
+      <td>{{person.person_name}}</td>
+      <td>{{person.display_name}}</td>
+      <td>{{person.comment}}</td>
+      <td><button {{action 'updatePerson' person}} class="btn btn-info">Update</button></td>
     </tr>
-  </thead>
-  <tbody>
+  {{/each}}
 
-{{#each person in model}}
-  <tr>
-    <td>{{person.person_name}}</td>
-    <td>{{person.display_name}}</td>
-    <td>{{person.comment}}</td>
-    <td><button {{action 'updatePerson' person}} class="btn btn-info">Update</button></td>
-  </tr>
-{{/each}}
-
-</tbody>
-</table>
-{{outlet}}
+  </tbody>
+  </table>
+  {{outlet}}
+</div>

@@ -15,6 +15,7 @@
     "bootstrap": "latest",
     "firebase": "^2.1.0",
     "file-saver": "*",
-    "js-xlsx": "~0.8.0"
+    "js-xlsx": "~0.8.0",
+    "font-awesome": "~4.5.0"
   }
 }

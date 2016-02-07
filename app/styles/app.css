@@ -2,11 +2,21 @@ html, body{
   height: 100%;
 }
 .page-container{
-  padding-top: 50px;
+  padding-top: 65px;
 }
 .add-btn {
     margin: 10px;
 }
 .show{
   display: block !important;
+}
+td, th {
+    text-align: center;
+}
+.data-container {
+    padding-top: 50px;
+}
+
+.action-btns {
+    margin-top: -50px;
 }

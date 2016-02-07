@@ -1,42 +1,46 @@
-{{#link-to 'expence.new' class="btn btn-sm btn-default add-btn"}}Add Expence{{/link-to}}
-<button type="button" class="btn btn-primary" {{action "downloadFile" 'excel'}}>Export As Excel</button>
-<button type="button" class="btn btn-primary" {{action "downloadFile" 'csv'}}>Export As CSV</button>
-<table class="table">
-  <thead>
+<div class="data-container">
+  <div class="action-btns">
+    {{#link-to 'expence.new' class="btn btn-sm btn-default add-btn"}} {{fa-icon icon="plus"}} Add Expence{{/link-to}}
+    <button type="button" class="btn btn-primary btn-sm" {{action "downloadFile" 'excel'}}>{{fa-icon icon="fa-file-excel-o"}} Export As Excel</button>
+    <button type="button" class="btn btn-primary btn-sm" {{action "downloadFile" 'csv'}}>{{fa-icon icon="fa-file"}} Export As CSV</button>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>
+          Date (yyyy-mm-dd)
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Payee
+        </th>
+        <th>
+          Amount
+        </th>
+        <th>
+          Paid To
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+  {{#each model as |expence|}}
     <tr>
-      <th>
-        Date (yyyy-mm-dd)
-      </th>
-      <th>
-        Description
-      </th>
-      <th>
-        Payee
-      </th>
-      <th>
-        Amount
-      </th>
-      <th>
-        Paid To
-      </th>
+      <td>{{expence.date}}</td>
+      <td>{{expence.description}}</td>
+      <td>{{expence.payee.display_name}}</td>
+      <td>{{expence.amount}}</td>
+      <td>{{#each expence.paidTo as |person index|}}
+            {{math index '+' 1}}. {{person.display_name}}
+          {{/each}}
+      </td>
     </tr>
-  </thead>
-  <tbody>
+  {{/each}}
 
-{{#each expence in controller.model}}
-  <tr>
-    <td>{{expence.date}}</td>
-    <td>{{expence.description}}</td>
-    <td>{{expence.payee.display_name}}</td>
-    <td>{{expence.amount}}</td>
-    <td>{{#each expence.paidTo as |person index|}}
-          {{math index '+' 1}}. {{person.display_name}}
-        {{/each}}
-    </td>
-  </tr>
-{{/each}}
+  </tbody>
+  </table>
 
-</tbody>
-</table>
-
-{{outlet}}
+  {{outlet}}
+</div>

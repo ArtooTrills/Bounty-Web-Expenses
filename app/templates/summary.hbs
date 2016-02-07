@@ -1,45 +1,47 @@
-<table class="table">
-  <thead>
+<div class="data-container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Expences
+        </th>
+        <th>
+            Total Spent
+        </th>
+        <th>
+            Owes (Had To Pay)
+        </th>
+        <th>
+            Is Owned (Already Paid)
+        </th>
+        <th>
+            Balance
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+  {{#each person in controller.person}}
     <tr>
-      <th>
-          Name
-      </th>
-      <th>
-          Expences
-      </th>
-      <th>
-          Total Spent
-      </th>
-      <th>
-          Owes (Had To Pay)
-      </th>
-      <th>
-          Is Owned (Already Paid)
-      </th>
-      <th>
-          Balance
-      </th>
+      <td>{{person.display_name}}</td>
+
+      <td>{{summary.expence-count person controller.expence}}</td>
+
+      <td>{{summary.total-spent person controller.expence}}</td>
+
+      <td>{{summary.total-owes person controller.expence}}</td>
+
+      <td>{{summary.total-owned person controller.expence}}</td>
+
+      <td>{{summary.total-balance person controller.expence}}</td>
     </tr>
-  </thead>
-  <tbody>
+  {{/each}}
 
-{{#each person in controller.person}}
-  <tr>
-    <td>{{person.display_name}}</td>
+  </tbody>
+  </table>
 
-    <td>{{summary.expence-count person controller.expence}}</td>
-
-    <td>{{summary.total-spent person controller.expence}}</td>
-
-    <td>{{summary.total-owes person controller.expence}}</td>
-
-    <td>{{summary.total-owned person controller.expence}}</td>
-
-    <td>{{summary.total-balance person controller.expence}}</td>
-  </tr>
-{{/each}}
-
-</tbody>
-</table>
-
-{{outlet}}
+  {{outlet}}
+</div>

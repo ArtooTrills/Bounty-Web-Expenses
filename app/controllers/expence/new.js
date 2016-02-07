@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
   init        : function()
                 {
                   this.set('person',  this.store.findAll('person'));
+                  this.set('expence', this.store.createRecord('expence',{}));
                 },
   isValid     : function(expence)
                 {
@@ -23,13 +24,11 @@ export default Ember.Controller.extend({
                                     {
                                       var expence = this.get('expence');
 
-                                      expence = this.store.createRecord('expence',  {
-                                                      date            : this.get('date'),
-                                                      amount          : this.get('amount'),
-                                                      payee           : this.get('payee'),
-                                                      description     : this.get('description'),
-                                                      paidTo          : expence.paidTo
-                                                    });
+                                      expence.set('date', this.get('date'));
+                                      expence.set('amount', this.get('amount'));
+                                      expence.set('payee', this.get('payee'));
+                                      expence.set('description', this.get('description'));
+                                      // expence.set('paidTo', expence.paidTo);
 
                                       if(!this.isValid(expence)){return;}
                                       var _this = this;
@@ -50,7 +49,7 @@ export default Ember.Controller.extend({
                                     {
                                       console.log(this);
                                       var model = this.get('expence');
-                                      model.payee = this.get('payee');
+                                      model.set('payee', this.get('payee'));
                                     },
                       addPaidTo  :  function(newSelection)
                                     {
@@ -59,7 +58,7 @@ export default Ember.Controller.extend({
                                       newSelection.forEach(function(person){
                                           paidTo.push(person);
                                       });
-                                      model.paidTo = paidTo;
+                                      model.set('paidTo', paidTo);
                                     },
                     closePopup   :  function()
                                     {
