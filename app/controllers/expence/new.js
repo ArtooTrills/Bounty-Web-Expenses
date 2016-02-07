@@ -4,8 +4,9 @@ export default Ember.Controller.extend({
   init        : function()
                 {
                   this.set('person',  this.store.findAll('person'));
-                  this.set('expence', this.store.createRecord('expence',{}));
+                  this.set('expence', {});
                 },
+  isLoading   : false,
   isValid     : function(expence)
                 {
                     var isValid = true;
@@ -20,45 +21,75 @@ export default Ember.Controller.extend({
                     return isValid;
                   },
   actions      :  {
-                      addExpences : function()
+                      addExpences : function(action)
                                     {
+                                      if(this.isLoading)
+                                      {
+                                        return;
+                                      }
+                                      else
+                                      {
+                                        this.isLoading = true;
+                                      }
                                       var expence = this.get('expence');
 
-                                      expence.set('date', this.get('date'));
-                                      expence.set('amount', this.get('amount'));
-                                      expence.set('payee', this.get('payee'));
-                                      expence.set('description', this.get('description'));
+                                      expence.date              =  this.get('date');
+                                      expence.amount            = this.get('amount');
+                                      expence.payee             = this.get('payee');
+                                      expence.description       = this.get('description');
                                       // expence.set('paidTo', expence.paidTo);
 
-                                      if(!this.isValid(expence)){return;}
+                                      if(!this.isValid(expence))
+                                      {
+                                        this.isLoading = false;
+                                        return;
+                                      }
                                       var _this = this;
+                                      expence= this.store.createRecord('expence', expence)
                                       expence.save().then(function(){
-                                        _this.setProperties({
-                                                    date            : '',
-                                                    amount          : '',
-                                                    payee           : '',
-                                                    paidTo          : '',
-                                                    description     : '',
-                                        });
-                                        _this.set('expence', expence);
-                                        _this.transitionToRoute('expence');
+                                        if(action != 'new')
+                                        {
+                                          _this.transitionToRoute('expence');
+                                        }
+                                        else
+                                        {
+                                          _this.setProperties({
+                                                      date            : '',
+                                                      amount          : '',
+                                                      payee           : '',
+                                                      paidTo          : '',
+                                                      description     : '',
+                                          });
+                                          _this.set('expence', {});
+                                        }
+                                        _this.isLoading = false;
+                                      }).catch(function(){
+                                        alert('error occurred')
                                       });
 
                                     },
                       changePayee : function()
                                     {
+                                      if(this.isLoading)
+                                      {
+                                        return;
+                                      }
                                       console.log(this);
                                       var model = this.get('expence');
-                                      model.set('payee', this.get('payee'));
+                                      model.payee = this.get('payee');
                                     },
                       addPaidTo  :  function(newSelection)
                                     {
+                                      if(this.isLoading)
+                                      {
+                                        return;
+                                      }
                                       var model = this.get('expence');
                                       var paidTo = [];
                                       newSelection.forEach(function(person){
                                           paidTo.push(person);
                                       });
-                                      model.set('paidTo', paidTo);
+                                      model.paidTo = paidTo;
                                     },
                     closePopup   :  function()
                                     {

@@ -48,7 +48,8 @@
         </form>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-primary" {{action "addExpences" 'new'}}>Save &amp; New </button>
+        <button type="button" class="btn btn-primary" {{action "addExpences"}}>Save</button>
         <button type="button" class="btn btn-default" {{action "closePopup"}}>Close</button>
-        <button type="button" class="btn btn-primary" {{action "addExpences"}}>Save changes</button>
       </div>
   {{/bs-modal}}
