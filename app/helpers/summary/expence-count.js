@@ -6,7 +6,7 @@ export function expenceCount (params){
   var count = 0;
   expences.forEach(function(expence){
 
-    if(expence.get('payee').get('content').id == person.id)
+    if(expence.get('payee').get('content').id === person.id)
     {
       count ++;
     }

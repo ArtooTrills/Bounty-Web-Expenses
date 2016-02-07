@@ -5,7 +5,6 @@ export default Ember.Controller.extend({
                     {
 
                     },
-  isLoading       : false,
   personIsValid   : function(person)
                     {
                       var isValid = true;
@@ -21,15 +20,6 @@ export default Ember.Controller.extend({
 
                         addPerson : function(action)
                                     {
-                                      if(this.isLoading)
-                                      {
-                                        console.log('Its loading...');
-                                        return;
-                                      }
-                                      else
-                                      {
-                                        this.isLoading = true;
-                                      }
                                       var person = {
                                                     person_name   : this.get('person_name'),
                                                     display_name  : this.get('display_name'),
@@ -37,28 +27,30 @@ export default Ember.Controller.extend({
                                       };
                                       if(!this.personIsValid(person))
                                       {
-                                        this.isLoading = false;
-                                        return;
+                                        this.set('isLoading', false);
                                       }
-                                      var _this = this;
-                                      person = this.store.createRecord('person', person)
-                                      person.save().then(function(){
-                                        if(action != 'new')
-                                        {
-                                          _this.transitionToRoute('person');
-                                        }
-                                        else
-                                        {
-                                          _this.setProperties({
-                                                                person_name: '',
-                                                                display_name: '',
-                                                                comment     : '',
-                                                              });
-                                        }
-                                        _this.isLoading = false;
-                                      }).catch(function(){
-                                        alert('error occurred')
-                                      });
+                                      else{
+                                        var _this = this;
+                                        person = this.store.createRecord('person', person)
+                                        person.save().then(function(){
+                                          if(action != 'new')
+                                          {
+                                            _this.transitionToRoute('person');
+                                          }
+                                          else
+                                          {
+                                            _this.setProperties({
+                                                                  person_name: '',
+                                                                  display_name: '',
+                                                                  comment     : '',
+                                                                });
+                                          }
+                                          _this.set('isLoading', false)
+                                        }).catch(function(){
+                                          alert('error occurred')
+                                        });
+                                      }
+
 
                                       },
                       closePopup   :  function()

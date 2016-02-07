@@ -6,12 +6,12 @@ export function totalSpent (params){
   var totalAmount = 0;
   expences.forEach(function(expence){
 
-    if(expence.get('payee').get('content').id == person.id)
+    if(expence.get('payee').get('content').id === person.id)
     {
       totalAmount += +(expence.get('amount'));
     }
   });
-  return totalAmount;
+  return Math.round(totalAmount);
 }
 
 export default Ember.Helper.helper(totalSpent);

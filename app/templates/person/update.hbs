@@ -1,4 +1,4 @@
-{{#bs-modal body=false footer=false header=false keyboard=false autoClose=false}}      
+{{#bs-modal body=false footer=false header=false keyboard=false autoClose=false}}
   <div class="modal-header">
         <button type="button" class="close" {{action "closePopup"}}><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Update Person</h4>
@@ -22,6 +22,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" {{action "closePopup"}}>Close</button>
-        <button type="button" class="btn btn-primary" {{action "updatePerson" person}}>Update changes</button>
+
+        {{spin-button isLoading=isLoading buttonText="Update changes"  action='updatePerson' param=person class_name="btn btn-primary" tagName=''}}
       </div>
 {{/bs-modal}}

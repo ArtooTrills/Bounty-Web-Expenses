@@ -6,7 +6,6 @@ export default Ember.Controller.extend({
                   this.set('person',  this.store.findAll('person'));
                   this.set('expence', {});
                 },
-  isLoading   : false,
   isValid     : function(expence)
                 {
                     var isValid = true;
@@ -23,14 +22,6 @@ export default Ember.Controller.extend({
   actions      :  {
                       addExpences : function(action)
                                     {
-                                      if(this.isLoading)
-                                      {
-                                        return;
-                                      }
-                                      else
-                                      {
-                                        this.isLoading = true;
-                                      }
                                       var expence = this.get('expence');
 
                                       expence.date              =  this.get('date');
@@ -41,7 +32,7 @@ export default Ember.Controller.extend({
 
                                       if(!this.isValid(expence))
                                       {
-                                        this.isLoading = false;
+                                        this.set('isLoading', false);
                                         return;
                                       }
                                       var _this = this;
@@ -62,7 +53,7 @@ export default Ember.Controller.extend({
                                           });
                                           _this.set('expence', {});
                                         }
-                                        _this.isLoading = false;
+                                        _this.set('isLoading', false);
                                       }).catch(function(){
                                         alert('error occurred')
                                       });
@@ -70,20 +61,12 @@ export default Ember.Controller.extend({
                                     },
                       changePayee : function()
                                     {
-                                      if(this.isLoading)
-                                      {
-                                        return;
-                                      }
                                       console.log(this);
                                       var model = this.get('expence');
                                       model.payee = this.get('payee');
                                     },
                       addPaidTo  :  function(newSelection)
                                     {
-                                      if(this.isLoading)
-                                      {
-                                        return;
-                                      }
                                       var model = this.get('expence');
                                       var paidTo = [];
                                       newSelection.forEach(function(person){

@@ -7,7 +7,7 @@ export function totalExpence (params){
   expences.forEach(function(expence){
       totalAmount += +(expence.get('amount'));
   });
-  return totalAmount;
+  return Math.round(totalAmount);
 }
 
 
