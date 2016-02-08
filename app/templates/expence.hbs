@@ -1,6 +1,6 @@
 <div class="data-container">
   <div class="action-btns">
-    {{#link-to 'expence.new' class="btn btn-sm btn-default add-btn"}} {{fa-icon icon="plus"}} Add Expence{{/link-to}}
+    {{#link-to 'expence.new' class="btn btn-sm btn-default add-btn"}} {{fa-icon icon="plus"}} <span class="hidden-xs">Add Expence</span>{{/link-to}}
     <button type="button" class="btn btn-primary btn-sm" {{action "downloadFile" 'excel'}}>{{fa-icon icon="fa-file-excel-o"}} Export As Excel</button>
     <button type="button" class="btn btn-primary btn-sm" {{action "downloadFile" 'csv'}}>{{fa-icon icon="fa-file"}} Export As CSV</button>
   </div>
