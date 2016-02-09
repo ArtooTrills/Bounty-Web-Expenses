@@ -2,10 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function() {
-   return this.store.findAll('expence');
+    return Ember.RSVP.hash({
+         expence: this.store.findAll('expence'),
+         person: this.store.findAll('person')
+     });
  },
- setupController: function( controller, model) {
-        this.controller.set('model', model);
-        this.controller.set('person', this.store.findAll('person'));
+ setupController: function(controller, model) {
+        this.controller.set('expence', model.expence);
+        this.controller.set('person', model.person);
     }
 });

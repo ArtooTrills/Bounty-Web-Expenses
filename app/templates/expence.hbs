@@ -26,13 +26,13 @@
     </thead>
     <tbody>
 
-  {{#each model as |expence|}}
+  {{#each expence as |temp_expence|}}
     <tr>
-      <td>{{expence.date}}</td>
-      <td>{{expence.description}}</td>
-      <td>{{expence.payee.display_name}}</td>
-      <td>{{expence.amount}}</td>
-      <td>{{#each expence.paidTo as |person index|}}
+      <td>{{temp_expence.date}}</td>
+      <td>{{temp_expence.description}}</td>
+      <td>{{temp_expence.payee.display_name}}</td>
+      <td>{{temp_expence.amount}}</td>
+      <td>{{#each temp_expence.paidTo as |person index|}}
             {{math index '+' 1}}. {{person.display_name}}
           {{/each}}
       </td>
