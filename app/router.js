@@ -6,9 +6,6 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('/', function(){
-    this.transitionTo('person')
-  })
   this.resource('expence', function(){
     this.route("new");
   });
