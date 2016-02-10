@@ -73,6 +73,10 @@
           <td>{{summary.to-payment from_id to_id person expenceMap}}</td>
 
           <td>{{summary.absolute-amount from_id to_id expenceMap}}</td>
+
+          <td>
+            <button type="button" name="button" class="btn btn-success" {{action 'pay' person[from_id] to_id expenceMap}}>Pay</button>
+          </td>
         </tr>
         {{/each}}
       {{/each}}

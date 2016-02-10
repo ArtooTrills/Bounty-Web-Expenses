@@ -23,18 +23,19 @@ export default Ember.Route.extend({
                 if(expence.get('payee').get('id') == person.get('id'))
                 {
                   var totalPaidPerPerson = expence.get('amount')/expence.get('paidTo').get('length');
-
+                  var name = "";
+                  var temp_name = "";
                   expence.get('paidTo').forEach(function(temp_person){
                       if(temp_person.get('id') != person.get('id'))
                       {
-                        if(!expenceMap[person.get('id')])
+                        if(!expenceMap[person.get('id')+name])
                         {
                           expenceMap[person.get('id')] = {};
-                          expenceMap[person.get('id')][temp_person.get('id')]  = 0;
+                          expenceMap[person.get('id')][temp_person.get('id')+temp_name]  = 0;
                         }
-                        var expence_amount =  expenceMap[person.get('id')][temp_person.get('id')] ? expenceMap[person.get('id')][temp_person.get('id')] : 0;
+                        var expence_amount =  expenceMap[person.get('id')+name][temp_person.get('id')+temp_name] ? expenceMap[person.get('id')+name][temp_person.get('id')+temp_name] : 0;
                         expence_amount += totalPaidPerPerson;
-                        expenceMap[person.get('id')][temp_person.get('id')] = expence_amount;
+                        expenceMap[person.get('id')+name][temp_person.get('id')+temp_name] = expence_amount;
                       }
                   });
                 }
@@ -42,15 +43,19 @@ export default Ember.Route.extend({
         });
         Object.keys(expenceMap).forEach(function(payee_id){
           Object.keys(expenceMap[payee_id]).forEach(function(payer_id){
+
             if(!final_expenceMap[payee_id] ) {
               final_expenceMap[payee_id]  = {};
             }
             if(!final_expenceMap[payer_id] || !final_expenceMap[payer_id][payee_id])
             {
-              final_expenceMap[payee_id][payer_id] =( (expenceMap[payer_id] ? +expenceMap[payer_id][payee_id] : 0) - (+expenceMap[payee_id][payer_id]));
+              var amount = +( (expenceMap[payee_id] ? expenceMap[payee_id][payer_id] : 0) - (expenceMap[payer_id] ? (expenceMap[payer_id][payee_id] ? expenceMap[payer_id][payee_id] : 0) : 0) );
+              if(amount)
+              final_expenceMap[payee_id][payer_id] = amount;
             }
           });
         });
+        console.log(final_expenceMap);
         this.controller.set('expenceMap', final_expenceMap);
         console.log((new Date()).getTime() - startTime.getTime() + " miliseconds");
     }

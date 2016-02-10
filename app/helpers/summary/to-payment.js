@@ -6,7 +6,7 @@ export function summaryToPayment(params/*, hash*/) {
   var persons             = params[2];
   var expence             = params[3];
   var person_name           = "";
-  if(expence[_from][_to] < 0)
+  if(expence[_from][_to] > 0)
   {
     persons.get('content').forEach(function(person){
       if(person.id === _from)
