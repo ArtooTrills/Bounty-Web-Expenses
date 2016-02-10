@@ -61,24 +61,25 @@
             <th>
                 Amount
             </th>
+            <th>
+                Action
+            </th>
           </tr>
         </thead>
         <tbody>
 
-      {{#each from_id in (get-keys expenceMap) }}
-        {{#each to_id in (get-keys expenceMap from_id) }}
+      {{#each payment in payments }}
         <tr>
-          <td>{{summary.from-payment from_id to_id controller.person expenceMap}}</td>
+          <td>{{payment.payer.display_name}}</td>
 
-          <td>{{summary.to-payment from_id to_id person expenceMap}}</td>
+          <td>{{payment.payee.display_name}}</td>
 
-          <td>{{summary.absolute-amount from_id to_id expenceMap}}</td>
+          <td>{{round-number payment.amount}}</td>
 
           <td>
-            <button type="button" name="button" class="btn btn-success" {{action 'pay' person[from_id] to_id expenceMap}}>Pay</button>
+            {{spin-button isLoading=isLoading buttonText="Pay"  action='pay' param=payment class_name="btn btn-primary" tagName=''}}
           </td>
         </tr>
-        {{/each}}
       {{/each}}
 
       </tbody>

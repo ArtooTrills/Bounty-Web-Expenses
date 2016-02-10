@@ -31,7 +31,7 @@
       <td>{{temp_expence.date}}</td>
       <td>{{temp_expence.description}}</td>
       <td>{{temp_expence.payee.display_name}}</td>
-      <td>{{temp_expence.amount}}</td>
+      <td>{{round-number temp_expence.amount}}</td>
       <td>{{#each temp_expence.paidTo as |person index|}}
             {{math index '+' 1}}. {{person.display_name}}
           {{/each}}
