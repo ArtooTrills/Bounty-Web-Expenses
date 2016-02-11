@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  needs       : ['person', 'expence'],
   init        : function()
                 {
-                  this.set('person',  this.store.findAll('person'));
                   this.set('expence', {});
                 },
   isValid     : function(expence)

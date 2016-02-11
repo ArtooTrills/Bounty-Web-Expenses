@@ -16,6 +16,10 @@ Router.map(function() {
   this.resource('summary', function(){
     this.route("new");
   });
+
+  this.route('expence', function() {
+    this.route('new');
+  });
 });
 
 export default Router;

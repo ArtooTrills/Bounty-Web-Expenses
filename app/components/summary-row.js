@@ -4,7 +4,6 @@ export default Ember.Component.extend({
   actions : {
               showLoading : function()
                     {
-                      debugger;
                       if(!this.controller.get('isLoading'))
                       {
                           this.controller.set('isLoading', true);

@@ -1,3 +1,4 @@
+import DS from 'ember-data';
 import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('controller:person/new', 'Unit | Controller | person/new', {

@@ -1,9 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  nameChanged: function() {
-    console.log("New name! New name!");
-  }.observes('payments'),
     actions : {
                 pay : function(payment)
                       {

@@ -1,8 +1,8 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('controller:person/update', 'Unit | Controller | person/update', {
+moduleFor('controller:person/update', 'Update Person controller', {
   // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  needs: ['controller:person']
 });
 
 // Replace this with your real tests.
