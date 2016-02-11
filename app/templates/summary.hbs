@@ -68,18 +68,8 @@
         </thead>
         <tbody>
 
-      {{#each payment in payments }}
-        <tr>
-          <td>{{payment.payer.display_name}}</td>
-
-          <td>{{payment.payee.display_name}}</td>
-
-          <td>{{round-number payment.amount}}</td>
-
-          <td>
-            {{spin-button isLoading=isLoading buttonText="Pay"  action='pay' param=payment class_name="btn btn-primary" tagName=''}}
-          </td>
-        </tr>
+      {{#each payments as |payment|}}
+        {{summary-row isLoading=isLoading buttonText="Pay"  action='pay' index=index payment=payment class_name="btn btn-primary" tagName='tr'}}
       {{/each}}
 
       </tbody>

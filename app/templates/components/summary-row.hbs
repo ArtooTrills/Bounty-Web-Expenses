@@ -1,0 +1,18 @@
+{{#if payment.isDeleted}}
+{{else}}
+<td>{{payment.payer.display_name}}</td>
+
+<td>{{payment.payee.display_name}}</td>
+
+<td>{{round-number payment.amount}}</td>
+
+<td>
+  <button {{action 'showLoading'}} class="{{class_name}}">
+          {{#if controller.isLoading}}
+              <img src="http://i639.photobucket.com/albums/uu116/pksjce/spiffygif_18x18.gif"/>
+          {{else}}
+              {{buttonText}}
+          {{/if}}
+      </button>
+</td>
+{{/if}}
