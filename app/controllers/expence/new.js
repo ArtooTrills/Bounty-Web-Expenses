@@ -61,7 +61,6 @@ export default Ember.Controller.extend({
                                     },
                       changePayee : function()
                                     {
-                                      console.log(this);
                                       var model = this.get('expence');
                                       model.payee = this.get('payee');
                                     },

@@ -48,7 +48,6 @@ export default Ember.Route.extend({
          if(amount)
          {
            final_expenceMap[payee_id][payer_id] = amount;
-           var amount = +( (expenceMap[payee_id] ? expenceMap[payee_id][payer_id] : 0) - (expenceMap[payer_id] ? (expenceMap[payer_id][payee_id] ? expenceMap[payer_id][payee_id] : 0) : 0) );
            Ember.RSVP.hash({
                 payee  : _this.store.find('person', payee_id),
                 payer  : _this.store.find('person', payer_id)
@@ -67,6 +66,7 @@ export default Ember.Route.extend({
    });
    model.payments =  paymentsArr;
    model.expenceMap =  final_expenceMap;
+   console.log((new Date()).getTime() - startTime.getTime() +" miliseconds");
  },
  setupController: function(controller, model) {
         this.controller.set('expence', model.expence);
