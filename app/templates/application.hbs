@@ -1,0 +1,31 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	  	<div class="container-fluid">
+	  		<div class="navbar-header">
+	  			<a class="navbar-brand" href="#">Expence Tracker</a>
+
+	  		</div>
+	  	</div>
+	  </nav>
+<div class="page-container container-fluid">
+  <ul class="nav nav-tabs">
+		{{#link-to "person" tagName="li" href=false}}
+		  <a {{bind-attr href="view.href"}}>
+				{{fa-icon icon="users"}}
+		    Persons
+		  </a>
+		{{/link-to}}
+		{{#link-to "expence" tagName="li" href=false}}
+		  <a {{bind-attr href="view.href"}}>
+				{{fa-icon icon="money"}}
+		    Expences
+		  </a>
+		{{/link-to}}
+		{{#link-to "summary" tagName="li" href=false}}
+		  <a {{bind-attr href="view.href"}}>
+				{{fa-icon icon="fa-pie-chart"}}
+		    Summary
+		  </a>
+		{{/link-to}}
+  </ul>
+{{outlet}}
+</div>

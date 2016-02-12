@@ -1,0 +1,35 @@
+html, body{
+  height: 100%;
+}
+.page-container{
+  padding-top: 65px;
+}
+.add-btn {
+    margin: 10px;
+}
+.show{
+  display: block !important;
+}
+td, th {
+    text-align: center;
+}
+.data-container {
+    padding-top: 50px;
+}
+
+.action-btns {
+  margin-top: -50px;
+  height: 50px;
+}
+.action-btns .btn{
+  margin: 10px;
+}
+.p-t-100{
+  padding-top: 100px;
+}
+.m-a{
+  margin: auto;
+}
+.p-t-0{
+  padding-top: 0 !important;
+}

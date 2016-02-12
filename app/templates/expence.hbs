@@ -1,0 +1,46 @@
+<div class="data-container">
+  <div class="action-btns">
+    {{#link-to 'expence.new' class="btn btn-sm btn-default add-btn"}} {{fa-icon icon="plus"}} <span class="hidden-xs">Add Expence</span>{{/link-to}}
+    <button type="button" class="btn btn-primary btn-sm" {{action "downloadFile" 'excel'}}>{{fa-icon icon="fa-file-excel-o"}} Export As Excel</button>
+    <button type="button" class="btn btn-primary btn-sm" {{action "downloadFile" 'csv'}}>{{fa-icon icon="fa-file"}} Export As CSV</button>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>
+          Date (yyyy-mm-dd)
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Payee
+        </th>
+        <th>
+          Amount
+        </th>
+        <th>
+          Paid To
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+  {{#each expence as |temp_expence|}}
+    <tr>
+      <td>{{temp_expence.date}}</td>
+      <td>{{temp_expence.description}}</td>
+      <td>{{temp_expence.payee.display_name}}</td>
+      <td>{{round-number temp_expence.amount}}</td>
+      <td>{{#each temp_expence.paidTo as |person index|}}
+            {{math index '+' 1}}. {{person.display_name}}
+          {{/each}}
+      </td>
+    </tr>
+  {{/each}}
+
+  </tbody>
+  </table>
+
+  {{outlet}}
+</div>

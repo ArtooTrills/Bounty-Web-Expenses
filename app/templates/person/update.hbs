@@ -1,0 +1,28 @@
+{{#bs-modal body=false footer=false header=false keyboard=false autoClose=false}}
+  <div class="modal-header">
+        <button type="button" class="close" {{action "closePopup"}}><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Update Person</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="personName">Person Name</label>
+
+            {{input value=person.person_name name="personName" placeholder="Full Name" class="form-control"}}
+          </div>
+          <div class="form-group">
+            <label for="displayName">Display Name</label>
+            {{input value=person.display_name name="displayName" placeholder="Display Name" class="form-control"}}
+          </div>
+          <div class="form-group">
+            <label for="comment">Comment</label>
+            {{input value=person.comment name="comment" placeholder="Comment" class="form-control"}}
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" {{action "closePopup"}}>Close</button>
+
+        {{spin-button isLoading=isLoading buttonText="Update changes"  action='updatePerson' param=person class_name="btn btn-primary" tagName=''}}
+      </div>
+{{/bs-modal}}

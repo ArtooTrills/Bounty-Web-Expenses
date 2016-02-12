@@ -1,0 +1,55 @@
+{{#bs-modal body=false footer=false header=false keyboard=false autoClose=false}}
+      <div class="modal-header">
+        <button type="button" class="close" {{action "closePopup"}}><span aria-hidden="true">&times;</span></button>
+
+        <h4 class="modal-title">Add Expence</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="date">Date</label>
+            {{input value=date placeholder="Full Name" name="date" type="date" class="form-control"}}
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            {{input value=description placeholder="Description" name="description" class="form-control"}}
+          </div>
+          <div class="form-group">
+            <label>Who Paid</label>
+            <div class="radio">
+              {{#each model in controller.person}}
+                    <label>
+                      {{#radio-button
+                        value=model
+                        groupValue=payee
+                        changed="changePayee"}}
+                        {{model.display_name}}
+                    {{/radio-button}}
+                    </label>
+              {{/each}}
+
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            {{input value=amount type="number" laceholder="Amount" name="amount" class="form-control"}}
+          </div>
+          <div class="form-group">
+            <label>For Whom</label>
+            <div class="checkbox">
+              {{#multiselect-checkboxes options=controller.person onchange=(action 'addPaidTo') selection=selectedUsers as |model isSelected| }}
+              <label>
+                {{input checked=isSelected  type="checkbox" }} {{model.display_name}}
+              </label>
+              {{/multiselect-checkboxes}}
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        {{spin-button isLoading=isLoading buttonText="Save & New"  action='addExpences' param="new" class_name="btn btn-primary" tagName=''}}
+        {{spin-button isLoading=isLoading buttonText="Save"  action='addExpences' class_name="btn btn-primary" tagName=''}}
+        <button type="button" class="btn btn-default" {{action "closePopup"}}>Close</button>
+      </div>
+  {{/bs-modal}}
