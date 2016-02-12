@@ -48,18 +48,15 @@ export default Ember.Route.extend({
          if(amount)
          {
            final_expenceMap[payee_id][payer_id] = amount;
-           Ember.RSVP.hash({
-                payee  : _this.store.find('person', payee_id),
-                payer  : _this.store.find('person', payer_id)
-            }).then(function(persons){
-              var payment = _this.get('store').createRecord('payment',{
-                payee   : amount > 0 ? persons.payee : persons.payer,
-                payer   : amount < 0 ? persons.payee : persons.payer,
-                amount  : Math.abs(amount)
-              });
-              paymentsArr.push(payment);
-            });
 
+              var payee  = model.person.findBy('id', payee_id);
+              var payer  = model.person.findBy('id', payer_id);
+              var payment = _this.get('store').createRecord('payment',{
+                      payee   : amount > 0 ? payee : payer,
+                      payer   : amount < 0 ? payee : payer,
+                      amount  : Math.abs(amount)
+                  });
+              paymentsArr.push(payment);
          }
        }
      });

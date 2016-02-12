@@ -1,5 +1,4 @@
-{{#if payment.isDeleted}}
-{{else}}
+{{#unless payment.isDeleted}}
 <td>{{payment.payer.display_name}}</td>
 
 <td>{{payment.payee.display_name}}</td>
@@ -15,4 +14,4 @@
           {{/if}}
       </button>
 </td>
-{{/if}}
+{{/unless}}
