@@ -8,19 +8,10 @@ Your task is to build a simple (yet functional) Expense Manager app using Ember.
  * How you code - structure, comments, and efficiency
  * And how quickly can you learn
 
-We have included a few graphics to get you started below. Be creative in your approach.
-
-#### Add New Member
-
-![Add New Member](http://artoogithubdocs.s3.amazonaws.com/bounty/add-new-member.png)
-
-#### Add New Expense
-
-![Add New Expense](http://artoogithubdocs.s3.amazonaws.com/bounty/add-expense.png)
-
-#### Summary Sheet
-
-![Summary Sheet](http://artoogithubdocs.s3.amazonaws.com/bounty/summary.png) 
+Few screens can be
+- Add New Member
+- Add New Expense
+- Summary Sheet
 
 If you are going for the kill and you really want to wow us:
 
